@@ -1,0 +1,16 @@
+{
+  "enabled": true,
+  "name": "Validate DTO Structure",
+  "description": "Checks that DTOs include proper class-validator decorators for input validation",
+  "version": "1",
+  "when": {
+    "type": "fileCreated",
+    "patterns": [
+      "**/*.dto.ts"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Review the DTO file and ensure: 1) All properties have appropriate class-validator decorators (@IsString, @IsNumber, etc.), 2) Optional fields use @IsOptional, 3) Numeric fields have @Min/@Max where appropriate, 4) Nested objects use @ValidateNested. Suggest missing validations."
+  }
+}

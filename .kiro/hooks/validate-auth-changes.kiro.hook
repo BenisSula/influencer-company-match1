@@ -1,0 +1,17 @@
+{
+  "enabled": true,
+  "name": "Validate Authentication Code",
+  "description": "Reviews authentication-related code changes for security compliance",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "**/auth/**/*.ts",
+      "**/auth/**/*.tsx"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Review authentication code changes and verify: 1) Passwords are hashed with bcrypt (10-12 rounds), 2) JWT tokens have expiration, 3) Sensitive data is not logged, 4) Role-based guards are properly applied, 5) No credentials in code. Flag security issues."
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "enabled": true,
+  "name": "Validate Matching Algorithm Changes",
+  "description": "Reviews changes to matching algorithm to ensure determinism, correct weights, and performance considerations",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "**/matching/**/*.ts",
+      "**/matching/**/*.tsx"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Review the matching algorithm changes and verify: 1) Algorithm remains deterministic (no randomness), 2) Weights sum correctly, 3) Score calculations are 0-100, 4) Performance considerations (caching, indexing) are maintained. Flag any issues."
+  }
+}
