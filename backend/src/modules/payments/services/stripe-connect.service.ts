@@ -18,9 +18,15 @@ export class StripeConnectService {
     private userRepository: Repository<User>,
   ) {
     this.stripeConfig = this.configService.get<StripeConfig>('stripe');
-    this.stripe = new Stripe(this.stripeConfig.secretKey, {
-      apiVersion: '2026-01-28.clover',
-    });
+    
+    // Only initialize Stripe if config is available
+    if (this.stripeConfig?.secretKey) {
+      this.stripe = new Stripe(this.stripeConfig.secretKey, {
+        apiVersion: '2026-01-28.clover',
+      });
+    } else {
+      this.logger.warn('Stripe not configured - payment features disabled');
+    }
   }
 
   /**
@@ -30,6 +36,11 @@ export class StripeConnectService {
    * @returns Stripe account ID
    */
   async createConnectAccount(userId: string, email: string): Promise<string> {
+    if (!this.stripe) {
+      this.logger.warn('Stripe not configured - cannot create Connect account');
+      return null;
+    }
+    
     try {
       this.logger.log(`Creating Stripe Connect account for user ${userId}`);
 
@@ -68,6 +79,11 @@ export class StripeConnectService {
    * @returns Stripe customer ID
    */
   async createCustomer(userId: string, email: string, name?: string): Promise<string> {
+    if (!this.stripe) {
+      this.logger.warn('Stripe not configured - cannot create Customer');
+      return null;
+    }
+    
     try {
       this.logger.log(`Creating Stripe Customer for user ${userId}`);
 
@@ -130,6 +146,10 @@ export class StripeConnectService {
     refreshUrl: string,
     returnUrl: string,
   ): Promise<string> {
+    if (!this.stripe) {
+      throw new Error('Stripe not configured');
+    }
+    
     try {
       const accountLink = await this.stripe.accountLinks.create({
         account: accountId,
@@ -151,6 +171,10 @@ export class StripeConnectService {
    * @returns True if onboarding complete
    */
   async isOnboardingComplete(accountId: string): Promise<boolean> {
+    if (!this.stripe) {
+      return false;
+    }
+    
     try {
       const account = await this.stripe.accounts.retrieve(accountId);
       return account.charges_enabled && account.payouts_enabled;
