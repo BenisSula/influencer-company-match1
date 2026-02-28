@@ -20,7 +20,35 @@ services:
         generateValue: true
       - key: FRONTEND_URL
         value: https://influencer-match-frontend.onrender.com
+      - key: ML_SERVICE_URL
+        value: https://influencer-match-ml-chatbot.onrender.com
+      - key: ML_MATCHING_SERVICE_URL
+        value: https://influencer-match-ml-matching.onrender.com
     healthCheckPath: /health
+
+  # ML Chatbot Service (Python/FastAPI)
+  - type: web
+    name: influencer-match-ml-chatbot
+    env: python
+    region: oregon
+    plan: free
+    buildCommand: cd ml-service && pip install -r requirements.txt
+    startCommand: cd ml-service && uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+
+  # ML Matching Service (Python/FastAPI)
+  - type: web
+    name: influencer-match-ml-matching
+    env: python
+    region: oregon
+    plan: free
+    buildCommand: cd ml-matching-service && pip install -r requirements.txt
+    startCommand: cd ml-matching-service && uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
 
   # Frontend Static Site
   - type: web

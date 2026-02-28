@@ -46,6 +46,24 @@ Visit your frontend URL and test:
 - Matching features
 - Real-time messaging
 - Payment flow (test mode)
+- **AI Chatbot** - Test the chatbot widget
+- **ML Matching** - Check AI-powered match recommendations
+
+## 🤖 AI/ML Services Included
+
+Your deployment includes **TWO AI/ML services**:
+
+✅ **ML Chatbot Service** - AI-powered user assistance
+- Intent classification
+- Sentiment analysis
+- Real-time chat responses
+
+✅ **ML Matching Service** - AI-powered matching algorithm
+- Compatibility scoring (0-100%)
+- Smart recommendations
+- Learning from user feedback
+
+📖 **See `ML-SERVICES-DEPLOYMENT.md` for complete AI/ML documentation**
 
 ## Important Notes
 
