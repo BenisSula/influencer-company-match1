@@ -5,25 +5,34 @@ services:
     env: node
     region: oregon
     plan: free
-    buildCommand: cd backend && npm install && npm run build
-    startCommand: cd backend && npm run start:prod
+    rootDir: backend
+    buildCommand: npm install && npm run build
+    startCommand: npm run start:prod
     envVars:
       - key: NODE_ENV
         value: production
       - key: PORT
-        value: 3000
+        value: 10000
       - key: DATABASE_URL
         fromDatabase:
           name: influencer-match-db
           property: connectionString
       - key: JWT_SECRET
         generateValue: true
+      - key: CORS_ORIGIN
+        value: https://influencer-match-frontend.onrender.com
       - key: FRONTEND_URL
         value: https://influencer-match-frontend.onrender.com
       - key: ML_SERVICE_URL
         value: https://influencer-match-ml-chatbot.onrender.com
       - key: ML_MATCHING_SERVICE_URL
         value: https://influencer-match-ml-matching.onrender.com
+      - key: REDIS_URL
+        value: redis://localhost:6379
+      - key: STRIPE_SECRET_KEY
+        sync: false
+      - key: STRIPE_WEBHOOK_SECRET
+        sync: false
     healthCheckPath: /health
 
   # ML Chatbot Service (Python/FastAPI)
@@ -32,8 +41,9 @@ services:
     env: python
     region: oregon
     plan: free
-    buildCommand: cd ml-service && pip install -r requirements.txt
-    startCommand: cd ml-service && uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    rootDir: ml-service
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.0
@@ -44,8 +54,9 @@ services:
     env: python
     region: oregon
     plan: free
-    buildCommand: cd ml-matching-service && pip install -r requirements.txt
-    startCommand: cd ml-matching-service && uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    rootDir: ml-matching-service
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.0
