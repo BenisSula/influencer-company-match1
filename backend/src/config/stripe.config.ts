@@ -31,10 +31,11 @@ export default registerAs('stripe', (): StripeConfig => {
     const missingFields = requiredFields.filter((field) => !config[field]);
 
     if (missingFields.length > 0) {
-      throw new Error(
-        `Missing required Stripe configuration: ${missingFields.join(', ')}. ` +
-        `Please set the following environment variables: ${missingFields.map(f => `STRIPE_${f.replace(/([A-Z])/g, '_$1').toUpperCase()}`).join(', ')}`
+      console.warn(
+        `⚠️  WARNING: Missing Stripe configuration: ${missingFields.join(', ')}. ` +
+        `Payment features will be disabled. Set these environment variables to enable payments: ${missingFields.map(f => `STRIPE_${f.replace(/([A-Z])/g, '_$1').toUpperCase()}`).join(', ')}`
       );
+      // Don't throw error - allow app to start without Stripe
     }
   }
 
