@@ -1,0 +1,115 @@
+/**
+ * Landing Page Phase 2: Engagement & Interactivity Styles
+ * Using brand colors from global.css
+ */
+
+/* ========================================
+   INTERACTIVE FEATURES SECTION
+   ======================================== */
+
+.interactive-features-section {
+  padding: 5rem 2rem;
+  background: var(--color-bg-primary);
+}
+
+/* ========================================
+   COMPARISON SECTION
+   ======================================== */
+
+.comparison-section {
+  padding: 5rem 2rem;
+  background: var(--color-bg-secondary);
+}
+
+/* ========================================
+   SOCIAL PROOF SECTION
+   ======================================== */
+
+.social-proof-section {
+  padding: 5rem 2rem;
+  background: var(--color-bg-primary);
+}
+
+.social-proof-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+/* ========================================
+   RESPONSIVE - TABLET
+   ======================================== */
+
+@media (max-width: 1023px) {
+  .interactive-features-section,
+  .comparison-section,
+  .social-proof-section {
+    padding: 4rem 1.5rem;
+  }
+
+  .social-proof-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+/* ========================================
+   RESPONSIVE - MOBILE
+   ======================================== */
+
+@media (max-width: 768px) {
+  .interactive-features-section,
+  .comparison-section,
+  .social-proof-section {
+    padding: 3rem 1rem;
+  }
+
+  .social-proof-grid {
+    gap: 1.25rem;
+    margin-top: 2rem;
+  }
+}
+
+
+/* ============================================
+   PHASE 2.3: ROI CALCULATOR SECTION
+   ============================================ */
+
+.roi-calculator-section {
+  padding: var(--spacing-4xl) 0;
+  background: linear-gradient(180deg, var(--color-bg-primary) 0%, var(--color-bg-secondary) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.roi-calculator-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    var(--color-primary) 50%, 
+    transparent 100%
+  );
+}
+
+.roi-calculator-section .section-container {
+  max-width: 1400px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .roi-calculator-section {
+    padding: var(--spacing-3xl) 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .roi-calculator-section {
+    padding: var(--spacing-2xl) 0;
+  }
+}

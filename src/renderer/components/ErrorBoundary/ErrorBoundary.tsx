@@ -1,4 +1,4 @@
-import React, { Component, ErrorInfo, ReactNode } from 'react';
+import { Component, ErrorInfo, ReactNode } from 'react';
 import { Card, CardBody, Button } from '../';
 import { HiExclamationCircle } from 'react-icons/hi';
 import './ErrorBoundary.css';

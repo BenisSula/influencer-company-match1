@@ -1,0 +1,389 @@
+﻿{
+  "intents": [
+    {
+      "tag": "greeting",
+      "patterns": [
+        "hi", "hello", "hey", "good morning", "good afternoon", "good evening",
+        "what's up", "howdy", "greetings", "yo", "sup", "hiya", "heya"
+      ],
+      "responses": [
+        "Hello! 👋 How can I help you today? I can assist with finding matches, managing collaborations, or answering platform questions!",
+        "Hi there! What can I do for you? I'm here to help with matches, analytics, and more!",
+        "Hey! Ready to find your perfect match? Let me know what you need!",
+        "Hello! I'm your AI assistant for all things IC Match. How can I help?"
+      ]
+    },
+    {
+      "tag": "find_matches",
+      "patterns": [
+        "find matches", "show matches", "who can i work with", "find influencers",
+        "find companies", "suggest matches", "match me", "looking for partners",
+        "find collaborators", "show me potential matches", "recommend matches",
+        "best matches", "compatible matches", "search for matches"
+      ],
+      "responses": [
+        "I can help you find perfect matches! 🎯\n\nTo get started:\n1. Go to the 'Matches' page from the sidebar\n2. Use filters to refine by industry, budget, location\n3. View compatibility scores for each match\n4. Click profiles to see detailed information\n\nYou can also check 'Suggested Matches' in your right sidebar for AI-recommended partners!",
+        "Great! Let me help you find the best matches. 🔍\n\nOur AI analyzes:\n• Industry & niche compatibility\n• Budget alignment\n• Audience demographics\n• Content style & values\n• Past collaboration success\n\nHead to the Matches page to see your personalized recommendations!",
+        "Looking for the perfect collaboration partner? 🤝\n\nI recommend:\n1. Check your Dashboard for top suggested matches\n2. Use advanced filters on the Matches page\n3. Sort by compatibility score (0-100%)\n4. Review profiles and send connection requests\n\nWant me to explain how our matching algorithm works?"
+      ]
+    },
+    {
+      "tag": "matching_algorithm",
+      "patterns": [
+        "how does matching work", "matching algorithm", "how are matches calculated",
+        "compatibility score", "match score", "how do you match", "matching system",
+        "ai matching", "how does the ai work", "explain matching"
+      ],
+      "responses": [
+        "Our AI-powered matching system analyzes multiple factors: 🧠\n\n🎯 Industry & Niche Compatibility (25%)\n💰 Budget Alignment (20%)\n📊 Audience Demographics (20%)\n🎨 Content Style & Values (15%)\n📈 Past Collaboration Success (10%)\n⭐ Profile Completeness (10%)\n\nThe system calculates a compatibility score (0-100%) and ranks matches accordingly. Higher scores mean better compatibility!"
+      ]
+    },
+    {
+      "tag": "collaboration",
+      "patterns": [
+        "send collaboration request", "work together", "start project", "collaborate",
+        "partner with", "send request", "reach out", "connect with",
+        "start collaboration", "propose partnership", "collaboration request",
+        "how to collaborate", "start working together"
+      ],
+      "responses": [
+        "Let's start a collaboration! 🤝\n\nHere's how:\n1. Find a match you like on the Matches page\n2. Click on their profile\n3. Click 'Send Collaboration Request'\n4. Fill in:\n   • Project description\n   • Budget range\n   • Timeline\n   • Deliverables\n5. Send the request\n\nThey'll receive a notification and can accept, decline, or negotiate!",
+        "Ready to collaborate? Here's the process: ✨\n\n1️⃣ Browse matches and find someone compatible\n2️⃣ Review their portfolio and past work\n3️⃣ Click 'Send Collaboration Request'\n4️⃣ Be specific about your project goals\n5️⃣ Set realistic budget and timeline\n\nTip: Detailed requests get 3x more responses!"
+      ]
+    },
+    {
+      "tag": "collaboration_status",
+      "patterns": [
+        "my collaborations", "collaboration status", "pending requests",
+        "active collaborations", "view requests", "check collaborations",
+        "collaboration history", "past collaborations"
+      ],
+      "responses": [
+        "Check your collaboration status: 📋\n\n• Go to 'Connections' page\n• View tabs:\n  - Pending: Awaiting response\n  - Active: Ongoing projects\n  - Completed: Finished collaborations\n\nYou can also see collaboration requests in your Dashboard widget!"
+      ]
+    },
+    {
+      "tag": "performance",
+      "patterns": [
+        "show stats", "my performance", "analytics", "how am i doing",
+        "dashboard", "metrics", "my stats", "performance report",
+        "show analytics", "view metrics", "my data", "statistics"
+      ],
+      "responses": [
+        "Let me pull up your performance metrics! 📊\n\nYour Dashboard shows:\n• Match success rate\n• Response rate\n• Active collaborations\n• Profile views & engagement\n• Earnings/spending trends\n• Top performing content\n\nGo to Dashboard → Analytics for detailed charts and insights!",
+        "Here's what you can track: 📈\n\n✅ Profile Performance\n• Views, clicks, engagement\n• Completion rate\n\n🤝 Collaboration Metrics\n• Success rate\n• Average response time\n• Completed projects\n\n💰 Financial Overview\n• Total earnings/spending\n• Average deal size\n\nHead to your Dashboard to see real-time data!"
+      ]
+    },
+    {
+      "tag": "profile",
+      "patterns": [
+        "my profile", "edit profile", "update profile", "view profile",
+        "profile settings", "change profile", "profile info", "account settings",
+        "complete profile", "profile completion", "improve profile"
+      ],
+      "responses": [
+        "Manage your profile: ✏️\n\n• Edit Profile → Update information\n• Change avatar → Upload new photo\n• Update bio → Tell your story\n• Set preferences → Define ideal matches\n• Add portfolio → Showcase work\n• Verify account → Build trust\n\nTip: Complete profiles get 3x more matches!",
+        "Profile optimization tips: 🌟\n\n✅ Use professional photos\n✅ Write detailed bio (150+ words)\n✅ Add portfolio samples\n✅ List specific niches\n✅ Set accurate budget range\n✅ Complete all sections\n✅ Get verified\n\nProfiles with 5+ reviews get 10x more visibility!"
+      ]
+    },
+    {
+      "tag": "messages",
+      "patterns": [
+        "messages", "inbox", "check messages", "new messages", "read messages",
+        "send message", "chat", "conversations", "dm", "direct message",
+        "message someone", "how to message"
+      ],
+      "responses": [
+        "Access your messages: 💬\n\n1. Click 'Messages' in the sidebar\n2. View all conversations\n3. Send messages to connections\n4. Get real-time notifications\n\nNote: You can only message people you're connected with. Send a connection request first!",
+        "Messaging features: ✉️\n\n• Real-time chat\n• File sharing\n• Read receipts\n• Typing indicators\n• Message search\n• Conversation filters\n\nTip: Respond within 24 hours for better engagement rates!"
+      ]
+    },
+    {
+      "tag": "budget_pricing",
+      "patterns": [
+        "budget", "price", "pricing", "cost", "fee", "payment", "money",
+        "how much", "rates", "pricing tiers", "subscription", "pay"
+      ],
+      "responses": [
+        "About budgets and pricing: 💰\n\n• Set your budget range in profile settings\n• Matches are filtered by budget compatibility\n• Payments handled securely through platform\n• View pricing tiers in campaign details\n\nInfluencers set their rates, companies set their budgets. The platform helps you find compatible matches!",
+        "Pricing structure: 💵\n\n🎯 For Influencers:\n• Set your rates per post/campaign\n• Negotiate with companies\n• Receive secure payments\n\n🏢 For Companies:\n• Set campaign budgets\n• View influencer rates\n• Pay through platform\n\nAll transactions are secure and protected!"
+      ]
+    },
+    {
+      "tag": "platform_features",
+      "patterns": [
+        "features", "what can you do", "capabilities", "functions",
+        "platform features", "what does this do", "available features"
+      ],
+      "responses": [
+        "Platform features: 🚀\n\n🎯 AI-Powered Matching\n🤝 Collaboration Management\n💬 Direct Messaging\n📊 Analytics Dashboard\n🔍 Advanced Search & Filters\n⭐ Profile Reviews & Ratings\n📱 Mobile Responsive\n🔔 Real-Time Notifications\n🎨 Portfolio Showcase\n💰 Secure Payments\n📈 Performance Tracking\n🤖 AI Chatbot Assistant (that's me!)"
+      ]
+    },
+    {
+      "tag": "account_settings",
+      "patterns": [
+        "account", "settings", "preferences", "configuration", "setup",
+        "account settings", "change settings", "notification settings",
+        "privacy settings", "security settings"
+      ],
+      "responses": [
+        "Manage your account: ⚙️\n\n1. Click your avatar → Settings\n2. Available options:\n   • Notification preferences\n   • Privacy settings\n   • Display preferences\n   • Email notifications\n   • Password & security\n   • Account information\n\nCustomize your experience to fit your needs!"
+      ]
+    },
+    {
+      "tag": "search",
+      "patterns": [
+        "search", "find", "look for", "looking for", "how to search",
+        "search bar", "search feature", "find profiles"
+      ],
+      "responses": [
+        "Use our powerful search: 🔍\n\n• Global search bar (top of page)\n• Filter by:\n  - Industry\n  - Location\n  - Budget range\n  - Rating\n  - Niche\n• Sort by compatibility score\n• Save search filters\n• View trending profiles\n\nTry the search bar to find specific profiles instantly!"
+      ]
+    },
+    {
+      "tag": "notifications",
+      "patterns": [
+        "notification", "notifications", "alert", "alerts", "updates",
+        "notification settings", "turn off notifications", "manage notifications"
+      ],
+      "responses": [
+        "Manage notifications: 🔔\n\n• Bell icon shows all notifications\n• Types:\n  - Message notifications\n  - Collaboration requests\n  - Profile views\n  - Match suggestions\n  - System updates\n\nCustomize in Settings → Notifications\nChoose email, push, or in-app notifications!"
+      ]
+    },
+    {
+      "tag": "success_tips",
+      "patterns": [
+        "tips", "advice", "help me succeed", "best practices", "how to succeed",
+        "improve", "get more matches", "increase success", "recommendations"
+      ],
+      "responses": [
+        "Tips for success: 🌟\n\n✅ Complete your profile 100%\n✅ Use professional photos\n✅ Write detailed, authentic bio\n✅ Be specific about your niche\n✅ Respond quickly to messages (< 24hrs)\n✅ Build genuine relationships\n✅ Collect reviews from collaborations\n✅ Update portfolio regularly\n✅ Set realistic budgets\n✅ Be professional and reliable\n\nProfiles with 5+ reviews get 10x more matches!"
+      ]
+    },
+    {
+      "tag": "industries",
+      "patterns": [
+        "industry", "industries", "niche", "niches", "category", "categories",
+        "sector", "what industries", "available industries"
+      ],
+      "responses": [
+        "Popular industries on our platform: 🎨\n\n• Fashion & Beauty\n• Fitness & Health\n• Food & Beverage\n• Travel & Lifestyle\n• Gaming & Tech\n• Music & Entertainment\n• Education\n• Home & Decor\n• Business & Finance\n• Sports & Outdoors\n• Parenting & Family\n• Art & Design\n\nSelect your industry in profile settings to get better matches!"
+      ]
+    },
+    {
+      "tag": "connections",
+      "patterns": [
+        "connect", "connection", "connected", "accept", "pending",
+        "connection request", "send connection", "accept connection"
+      ],
+      "responses": [
+        "About connections: 🤝\n\n1. Send connection requests from profiles\n2. Accept/decline incoming requests\n3. View all connections in 'Connections' page\n4. Message connected users\n5. Leave reviews after collaborations\n\nConnections are the first step to collaboration!\n\nTip: Personalize connection requests for better acceptance rates!"
+      ]
+    },
+    {
+      "tag": "campaigns",
+      "patterns": [
+        "campaign", "campaigns", "project", "projects", "create campaign",
+        "view campaigns", "campaign system", "browse campaigns"
+      ],
+      "responses": [
+        "Campaign system: 📋\n\n🏢 For Companies:\n1. Create campaigns\n2. Set goals, budget, timeline\n3. Review influencer applications\n4. Select collaborators\n5. Track progress\n\n🎯 For Influencers:\n1. Browse campaigns\n2. Apply to relevant ones\n3. Wait for approval\n4. Start collaboration\n5. Deliver content\n\nCheck 'Campaigns' page to browse opportunities!"
+      ]
+    },
+    {
+      "tag": "reviews_ratings",
+      "patterns": [
+        "review", "reviews", "rating", "ratings", "feedback", "testimonial",
+        "leave review", "rate", "reputation"
+      ],
+      "responses": [
+        "Reviews & ratings: ⭐\n\n• Leave reviews after collaborations\n• Rate:\n  - Professionalism\n  - Communication\n  - Quality of work\n  - Timeliness\n• Reviews appear on profiles\n• Build your reputation\n• Get verified collaboration badges\n\nGood reviews lead to more opportunities!\n\nTip: Be honest and constructive in your feedback!"
+      ]
+    },
+    {
+      "tag": "technical_issues",
+      "patterns": [
+        "error", "bug", "issue", "problem", "not working", "broken", "fix",
+        "technical issue", "something wrong", "doesn't work"
+      ],
+      "responses": [
+        "Having technical issues? 🔧\n\nQuick fixes:\n1. Refresh the page (F5)\n2. Clear browser cache\n3. Log out and log back in\n4. Check internet connection\n5. Try different browser\n6. Disable browser extensions\n\nStill having issues? Contact support at support@icmatch.com\n\nMost issues are resolved with a quick refresh!"
+      ]
+    },
+    {
+      "tag": "getting_started",
+      "patterns": [
+        "start", "begin", "getting started", "new user", "first time",
+        "onboard", "how to start", "new here", "just joined"
+      ],
+      "responses": [
+        "Welcome to IC Match! 🎉\n\nGetting started:\n1️⃣ Complete your profile (100%)\n2️⃣ Set your preferences\n3️⃣ Browse matches\n4️⃣ Send connection requests\n5️⃣ Start conversations\n6️⃣ Propose collaborations\n\nTake the profile setup wizard for guided onboarding!\n\nNeed help? I'm here to answer any questions!"
+      ]
+    },
+    {
+      "tag": "safety_security",
+      "patterns": [
+        "safe", "safety", "secure", "security", "privacy", "protect",
+        "scam", "fraud", "trust", "verification", "is this safe"
+      ],
+      "responses": [
+        "Your safety matters: 🔒\n\n✅ All data is encrypted\n✅ Verified profiles available\n✅ Secure payment processing\n✅ Report suspicious activity\n✅ Privacy controls\n✅ Email verification required\n✅ Two-factor authentication\n✅ Secure messaging\n\n⚠️ Never share personal payment info outside the platform!\n\nReport any suspicious behavior immediately."
+      ]
+    },
+    {
+      "tag": "verification",
+      "patterns": [
+        "verify", "verification", "verified", "get verified", "verify account",
+        "verify profile", "verification badge"
+      ],
+      "responses": [
+        "Get verified: ✅\n\nVerification benefits:\n• Increased trust\n• Higher visibility\n• More matches\n• Priority support\n\nHow to verify:\n1. Go to Profile Settings\n2. Click 'Verify Account'\n3. Submit required documents\n4. Wait for approval (24-48 hours)\n\nVerified accounts get 5x more engagement!"
+      ]
+    },
+    {
+      "tag": "portfolio",
+      "patterns": [
+        "portfolio", "showcase", "work samples", "past work", "examples",
+        "add portfolio", "upload work", "show my work"
+      ],
+      "responses": [
+        "Build your portfolio: 📸\n\n1. Go to Profile → Portfolio\n2. Upload:\n   • Images\n   • Videos\n   • Links to content\n   • Case studies\n3. Add descriptions\n4. Organize by category\n\nStrong portfolios get 4x more collaboration requests!\n\nTip: Show your best 5-10 pieces of work."
+      ]
+    },
+    {
+      "tag": "response_time",
+      "patterns": [
+        "response time", "how long", "when will they respond", "reply time",
+        "waiting for response", "no response"
+      ],
+      "responses": [
+        "About response times: ⏱️\n\n• Most users respond within 24-48 hours\n• Check their profile for average response time\n• Send a polite follow-up after 3 days\n• Some users have auto-responders\n\nTip: Users with faster response times are marked with a ⚡ badge!"
+      ]
+    },
+    {
+      "tag": "contract_agreement",
+      "patterns": [
+        "contract", "agreement", "terms", "legal", "sign contract",
+        "collaboration agreement", "terms of service"
+      ],
+      "responses": [
+        "Contracts & agreements: 📄\n\n• Platform provides contract templates\n• Customize for your collaboration\n• Both parties must agree\n• Digital signatures supported\n• Stored securely in platform\n\nAlways use contracts for:\n• Payment terms\n• Deliverables\n• Timeline\n• Rights & usage\n\nProtect yourself and your partner!"
+      ]
+    },
+    {
+      "tag": "payment_methods",
+      "patterns": [
+        "payment method", "how to pay", "payment options", "credit card",
+        "paypal", "bank transfer", "payment processing"
+      ],
+      "responses": [
+        "Payment methods: 💳\n\nAccepted:\n• Credit/Debit cards\n• PayPal\n• Bank transfer\n• Stripe\n\nPayment process:\n1. Agree on terms\n2. Create milestone payments\n3. Platform holds funds\n4. Release upon completion\n\nAll transactions are secure and protected!"
+      ]
+    },
+    {
+      "tag": "dispute_resolution",
+      "patterns": [
+        "dispute", "problem with collaboration", "disagreement", "conflict",
+        "resolve dispute", "mediation", "complaint"
+      ],
+      "responses": [
+        "Dispute resolution: ⚖️\n\nIf issues arise:\n1. Try to resolve directly first\n2. Document everything\n3. Contact platform support\n4. Mediation available\n5. Review contract terms\n\nWe're here to help both parties reach a fair resolution.\n\nContact: support@icmatch.com"
+      ]
+    },
+    {
+      "tag": "mobile_app",
+      "patterns": [
+        "mobile app", "app", "download app", "ios", "android",
+        "mobile version", "phone app"
+      ],
+      "responses": [
+        "Mobile experience: 📱\n\n• Fully responsive web app\n• Works on all devices\n• No download needed\n• Add to home screen for app-like experience\n\niOS: Safari → Share → Add to Home Screen\nAndroid: Chrome → Menu → Add to Home Screen\n\nNative apps coming soon!"
+      ]
+    },
+    {
+      "tag": "data_export",
+      "patterns": [
+        "export data", "download data", "export analytics", "get my data",
+        "data export", "download report"
+      ],
+      "responses": [
+        "Export your data: 📥\n\n• Analytics → Export Report\n• Choose format: PDF, CSV, Excel\n• Select date range\n• Download instantly\n\nAvailable exports:\n• Performance reports\n• Collaboration history\n• Financial statements\n• Profile data\n\nGo to Settings → Data Export"
+      ]
+    },
+    {
+      "tag": "delete_account",
+      "patterns": [
+        "delete account", "close account", "remove account", "deactivate",
+        "cancel account", "delete profile"
+      ],
+      "responses": [
+        "Account deletion: 🗑️\n\nBefore you go:\n• Export your data first\n• Complete pending collaborations\n• Withdraw remaining balance\n\nTo delete:\n1. Settings → Account\n2. 'Delete Account'\n3. Confirm deletion\n4. Account removed in 30 days\n\nWe're sad to see you go! Can I help with anything?"
+      ]
+    },
+    {
+      "tag": "referral_program",
+      "patterns": [
+        "referral", "refer friend", "invite", "referral program",
+        "earn rewards", "invite users"
+      ],
+      "responses": [
+        "Referral program: 🎁\n\n• Invite friends to join\n• Earn rewards for each signup\n• Get bonus for completed collaborations\n• Track referrals in Dashboard\n\nHow to refer:\n1. Dashboard → Referrals\n2. Copy your unique link\n3. Share with friends\n4. Earn rewards!\n\nBoth you and your friend get bonuses!"
+      ]
+    },
+    {
+      "tag": "language_support",
+      "patterns": [
+        "language", "languages", "translate", "translation", "other languages",
+        "change language", "multilingual"
+      ],
+      "responses": [
+        "Language support: 🌍\n\nCurrently available:\n• English (primary)\n\nComing soon:\n• Spanish\n• French\n• German\n• Portuguese\n• More languages\n\nChange language: Settings → Language\n\nNeed help in another language? Contact support!"
+      ]
+    },
+    {
+      "tag": "api_integration",
+      "patterns": [
+        "api", "integration", "developer", "api access", "integrate",
+        "api documentation", "webhook"
+      ],
+      "responses": [
+        "API & Integrations: 🔌\n\n• REST API available\n• Webhook support\n• OAuth authentication\n• Rate limiting applied\n\nDeveloper resources:\n• API documentation\n• Code examples\n• SDKs (coming soon)\n\nContact: developers@icmatch.com for API access"
+      ]
+    },
+    {
+      "tag": "goodbye",
+      "patterns": [
+        "bye", "goodbye", "see you", "later", "exit", "quit", "close",
+        "thanks bye", "that's all", "done", "finished"
+      ],
+      "responses": [
+        "Goodbye! Feel free to come back anytime! 👋",
+        "See you later! Good luck with your collaborations! 🌟",
+        "Bye! Let me know if you need anything else! 😊",
+        "Take care! Happy matching! 🤝"
+      ]
+    },
+    {
+      "tag": "thanks",
+      "patterns": [
+        "thanks", "thank you", "appreciate it", "thanks a lot",
+        "thank you so much", "thx", "ty", "appreciate", "helpful"
+      ],
+      "responses": [
+        "You're welcome! Happy to help! 😊",
+        "Anytime! Let me know if you need anything else! 🌟",
+        "Glad I could help! Feel free to ask more questions! 💪",
+        "My pleasure! That's what I'm here for! 🤖"
+      ]
+    },
+    {
+      "tag": "unknown",
+      "patterns": [],
+      "responses": [
+        "I'm not sure I understand that specific question. 🤔\n\nI can help you with:\n💡 Finding matches\n🤝 Starting collaborations\n📊 Viewing analytics\n✏️ Managing your profile\n💬 Messaging & notifications\n🎯 Platform features\n\nWhat would you like to know more about?",
+        "Hmm, I didn't quite catch that. Let me help you with:\n\n• How matching works\n• Sending collaboration requests\n• Viewing your performance\n• Profile management\n• Platform features\n\nTry asking about any of these topics!",
+        "I'm here to help! While I didn't understand that exact question, I can assist with:\n\n🔍 Finding perfect matches\n📈 Analytics & performance\n🤝 Collaboration management\n⚙️ Account settings\n💬 Messaging features\n\nWhat would you like to explore?"
+      ]
+    }
+  ]
+}

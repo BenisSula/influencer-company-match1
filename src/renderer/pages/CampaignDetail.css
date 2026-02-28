@@ -1,0 +1,253 @@
+.campaign-detail-page {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.campaign-detail-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+}
+
+.campaign-detail-loading .spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid var(--gray-200);
+  border-top-color: var(--primary-color);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-bottom: 16px;
+}
+
+.campaign-detail-container {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.campaign-detail-header {
+  padding: 24px;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.back-button {
+  background: none;
+  border: none;
+  color: var(--primary-color);
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-bottom: 16px;
+  padding: 8px 0;
+  transition: opacity 0.2s ease;
+}
+
+.back-button:hover {
+  opacity: 0.8;
+}
+
+.campaign-header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.campaign-header-left h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--gray-900);
+  margin: 0 0 12px 0;
+}
+
+.campaign-header-actions {
+  display: flex;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.application-status {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.app-status-badge {
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.app-status-pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.app-status-accepted {
+  background: #d4edda;
+  color: #155724;
+}
+
+.app-status-rejected {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.app-status-withdrawn {
+  background: var(--gray-200);
+  color: var(--gray-700);
+}
+
+.campaign-company-section {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 24px;
+  border-bottom: 1px solid var(--gray-200);
+  background: var(--gray-50);
+}
+
+.company-info {
+  flex: 1;
+}
+
+.company-info h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--gray-900);
+  margin: 0 0 4px 0;
+}
+
+.company-info p {
+  font-size: 14px;
+  color: var(--gray-600);
+  margin: 0;
+}
+
+.company-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.company-actions button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.company-actions button svg {
+  flex-shrink: 0;
+}
+
+.campaign-detail-content {
+  padding: 32px 24px;
+}
+
+.campaign-section {
+  margin-bottom: 32px;
+}
+
+.campaign-section:last-child {
+  margin-bottom: 0;
+}
+
+.campaign-section h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--gray-900);
+  margin: 0 0 16px 0;
+}
+
+.campaign-description,
+.campaign-requirements,
+.campaign-deliverables {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--gray-700);
+  white-space: pre-wrap;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+}
+
+.detail-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.detail-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gray-600);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.detail-value {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--gray-900);
+}
+
+.platforms-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.platform-tag {
+  padding: 6px 12px;
+  background: var(--gray-100);
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--gray-700);
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .campaign-detail-page {
+    padding: 16px;
+  }
+
+  .campaign-header-content {
+    flex-direction: column;
+  }
+
+  .campaign-header-left h1 {
+    font-size: 24px;
+  }
+
+  .campaign-header-actions {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .campaign-header-actions button {
+    width: 100%;
+  }
+
+  .campaign-company-section {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .campaign-company-section button {
+    width: 100%;
+  }
+
+  .details-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}

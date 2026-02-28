@@ -1,0 +1,265 @@
+.avatar-upload {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.avatar-container {
+  position: relative;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 3px solid #e5e7eb;
+  background: #f9fafb;
+}
+
+.avatar-container:hover {
+  border-color: #3b82f6;
+  transform: scale(1.05);
+}
+
+.avatar-container.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.avatar-container.uploading {
+  pointer-events: none;
+}
+
+.avatar-upload-sm .avatar-container {
+  width: 64px;
+  height: 64px;
+}
+
+.avatar-upload-md .avatar-container {
+  width: 96px;
+  height: 96px;
+}
+
+.avatar-upload-lg .avatar-container {
+  width: 128px;
+  height: 128px;
+}
+
+.avatar-upload-xl .avatar-container {
+  width: 160px;
+  height: 160px;
+}
+
+.avatar-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.avatar-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  color: #6b7280;
+}
+
+.camera-icon {
+  font-size: 1.5rem;
+}
+
+.avatar-upload-sm .camera-icon {
+  font-size: 1rem;
+}
+
+.avatar-upload-md .camera-icon {
+  font-size: 1.25rem;
+}
+
+.avatar-upload-xl .camera-icon {
+  font-size: 2rem;
+}
+
+.placeholder-text {
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+.avatar-upload-sm .placeholder-text {
+  font-size: 0.625rem;
+}
+
+.avatar-upload-xl .placeholder-text {
+  font-size: 0.875rem;
+}
+
+.upload-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  color: white;
+}
+
+.avatar-container:hover .upload-overlay {
+  opacity: 1;
+}
+
+.overlay-icon {
+  font-size: 1.25rem;
+}
+
+.avatar-upload-sm .overlay-icon {
+  font-size: 1rem;
+}
+
+.avatar-upload-xl .overlay-icon {
+  font-size: 1.5rem;
+}
+
+.overlay-text {
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.avatar-upload-sm .overlay-text {
+  font-size: 0.625rem;
+}
+
+.progress-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.progress-circle {
+  position: relative;
+  width: 60px;
+  height: 60px;
+}
+
+.avatar-upload-sm .progress-circle {
+  width: 40px;
+  height: 40px;
+}
+
+.avatar-upload-xl .progress-circle {
+  width: 80px;
+  height: 80px;
+}
+
+.progress-svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.progress-bg {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.2);
+  stroke-width: 2;
+}
+
+.progress-bar {
+  fill: none;
+  stroke: #3b82f6;
+  stroke-width: 2;
+  stroke-linecap: round;
+  transition: stroke-dasharray 0.2s ease;
+}
+
+.progress-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: white;
+}
+
+.avatar-upload-sm .progress-text {
+  font-size: 0.625rem;
+}
+
+.file-input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  width: 0;
+  height: 0;
+}
+
+.clear-button {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #ef4444;
+  color: white;
+  border: 2px solid white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.75rem;
+}
+
+.clear-button:hover {
+  background: #dc2626;
+  transform: scale(1.1);
+}
+
+.upload-instructions {
+  text-align: center;
+  max-width: 200px;
+}
+
+.instruction-text {
+  font-size: 0.875rem;
+  color: #374151;
+  margin: 0 0 0.25rem 0;
+  font-weight: 500;
+}
+
+.instruction-hint {
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .avatar-upload-lg .avatar-container {
+    width: 96px;
+    height: 96px;
+  }
+  
+  .avatar-upload-xl .avatar-container {
+    width: 128px;
+    height: 128px;
+  }
+}

@@ -1,0 +1,329 @@
+/* ========================================
+   LEFT PANEL - INSTAGRAM GRADIENT
+   ======================================== */
+
+.auth-left-panel {
+  flex: 0 0 45%;
+  background: linear-gradient(135deg, #E1306C 0%, #FD8D32 100%);
+  position: relative;
+  overflow-y: auto; /* NEW: Allow internal scroll if needed */
+  max-height: 100vh; /* NEW: Constrain height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  color: white;
+}
+
+/* Hide scrollbar for left panel */
+.auth-left-panel::-webkit-scrollbar {
+  display: none;
+}
+
+.auth-left-panel {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.auth-left-content {
+  max-width: 500px;
+  width: 100%;
+  z-index: 2;
+  position: relative;
+}
+
+/* Logo */
+.auth-logo {
+  margin-bottom: 1.5rem;
+}
+
+.logo-text {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: white;
+  font-family: var(--font-secondary);
+}
+
+/* Hero Section */
+.auth-hero-title {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  color: white;
+  font-family: var(--font-secondary);
+}
+
+.auth-hero-subtitle {
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+  color: rgba(255, 255, 255, 0.95);
+  display: none; /* Clean look */
+}
+
+/* Benefits List */
+.auth-benefits-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem 0;
+}
+
+.auth-benefits-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: white;
+}
+
+.auth-benefits-list li:last-child {
+  margin-bottom: 0;
+}
+
+.benefit-icon {
+  flex-shrink: 0;
+  margin-top: 2px;
+  stroke-width: 2.5;
+}
+
+/* Trust Indicators */
+.auth-trust-indicators {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  padding: 1.5rem 0 0 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.trust-item {
+  text-align: center;
+}
+
+.trust-number {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 0.25rem;
+  font-family: var(--font-secondary);
+}
+
+.trust-label {
+  display: block;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Decorative Elements */
+.auth-decorative-elements {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.floating-circle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  animation: float 6s ease-in-out infinite;
+}
+
+.circle-1 {
+  width: 300px;
+  height: 300px;
+  top: -100px;
+  right: -100px;
+  animation-delay: 0s;
+}
+
+.circle-2 {
+  width: 200px;
+  height: 200px;
+  bottom: -50px;
+  left: -50px;
+  animation-delay: 2s;
+}
+
+.circle-3 {
+  width: 150px;
+  height: 150px;
+  top: 50%;
+  left: -75px;
+  animation-delay: 4s;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(5deg);
+  }
+}
+
+/* Pattern Overlay */
+.auth-left-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+  z-index: 1;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+/* Tablet (768px - 1023px) */
+@media (max-width: 1023px) and (min-width: 769px) {
+  .auth-left-panel {
+    flex: 0 0 45%;
+    padding: 2.5rem;
+  }
+
+  .auth-hero-title {
+    font-size: 2.5rem;
+  }
+
+  .auth-benefits-list li {
+    font-size: 1rem;
+  }
+
+  .trust-number {
+    font-size: 1.75rem;
+  }
+}
+
+/* Mobile (< 768px) */
+@media (max-width: 768px) {
+  .auth-left-panel {
+    flex: 0 0 auto;
+    min-height: 30vh; /* Reduced from 40vh */
+    max-height: 40vh; /* NEW: Limit height */
+    padding: 2rem 1.5rem;
+  }
+
+  .auth-left-content {
+    max-width: 100%;
+  }
+
+  .logo-text {
+    font-size: 1.5rem;
+  }
+
+  .auth-logo {
+    margin-bottom: 1.5rem;
+  }
+
+  .auth-hero-title {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .auth-benefits-list {
+    margin-bottom: 2rem;
+  }
+
+  .auth-benefits-list li {
+    font-size: 0.9375rem;
+    margin-bottom: 1rem;
+    gap: 0.75rem;
+  }
+
+  .benefit-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .auth-trust-indicators {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    padding: 1.5rem 0 0 0;
+  }
+
+  .trust-number {
+    font-size: 1.5rem;
+  }
+
+  .trust-label {
+    font-size: 0.75rem;
+  }
+
+  /* Smaller decorative circles on mobile */
+  .circle-1 {
+    width: 200px;
+    height: 200px;
+  }
+
+  .circle-2 {
+    width: 150px;
+    height: 150px;
+  }
+
+  .circle-3 {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+/* Small Mobile (< 480px) */
+@media (max-width: 480px) {
+  .auth-left-panel {
+    padding: 1.5rem 1rem;
+    min-height: 35vh;
+  }
+
+  .auth-hero-title {
+    font-size: 1.75rem;
+  }
+
+  .auth-benefits-list li {
+    font-size: 0.875rem;
+  }
+
+  .auth-trust-indicators {
+    gap: 0.75rem;
+    padding: 1.25rem 0 0 0;
+  }
+
+  .trust-number {
+    font-size: 1.25rem;
+  }
+}
+
+/* Landscape Mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+  .auth-left-panel {
+    min-height: 50vh;
+    padding: 1.5rem;
+  }
+
+  .auth-hero-title {
+    font-size: 1.75rem;
+  }
+
+  .auth-benefits-list {
+    margin-bottom: 1.5rem;
+  }
+
+  .auth-benefits-list li {
+    margin-bottom: 0.75rem;
+  }
+
+  .auth-trust-indicators {
+    padding: 1rem 0 0 0;
+  }
+}

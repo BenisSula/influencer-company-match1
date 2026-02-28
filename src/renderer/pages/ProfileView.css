@@ -1,0 +1,168 @@
+/* ProfileView Header Buttons - 2x2 Grid Layout */
+
+.profile-view-header-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  max-width: 600px;
+}
+
+/* Desktop - Full size buttons with text */
+.profile-view-header-buttons .button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  font-size: 0.909rem; /* Reduced by 3% from 0.9375rem */
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.profile-view-header-buttons .button svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.profile-view-header-buttons .button-text {
+  display: inline;
+}
+
+/* Back Button - Fix visibility on white background */
+.profile-view-header-buttons .back-button {
+  background-color: #F0F2F5 !important;
+  color: #050505 !important;
+  border: 2px solid #E4E6EB !important;
+  font-weight: 600 !important;
+}
+
+.profile-view-header-buttons .back-button:hover:not(:disabled) {
+  background-color: #E4E6EB !important;
+  border-color: #BDC1C6 !important;
+  color: #050505 !important;
+}
+
+.profile-view-header-buttons .back-button svg {
+  color: #050505 !important;
+}
+
+/* Tablet - Slightly smaller, maintain 2x2 grid */
+@media (max-width: 1024px) {
+  .profile-view-header-buttons {
+    max-width: 500px;
+  }
+
+  .profile-view-header-buttons .button {
+    padding: 0.5rem 1rem;
+    font-size: 0.849rem; /* Reduced by 3% from 0.875rem */
+  }
+
+  .profile-view-header-buttons .button svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+/* Small Tablet - Compact buttons, 2x2 grid */
+@media (max-width: 768px) {
+  .profile-view-header-buttons {
+    gap: 0.375rem;
+    max-width: 450px;
+  }
+
+  .profile-view-header-buttons .button {
+    padding: 0.5rem 0.875rem;
+    font-size: 0.788rem; /* Reduced by 3% from 0.8125rem */
+  }
+
+  .profile-view-header-buttons .button svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+/* Mobile - Very compact, 2x2 grid with smaller text */
+@media (max-width: 640px) {
+  .profile-view-header-buttons {
+    gap: 0.25rem;
+    max-width: 380px;
+  }
+
+  .profile-view-header-buttons .button {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.728rem; /* Reduced by 3% from 0.75rem */
+    min-height: 36px;
+  }
+
+  .profile-view-header-buttons .button svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+/* Extra Small Mobile - Very compact, maintain full text */
+@media (max-width: 480px) {
+  .profile-view-header-buttons {
+    max-width: 340px;
+  }
+
+  .profile-view-header-buttons .button {
+    padding: 0.375rem 0.625rem;
+    font-size: 0.667rem; /* Reduced by 3% from 0.6875rem */
+    min-height: 32px;
+  }
+
+  .profile-view-header-buttons .button svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+/* Very Small Mobile - Icon only for secondary buttons if needed */
+@media (max-width: 380px) {
+  .profile-view-header-buttons {
+    gap: 0.25rem;
+    max-width: 300px;
+  }
+
+  .profile-view-header-buttons .button {
+    padding: 0.375rem 0.5rem;
+    font-size: 0.606rem; /* Reduced by 3% from 0.625rem */
+    min-height: 32px;
+  }
+
+  .profile-view-header-buttons .button svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* Hide text for secondary buttons on very small screens, keep icon */
+  .profile-view-header-buttons .button.button-secondary .button-text {
+    display: none;
+  }
+
+  /* Keep text for primary action button */
+  .profile-view-header-buttons .button.button-primary .button-text {
+    display: inline;
+  }
+}
+
+/* Ensure buttons don't break layout */
+.profile-view-header-buttons .button {
+  flex-shrink: 0;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Back button - always show text */
+.profile-view-header-buttons .button.back-button .button-text {
+  display: inline !important;
+}
+
+@media (max-width: 380px) {
+  .profile-view-header-buttons .button.back-button {
+    padding: 0.375rem 0.625rem;
+  }
+}

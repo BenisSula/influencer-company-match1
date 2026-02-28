@@ -15,10 +15,10 @@ export class CollaborationRequest {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @ManyToOne(() => User, { eager: true })
+  @ManyToOne(() => User)
   sender: User;
 
-  @ManyToOne(() => User, { eager: true })
+  @ManyToOne(() => User)
   recipient: User;
 
   @Column({ type: 'text' })

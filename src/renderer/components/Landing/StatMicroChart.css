@@ -1,0 +1,41 @@
+/* StatMicroChart Component Styles */
+
+.stat-micro-chart {
+  width: 100%;
+  height: 40px;
+  margin-top: 0.75rem;
+  opacity: 0.6;
+  transition: opacity var(--transition-base);
+  position: relative; /* ADDED: Ensure stacking context */
+  z-index: 2; /* ADDED: Chart - above overlay but below text */
+}
+
+.stat-card:hover .stat-micro-chart {
+  opacity: 1;
+}
+
+/* Ensure chart doesn't cause layout shift */
+.stat-micro-chart svg {
+  overflow: visible;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .stat-micro-chart {
+    opacity: 0.8;
+  }
+  
+  .stat-micro-chart * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Mobile optimization */
+@media (max-width: 640px) {
+  .stat-micro-chart {
+    height: 32px;
+    margin-top: 0.5rem;
+  }
+}

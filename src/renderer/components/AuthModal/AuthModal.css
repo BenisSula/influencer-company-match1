@@ -1,0 +1,168 @@
+/* ========================================
+   AUTH MODAL - FLOATING OVERLAY
+   ======================================== */
+
+.auth-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 1rem;
+  animation: fadeIn 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow-y: auto;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.auth-modal-container {
+  position: relative;
+  background: white;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 
+    0 4px 6px rgba(0, 0, 0, 0.07),
+    0 10px 20px rgba(0, 0, 0, 0.10),
+    0 20px 40px rgba(0, 0, 0, 0.12);
+  max-width: 500px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: slideUp 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  margin: auto;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.auth-modal-close {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 10;
+  color: #6b7280;
+}
+
+.auth-modal-close:hover {
+  background: white;
+  border-color: #d1d5db;
+  color: #1a1a1a;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+.auth-modal-close:active {
+  transform: scale(0.95);
+}
+
+.auth-modal-content {
+  padding: 0;
+}
+
+/* Adjust AuthRightPanel styles when inside modal */
+.auth-modal-container .auth-right-panel {
+  min-height: auto;
+  padding: 2rem;
+}
+
+.auth-modal-container .auth-right-content {
+  max-width: 100%;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .auth-modal-backdrop {
+    padding: 0;
+    align-items: flex-start;
+  }
+
+  .auth-modal-container {
+    max-width: 100%;
+    max-height: 100vh;
+    min-height: 100vh;
+    border-radius: 0;
+    margin: 0;
+  }
+
+  .auth-modal-close {
+    top: 0.75rem;
+    right: 0.75rem;
+    width: 36px;
+    height: 36px;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .auth-modal-container .auth-right-panel {
+    padding: 1.5rem;
+    padding-top: 3rem;
+  }
+}
+
+/* Smooth scrollbar for modal content */
+.auth-modal-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.auth-modal-container::-webkit-scrollbar-track {
+  background: #f9fafb;
+  border-radius: 0 12px 12px 0;
+}
+
+.auth-modal-container::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 4px;
+}
+
+.auth-modal-container::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+/* Prevent body scroll when modal is open */
+body.modal-open {
+  overflow: hidden;
+}
+
+/* Focus trap styling */
+.auth-modal-backdrop:focus {
+  outline: none;
+}
+
+/* Accessibility - reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  .auth-modal-backdrop,
+  .auth-modal-container {
+    animation: none;
+  }
+}

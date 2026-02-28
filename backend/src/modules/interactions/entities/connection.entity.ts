@@ -13,10 +13,10 @@ export class Connection {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @ManyToOne(() => User, { eager: true })
+  @ManyToOne(() => User)
   user1: User;
 
-  @ManyToOne(() => User, { eager: true })
+  @ManyToOne(() => User)
   user2: User;
 
   @CreateDateColumn()

@@ -20,7 +20,7 @@ export class CampaignInvite {
   @Column('uuid')
   campaignId: string;
 
-  @ManyToOne(() => User, { eager: true })
+  @ManyToOne(() => User)
   influencer: User;
 
   @Column({ type: 'text' })

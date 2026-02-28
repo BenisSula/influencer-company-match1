@@ -1,0 +1,327 @@
+/* Mobile-First Comparison Table - Ultra Compact */
+
+/* CSS Variables for DRY principle */
+:root {
+  --comparison-avatar-size: 20px;
+  --comparison-font-xs: 7px;
+  --comparison-font-sm: 8px;
+  --comparison-font-md: 9px;
+  --comparison-font-lg: 10px;
+  --comparison-font-xl: 14px;
+  --comparison-padding-sm: 0.5rem;
+  --comparison-padding-md: 0.625rem;
+  --comparison-gap-sm: 0.375rem;
+  --comparison-gap-md: 0.5rem;
+}
+
+.comparison-table-wrapper {
+  background: #FFFFFF;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Mobile: Card-based layout */
+@media (max-width: 767px) {
+  .comparison-table {
+    display: none;
+  }
+
+  .comparison-table-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .mobile-comparison-card {
+    background: #FFFFFF;
+    border-radius: 0.75rem;
+    padding: 1rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  .mobile-card-header {
+    display: flex;
+    align-items: center;
+    gap: var(--comparison-gap-md);
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #DBDBDB;
+  }
+
+  .mobile-card-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .mobile-card-info h3 {
+    font-size: var(--comparison-font-xl);
+    font-weight: 700;
+    color: #262626;
+    margin: 0 0 0.125rem 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .mobile-card-role {
+    font-size: var(--comparison-font-lg);
+    color: #8E8E8E;
+    text-transform: capitalize;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .mobile-score-badge {
+    margin-left: auto;
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  .mobile-score-value {
+    font-size: 20px;
+    font-weight: 700;
+    display: block;
+    line-height: 1;
+  }
+
+  .mobile-score-label {
+    font-size: var(--comparison-font-sm);
+    color: #8E8E8E;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    margin-top: 0.25rem;
+    display: block;
+  }
+
+  .mobile-factors {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .mobile-factor-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .mobile-factor-label {
+    font-size: var(--comparison-font-lg);
+    color: #262626;
+    font-weight: 500;
+  }
+
+  .mobile-factor-value {
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .mobile-best-badge {
+    display: inline-block;
+    margin-left: 0.25rem;
+    padding: 0.0625rem 0.25rem;
+    background: #00D95F;
+    color: white;
+    border-radius: 0.1875rem;
+    font-size: var(--comparison-font-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+}
+
+/* Tablet & Desktop: Table layout */
+@media (min-width: 768px) {
+  .mobile-comparison-card {
+    display: none;
+  }
+
+  .comparison-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+
+  .comparison-table th,
+  .comparison-table td {
+    padding: var(--comparison-padding-sm) var(--comparison-padding-sm);
+    text-align: left;
+    border-bottom: 1px solid #DBDBDB;
+    font-size: var(--comparison-font-md);
+  }
+
+  .comparison-table thead th {
+    background: #FAFAFA;
+    font-weight: 600;
+    color: #262626;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    font-size: var(--comparison-font-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+
+  .comparison-table tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  .header-label {
+    min-width: 100px;
+    max-width: 120px;
+  }
+
+  .header-match {
+    min-width: 120px;
+    max-width: 150px;
+  }
+
+  .match-header {
+    display: flex;
+    align-items: center;
+    gap: var(--comparison-gap-sm);
+  }
+
+  .match-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.0625rem;
+    min-width: 0;
+    flex: 1;
+  }
+
+  .match-name {
+    font-size: var(--comparison-font-md);
+    font-weight: 600;
+    color: #262626;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .match-role {
+    font-size: var(--comparison-font-sm);
+    color: #8E8E8E;
+    text-transform: capitalize;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .overall-row {
+    background: #FAFAFA;
+  }
+
+  .overall-row td {
+    font-weight: 600;
+  }
+
+  .row-label {
+    font-weight: 500;
+    color: #262626;
+    font-size: var(--comparison-font-md);
+  }
+
+  .score-cell,
+  .factor-cell {
+    text-align: center;
+    position: relative;
+  }
+
+  .score-large {
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .score-value {
+    font-size: var(--comparison-font-lg);
+    font-weight: 700;
+  }
+
+  .score-excellent {
+    color: #00D95F;
+  }
+
+  .score-good {
+    color: #0095F6;
+  }
+
+  .score-fair {
+    color: #FFCC00;
+  }
+
+  .score-poor {
+    color: #ED4956;
+  }
+
+  .best-score {
+    background: rgba(0, 217, 95, 0.08);
+  }
+
+  .best-badge {
+    display: inline-block;
+    margin-left: 0.25rem;
+    padding: 0.0625rem 0.3125rem;
+    background: #00D95F;
+    color: white;
+    border-radius: 0.1875rem;
+    font-size: var(--comparison-font-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .comparison-table th,
+  .comparison-table td {
+    padding: var(--comparison-padding-md) var(--comparison-padding-md);
+    font-size: var(--comparison-font-lg);
+  }
+
+  .comparison-table thead th {
+    font-size: var(--comparison-font-md);
+  }
+
+  .header-label {
+    min-width: 110px;
+    max-width: 130px;
+  }
+
+  .header-match {
+    min-width: 130px;
+    max-width: 160px;
+  }
+
+  .match-name {
+    font-size: var(--comparison-font-lg);
+  }
+
+  .row-label {
+    font-size: var(--comparison-font-lg);
+  }
+
+  .score-large {
+    font-size: 20px;
+  }
+
+  .score-value {
+    font-size: 11px;
+  }
+
+  .best-badge {
+    font-size: var(--comparison-font-sm);
+    padding: 0.125rem 0.3125rem;
+  }
+}
+
+/* Override Avatar size for comparison table */
+.comparison-table .match-header .avatar,
+.mobile-card-header .avatar {
+  width: var(--comparison-avatar-size) !important;
+  height: var(--comparison-avatar-size) !important;
+  font-size: var(--comparison-font-sm) !important;
+}

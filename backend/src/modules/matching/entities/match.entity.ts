@@ -1,47 +1,31 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  ManyToOne,
-  CreateDateColumn,
-  Index,
-} from 'typeorm';
-import { User } from '../../users/entities/user.entity';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, ManyToOne, JoinColumn } from 'typeorm';
+import { User } from '../../auth/entities/user.entity';
 
 @Entity('matches')
-@Index(['influencer', 'company'])
-@Index(['score'])
-@Index(['tier'])
 export class Match {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
+  @Column()
+  influencerId: string;
+
+  @Column()
+  companyId: string;
+
   @ManyToOne(() => User)
+  @JoinColumn({ name: 'influencerId' })
   influencer: User;
 
   @ManyToOne(() => User)
+  @JoinColumn({ name: 'companyId' })
   company: User;
 
   @Column({ type: 'decimal', precision: 5, scale: 2 })
   score: number;
 
-  @Column()
-  tier: string; // 'Perfect', 'Excellent', 'Good', 'Fair'
-
-  @Column({ type: 'json', nullable: true })
-  scoreBreakdown: {
-    nicheCompatibility: number;
-    locationCompatibility: number;
-    budgetAlignment: number;
-    platformOverlap: number;
-    audienceSizeMatch: number;
-    engagementTierMatch: number;
-  };
+  @Column({ type: 'jsonb', nullable: true })
+  factors: any;
 
   @CreateDateColumn()
   createdAt: Date;
-
-  @Index()
-  @Column({ type: 'timestamp', nullable: true })
-  cachedUntil: Date;
 }

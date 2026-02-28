@@ -29,5 +29,6 @@ Thumbs.db
 coverage/
 .nyc_output/
 
-# Uploads
-uploads/
+# Uploads - keep directory structure but ignore uploaded files
+uploads/*
+!uploads/.gitkeep

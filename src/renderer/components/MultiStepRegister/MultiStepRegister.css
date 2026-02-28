@@ -1,0 +1,22 @@
+/* ========================================
+   MULTI-STEP REGISTER CONTAINER
+   ======================================== */
+
+.multi-step-register {
+  width: 100%;
+  max-width: 540px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+@media (max-width: 768px) {
+  .multi-step-register {
+    padding: 1.5rem 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .multi-step-register {
+    padding: 1rem 0.5rem;
+  }
+}

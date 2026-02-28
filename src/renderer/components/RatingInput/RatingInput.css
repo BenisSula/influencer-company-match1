@@ -1,0 +1,117 @@
+.rating-input {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.rating-input__label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary, #1f2937);
+  margin-bottom: 4px;
+}
+
+.rating-input__required {
+  color: var(--color-danger, #ef4444);
+  margin-left: 4px;
+}
+
+.rating-input__container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.rating-input__stars {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.rating-input__star-btn {
+  background: none;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rating-input__star-btn:hover:not(:disabled) {
+  transform: scale(1.1);
+}
+
+.rating-input__star-btn:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+.rating-input__star-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.rating-input__star-icon {
+  transition: all 0.2s ease;
+}
+
+.rating-input__rating-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-warning, #FBBF24);
+  min-width: 80px;
+}
+
+/* Size variants */
+.rating-input--small .rating-input__label {
+  font-size: 13px;
+}
+
+.rating-input--small .rating-input__rating-label {
+  font-size: 12px;
+}
+
+.rating-input--large .rating-input__label {
+  font-size: 15px;
+}
+
+.rating-input--large .rating-input__rating-label {
+  font-size: 15px;
+}
+
+/* Disabled state */
+.rating-input--disabled {
+  opacity: 0.6;
+}
+
+.rating-input--disabled .rating-input__label {
+  color: var(--text-secondary, #6b7280);
+}
+
+/* Focus styles for accessibility */
+.rating-input__star-btn:focus-visible {
+  outline: 2px solid var(--color-primary, #e1306c);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .rating-input__stars {
+    gap: 2px;
+  }
+  
+  .rating-input__star-btn {
+    padding: 2px;
+  }
+  
+  .rating-input__container {
+    gap: 8px;
+  }
+  
+  .rating-input__rating-label {
+    font-size: 13px;
+    min-width: 70px;
+  }
+}

@@ -1,0 +1,43 @@
+/* Mobile Navigation Toggle Button */
+.mobile-nav-toggle {
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1001;
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: var(--radius-md);
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  transition: var(--transition-base);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile-nav-toggle:hover {
+  background: var(--color-bg-secondary);
+  box-shadow: var(--shadow-lg);
+}
+
+.mobile-nav-toggle:active {
+  transform: scale(0.95);
+}
+
+/* Show on mobile */
+@media (min-width: 320px) {
+  .mobile-nav-toggle {
+    display: flex;
+  }
+}
+
+/* Hide on tablet and above */
+@media (min-width: 768px) {
+  .mobile-nav-toggle {
+    display: none;
+  }
+}

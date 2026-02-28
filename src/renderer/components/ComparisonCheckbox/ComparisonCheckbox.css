@@ -1,0 +1,137 @@
+.comparison-checkbox {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+  font-size: 14px;
+  color: #050505;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.checkbox-label:hover:not(.disabled) {
+  background: #F0F2F5;
+}
+
+.checkbox-label.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: 10px;
+  height: 10px;
+  cursor: pointer;
+  accent-color: #2563EB;
+  transition: transform 0.2s ease;
+}
+
+.checkbox-label:hover:not(.disabled) input[type="checkbox"] {
+  transform: scale(1.1);
+}
+
+.checkbox-label.disabled input[type="checkbox"] {
+  cursor: not-allowed;
+}
+
+.checkbox-text {
+  font-weight: 500;
+  color: #050505;
+}
+
+.checkbox-hint {
+  font-size: 11px;
+  color: #65676B;
+  margin-left: 26px;
+}
+
+/* Tablet (768px): Same as desktop */
+@media (max-width: 768px) {
+  .comparison-checkbox {
+    gap: 2px;
+  }
+
+  .checkbox-label {
+    padding: 4px 8px;
+    font-size: 12px;
+    gap: 6px;
+  }
+
+  .checkbox-label input[type="checkbox"] {
+    width: 10px;
+    height: 10px;
+  }
+
+  .checkbox-text {
+    font-size: 12px;
+  }
+}
+
+/* Mobile: Compact with visible label */
+@media (max-width: 480px) {
+  .comparison-checkbox {
+    width: auto;
+    min-width: 0;
+  }
+
+  .checkbox-label {
+    padding: 2px 6px;
+    gap: 4px;
+    min-width: 0;
+    font-size: 11px;
+  }
+
+  .checkbox-text {
+    display: inline; /* Keep text visible */
+    font-size: 11px;
+    white-space: nowrap;
+  }
+
+  .checkbox-label input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+  }
+
+  .checkbox-hint {
+    display: none;
+  }
+}
+
+/* Extra small: Even more compact with visible label */
+@media (max-width: 375px) {
+  .checkbox-label {
+    padding: 2px 4px;
+    gap: 3px;
+    font-size: 10px;
+  }
+
+  .checkbox-text {
+    font-size: 10px;
+  }
+
+  .checkbox-label input[type="checkbox"] {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+/* Tablet+: Show text - FIXED PER IMPLEMENTATION PLAN */
+@media (min-width: 481px) {
+  .checkbox-text {
+    display: inline;
+  }
+
+  .checkbox-label {
+    padding: 4px 8px;
+    gap: 6px;
+  }
+}

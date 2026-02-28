@@ -1,76 +1,72 @@
-import React, { useEffect } from 'react';
-import { HiX, HiCheckCircle, HiExclamationCircle, HiInformationCircle } from 'react-icons/hi';
+import React, { useEffect, useCallback } from 'react';
+import { CheckCircle, XCircle, AlertCircle, Info, X } from 'lucide-react';
 import './Toast.css';
 
-export type ToastType = 'success' | 'error' | 'info' | 'warning';
-
-export interface ToastProps {
+interface ToastProps {
   id: string;
   message: string;
-  type?: ToastType;
+  type: 'success' | 'error' | 'warning' | 'info';
   duration?: number;
-  action?: {
-    label: string;
-    onClick: () => void;
-  };
   onClose: (id: string) => void;
 }
 
-export const Toast: React.FC<ToastProps> = ({
+export const Toast: React.FC<ToastProps> = ({ 
   id,
-  message,
-  type = 'info',
-  duration = 5000,
-  action,
-  onClose,
+  message, 
+  type, 
+  duration = 5000, 
+  onClose 
 }) => {
-  useEffect(() => {
-    if (duration > 0) {
-      const timer = setTimeout(() => {
-        onClose(id);
-      }, duration);
+  // Use useCallback to create a stable onClose handler
+  const handleClose = useCallback(() => {
+    onClose(id);
+  }, [id, onClose]);
 
-      return () => clearTimeout(timer);
-    }
+  useEffect(() => {
+    // Auto-dismiss after duration
+    const timer = setTimeout(() => {
+      onClose(id);
+    }, duration);
+    
+    return () => clearTimeout(timer);
   }, [id, duration, onClose]);
 
-  const getIcon = () => {
-    switch (type) {
-      case 'success':
-        return <HiCheckCircle size={20} />;
-      case 'error':
-        return <HiExclamationCircle size={20} />;
-      case 'warning':
-        return <HiExclamationCircle size={20} />;
-      default:
-        return <HiInformationCircle size={20} />;
-    }
+  const icons = {
+    success: <CheckCircle size={20} />,
+    error: <XCircle size={20} />,
+    warning: <AlertCircle size={20} />,
+    info: <Info size={20} />,
   };
 
   return (
-    <div className={`toast toast-${type}`} role="alert" aria-live="polite">
-      <div className="toast-icon">{getIcon()}</div>
-      <div className="toast-content">
-        <p className="toast-message">{message}</p>
-        {action && (
-          <button
-            className="toast-action"
-            onClick={() => {
-              action.onClick();
-              onClose(id);
-            }}
-          >
-            {action.label}
-          </button>
-        )}
-      </div>
-      <button
-        className="toast-close"
-        onClick={() => onClose(id)}
-        aria-label="Close notification"
-      >
-        <HiX size={16} />
+    <div className={`toast toast-${type}`}>
+      <div className="toast-icon">{icons[type]}</div>
+      <div className="toast-message">{message}</div>
+      <button className="toast-close" onClick={handleClose} aria-label="Close">
+        <X size={16} />
       </button>
+    </div>
+  );
+};
+
+// Toast Container
+interface ToastContainerProps {
+  toasts: Array<{ id: string; message: string; type: 'success' | 'error' | 'warning' | 'info' }>;
+  onClose: (id: string) => void;
+}
+
+export const ToastContainer: React.FC<ToastContainerProps> = ({ toasts, onClose }) => {
+  return (
+    <div className="toast-container">
+      {toasts.map((toast) => (
+        <Toast 
+          key={toast.id} 
+          id={toast.id}
+          message={toast.message} 
+          type={toast.type} 
+          onClose={onClose} 
+        />
+      ))}
     </div>
   );
 };

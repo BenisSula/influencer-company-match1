@@ -1,10 +1,21 @@
 import { NavLink, useNavigate } from 'react-router-dom';
-import { useState, useEffect, useRef } from 'react';
-import { HiHome, HiUsers, HiUserCircle, HiChatAlt2, HiCog, HiBell, HiSearch, HiMenu, HiX } from 'react-icons/hi';
+import { useState, useRef } from 'react';
+import { HiHome, HiUsers, HiUserCircle, HiChatAlt2, HiCog, HiBell, HiMenu, HiX, HiNewspaper, HiChevronLeft, HiChevronRight, HiClipboardList, HiChartBar } from 'react-icons/hi';
 import { useAuth } from '../../contexts/AuthContext';
-import { matchingService, Match } from '../../services/matching.service';
+import { useNotifications } from '../../contexts/NotificationContext';
 import { useClickOutside } from '../../hooks/useClickOutside';
-import { useDebounce } from '../../hooks/useDebounce';
+import { useSidebarState } from '../../hooks/useSidebarState';
+import { useMediaQuery } from '../../hooks/useMediaQuery';
+import { useProfileUpdates } from '../../hooks/useProfileUpdates';
+import { UnreadBadge } from '../../components/UnreadBadge/UnreadBadge';
+import { NotificationDropdown } from '../../components/NotificationDropdown/NotificationDropdown';
+import { MessageToastContainer } from '../../components/MessageToastNotification/MessageToastContainer';
+import { GlobalSearch } from '../../components/GlobalSearch';
+import { Avatar } from '../../components/Avatar';
+import { SuggestedMatchesList } from '../../components/SuggestedMatchesList/SuggestedMatchesList';
+import { MobileNav } from '../../components/MobileNav/MobileNav';
+import { ChatbotWidget } from '../../components/ChatbotWidget/ChatbotWidget';
+import { isFeatureEnabled } from '../../config/features';
 import './AppLayout.css';
 
 interface AppLayoutProps {
@@ -14,23 +25,39 @@ interface AppLayoutProps {
 export const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
   const navigate = useNavigate();
   const { user, logout } = useAuth();
+  
+  // Real-time profile updates
+  useProfileUpdates();
+  
+  const { 
+    notifications, 
+    removeNotification, 
+    clearAllNotifications,
+    generalNotifications,
+    generalUnreadCount,
+    messageToasts,
+    removeMessageToast,
+  } = useNotifications();
+  
+  // Check if mobile
+  const isMobile = useMediaQuery('(max-width: 768px)');
+  
+  // Sidebar collapse states using custom hook (DRY principle)
+  const leftSidebar = useSidebarState({ storageKey: 'left-sidebar-collapsed', defaultCollapsed: false });
+  const rightSidebar = useSidebarState({ storageKey: 'right-sidebar-collapsed', defaultCollapsed: false });
+  
   const [showUserMenu, setShowUserMenu] = useState(false);
+  const [showNotifications, setShowNotifications] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [searchResults, setSearchResults] = useState<Match[]>([]);
-  const [showSearchResults, setShowSearchResults] = useState(false);
-  const [suggestedMatches, setSuggestedMatches] = useState<Match[]>([]);
   
   const userMenuRef = useRef<HTMLDivElement>(null);
-  const searchRef = useRef<HTMLDivElement>(null);
-  
-  const debouncedSearch = useDebounce(searchQuery, 300);
+  const notificationRef = useRef<HTMLDivElement>(null);
 
   // Close user menu when clicking outside
   useClickOutside(userMenuRef, () => setShowUserMenu(false), showUserMenu);
   
-  // Close search results when clicking outside
-  useClickOutside(searchRef, () => setShowSearchResults(false), showSearchResults);
+  // Close notifications when clicking outside
+  useClickOutside(notificationRef, () => setShowNotifications(false), showNotifications);
 
   const handleLogout = () => {
     logout();
@@ -38,43 +65,18 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
     setShowUserMenu(false);
   };
 
-  // Load suggested matches
-  useEffect(() => {
-    matchingService.getMatches().then(response => {
-      setSuggestedMatches(response.data.slice(0, 3));
-    }).catch(err => {
-      console.error('Failed to load suggested matches:', err);
+  const handleNotificationClick = (notification: any) => {
+    navigate('/messages', {
+      state: {
+        openConversationId: notification.conversationId,
+      },
     });
-  }, []);
+    removeNotification(notification.id);
+    setShowNotifications(false);
+  };
 
-  // Handle search
-  useEffect(() => {
-    if (debouncedSearch.trim()) {
-      matchingService.getMatches().then(response => {
-        const filtered = response.data.filter(match => {
-          const searchLower = debouncedSearch.toLowerCase();
-          return (
-            match.profile.name.toLowerCase().includes(searchLower) ||
-            (match.profile.niche && match.profile.niche.toLowerCase().includes(searchLower)) ||
-            (match.profile.industry && match.profile.industry.toLowerCase().includes(searchLower)) ||
-            (match.profile.location && match.profile.location.toLowerCase().includes(searchLower))
-          );
-        });
-        setSearchResults(filtered.slice(0, 5));
-        setShowSearchResults(true);
-      }).catch(err => {
-        console.error('Search failed:', err);
-      });
-    } else {
-      setSearchResults([]);
-      setShowSearchResults(false);
-    }
-  }, [debouncedSearch]);
-
-  const handleSearchSelect = (matchId: string) => {
-    navigate(`/profile/${matchId}`);
-    setSearchQuery('');
-    setShowSearchResults(false);
+  const handleClearAllNotifications = () => {
+    clearAllNotifications();
   };
 
   const closeSidebar = () => {
@@ -82,7 +84,6 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
   };
 
   const userName = user?.profile?.name || user?.email || 'User';
-  const userInitial = userName.charAt(0).toUpperCase();
 
   return (
     <div className="app-layout">
@@ -103,69 +104,27 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
             {sidebarOpen ? <HiX size={24} /> : <HiMenu size={24} />}
           </button>
           <h1 className="app-logo">InfluMatch</h1>
-          <div className="search-bar" ref={searchRef}>
-            <HiSearch className="search-icon" aria-hidden="true" />
-            <input
-              type="text"
-              placeholder="Search matches..."
-              className="search-input"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              aria-label="Search matches"
-              aria-autocomplete="list"
-              aria-controls="search-results"
-              aria-expanded={showSearchResults}
-            />
-            {searchQuery && (
-              <button
-                className="search-clear"
-                onClick={() => {
-                  setSearchQuery('');
-                  setShowSearchResults(false);
-                }}
-                aria-label="Clear search"
-              >
-                <HiX size={16} />
-              </button>
-            )}
-            
-            {showSearchResults && (
-              <div id="search-results" className="search-results" role="listbox">
-                {searchResults.length > 0 ? (
-                  searchResults.map((match) => (
-                    <button
-                      key={match.id}
-                      className="search-result-item"
-                      onClick={() => handleSearchSelect(match.profile.id)}
-                      role="option"
-                    >
-                      <div className="search-result-avatar">
-                        {match.profile.name.charAt(0).toUpperCase()}
-                      </div>
-                      <div className="search-result-info">
-                        <div className="search-result-name">{match.profile.name}</div>
-                        <div className="search-result-meta">
-                          {match.profile.type === 'influencer' ? match.profile.niche : match.profile.industry}
-                        </div>
-                      </div>
-                      <div className="search-result-score">{match.score}</div>
-                    </button>
-                  ))
-                ) : (
-                  <div className="search-no-results">No matches found</div>
-                )}
-              </div>
-            )}
+          
+          {/* Enhanced Global Search */}
+          <div className="header-search-wrapper">
+            <GlobalSearch placeholder="Search users, posts..." />
           </div>
         </div>
         
         <div className="header-center">
           <NavLink
-            to="/"
+            to="/dashboard"
             className={({ isActive }) => `header-nav-btn ${isActive ? 'active' : ''}`}
             aria-label="Dashboard"
           >
             <HiHome size={24} aria-hidden="true" />
+          </NavLink>
+          <NavLink
+            to="/feed"
+            className={({ isActive }) => `header-nav-btn ${isActive ? 'active' : ''}`}
+            aria-label="Feed"
+          >
+            <HiNewspaper size={24} aria-hidden="true" />
           </NavLink>
           <NavLink
             to="/matches"
@@ -180,14 +139,37 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
             aria-label="Messages"
           >
             <HiChatAlt2 size={24} aria-hidden="true" />
+            <UnreadBadge />
           </NavLink>
         </div>
         
         <div className="header-right">
-          <button className="header-icon-btn" aria-label="Notifications">
-            <HiBell size={20} aria-hidden="true" />
-            <span className="notification-badge" aria-label="0 notifications">0</span>
-          </button>
+          <div className="notification-bell-wrapper" ref={notificationRef}>
+            <button 
+              className="header-icon-btn" 
+              aria-label="Notifications"
+              onClick={() => setShowNotifications(!showNotifications)}
+              aria-expanded={showNotifications}
+            >
+              <HiBell size={20} aria-hidden="true" />
+              {generalUnreadCount > 0 && (
+                <span className="notification-badge" aria-label={`${generalUnreadCount} notifications`}>
+                  {generalUnreadCount > 9 ? '9+' : generalUnreadCount}
+                </span>
+              )}
+            </button>
+            
+            {showNotifications && (
+              <NotificationDropdown
+                notifications={notifications}
+                generalNotifications={generalNotifications}
+                onNotificationClick={handleNotificationClick}
+                onClearAll={handleClearAllNotifications}
+                onClose={() => setShowNotifications(false)}
+              />
+            )}
+          </div>
+          
           <div className="user-profile-btn" ref={userMenuRef}>
             <button
               onClick={() => setShowUserMenu(!showUserMenu)}
@@ -195,9 +177,13 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
               aria-expanded={showUserMenu}
               aria-haspopup="true"
             >
-              <div className="user-avatar-small">
-                {userInitial}
-              </div>
+              <Avatar
+                src={user?.avatarUrl}
+                name={userName}
+                email={user?.email}
+                size="sm"
+                className="user-avatar-small"
+              />
             </button>
             
             {showUserMenu && (
@@ -243,12 +229,22 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
         />
       )}
 
-      <div className="app-body">
+      <div className={`app-body ${leftSidebar.isCollapsed ? 'left-collapsed' : ''} ${rightSidebar.isCollapsed ? 'right-collapsed' : ''}`}>
         {/* Left Sidebar - Facebook Style */}
-        <aside className={`left-sidebar ${sidebarOpen ? 'open' : ''}`} aria-label="Main navigation">
+        <aside className={`left-sidebar ${sidebarOpen ? 'open' : ''} ${leftSidebar.isCollapsed ? 'collapsed' : ''}`} aria-label="Main navigation">
+          {/* Collapse button for desktop */}
+          <button
+            className="sidebar-collapse-btn left-collapse-btn"
+            onClick={leftSidebar.toggle}
+            aria-label={leftSidebar.isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+            title={leftSidebar.isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+          >
+            {leftSidebar.isCollapsed ? <HiChevronRight size={20} /> : <HiChevronLeft size={20} />}
+          </button>
+          
           <nav className="sidebar-nav">
             <NavLink
-              to="/"
+              to="/dashboard"
               className={({ isActive }) => `sidebar-item ${isActive ? 'active' : ''}`}
               onClick={closeSidebar}
             >
@@ -256,13 +252,42 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
               <span>Dashboard</span>
             </NavLink>
             <NavLink
+              to="/feed"
+              className={({ isActive }) => `sidebar-item ${isActive ? 'active' : ''}`}
+              onClick={closeSidebar}
+            >
+              <HiNewspaper className="sidebar-icon" aria-hidden="true" />
+              <span>Feed</span>
+            </NavLink>
+            <NavLink
               to="/matches"
+              end
               className={({ isActive }) => `sidebar-item ${isActive ? 'active' : ''}`}
               onClick={closeSidebar}
             >
               <HiUsers className="sidebar-icon" aria-hidden="true" />
               <span>Matches</span>
             </NavLink>
+            {isFeatureEnabled('MATCH_HISTORY_ENABLED') && (
+              <NavLink
+                to="/matches/history"
+                className={({ isActive }) => `sidebar-item ${isActive ? 'active' : ''}`}
+                onClick={closeSidebar}
+              >
+                <HiChartBar className="sidebar-icon" aria-hidden="true" />
+                <span>Match Analytics</span>
+              </NavLink>
+            )}
+            {isFeatureEnabled('CAMPAIGNS_ENABLED') && (
+              <NavLink
+                to="/campaigns"
+                className={({ isActive }) => `sidebar-item ${isActive ? 'active' : ''}`}
+                onClick={closeSidebar}
+              >
+                <HiClipboardList className="sidebar-icon" aria-hidden="true" />
+                <span>Campaigns</span>
+              </NavLink>
+            )}
             <NavLink
               to="/profile"
               className={({ isActive }) => `sidebar-item ${isActive ? 'active' : ''}`}
@@ -296,37 +321,36 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
         </main>
 
         {/* Right Sidebar */}
-        <aside className="right-sidebar" aria-label="Suggested matches">
-          <div className="sidebar-section">
-            <h3 className="sidebar-title">Suggested Matches</h3>
-            <div className="suggested-list">
-              {suggestedMatches.length > 0 ? (
-                suggestedMatches.map((match) => (
-                  <NavLink 
-                    key={match.id} 
-                    to={`/profile/${match.profile.id}`}
-                    className="suggested-item"
-                  >
-                    <div className="suggested-avatar" aria-hidden="true">
-                      {match.profile.name.charAt(0).toUpperCase()}
-                    </div>
-                    <div className="suggested-info">
-                      <div className="suggested-name">{match.profile.name}</div>
-                      <div className="suggested-meta">
-                        {match.profile.type === 'influencer' ? match.profile.niche : match.profile.industry}
-                      </div>
-                    </div>
-                  </NavLink>
-                ))
-              ) : (
-                <div style={{ padding: '1rem', textAlign: 'center', color: '#65676B', fontSize: '0.875rem' }}>
-                  No suggestions yet
-                </div>
-              )}
+        <aside className={`right-sidebar ${rightSidebar.isCollapsed ? 'collapsed' : ''}`} aria-label="Suggested matches">
+          {/* Collapse button for desktop */}
+          <button
+            className="sidebar-collapse-btn right-collapse-btn"
+            onClick={rightSidebar.toggle}
+            aria-label={rightSidebar.isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+            title={rightSidebar.isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+          >
+            {rightSidebar.isCollapsed ? <HiChevronLeft size={20} /> : <HiChevronRight size={20} />}
+          </button>
+          
+          <div className="sidebar-content">
+            <div className="sidebar-section">
+              <SuggestedMatchesList limit={8} />
             </div>
           </div>
         </aside>
       </div>
+
+      {/* Message Toast Notifications - Positioned near Messages icon */}
+      <MessageToastContainer
+        toasts={messageToasts}
+        onToastClose={removeMessageToast}
+      />
+
+      {/* Mobile Bottom Navigation */}
+      {isMobile && <MobileNav />}
+
+      {/* AI Chatbot Widget - Floating button */}
+      <ChatbotWidget />
     </div>
   );
 };

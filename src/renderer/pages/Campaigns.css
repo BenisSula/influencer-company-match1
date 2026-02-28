@@ -1,0 +1,268 @@
+.campaigns-page {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.campaigns-header {
+  margin-bottom: 32px;
+}
+
+.campaigns-header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.campaigns-header h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--gray-900);
+  margin: 0;
+}
+
+.campaigns-tabs {
+  display: flex;
+  gap: 8px;
+  border-bottom: 2px solid var(--gray-200);
+}
+
+.campaigns-tabs .tab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--gray-600);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: -2px;
+}
+
+.campaigns-tabs .tab-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.campaigns-tabs .tab-icon svg {
+  flex-shrink: 0;
+}
+
+.campaigns-tabs .tab-label {
+  white-space: nowrap;
+}
+
+.campaigns-tabs .tab:hover {
+  color: var(--gray-900);
+}
+
+.campaigns-tabs .tab.active {
+  color: var(--primary-color);
+  border-bottom-color: var(--primary-color);
+}
+
+.campaigns-content {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 32px;
+}
+
+.campaigns-sidebar {
+  position: sticky;
+  top: 24px;
+  height: fit-content;
+}
+
+.filter-section {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.filter-section h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 20px 0;
+  color: var(--gray-900);
+}
+
+.filter-group {
+  margin-bottom: 20px;
+}
+
+.filter-group label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gray-700);
+  margin-bottom: 8px;
+}
+
+.filter-input,
+.filter-select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--gray-300);
+  border-radius: 8px;
+  font-size: 14px;
+  transition: border-color 0.2s ease;
+}
+
+.filter-input:focus,
+.filter-select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.budget-inputs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.budget-inputs input {
+  flex: 1;
+}
+
+.budget-inputs span {
+  font-size: 14px;
+  color: var(--gray-600);
+}
+
+.platform-checkboxes {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--gray-700);
+  cursor: pointer;
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.campaigns-main {
+  min-height: 400px;
+}
+
+.campaigns-loading,
+.campaigns-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.campaigns-loading .spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid var(--gray-200);
+  border-top-color: var(--primary-color);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-bottom: 16px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.campaigns-loading p,
+.campaigns-empty p {
+  font-size: 16px;
+  color: var(--gray-600);
+  margin: 0 0 16px 0;
+}
+
+.campaigns-empty .empty-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  color: var(--gray-400);
+}
+
+.campaigns-empty .empty-icon svg {
+  width: 64px;
+  height: 64px;
+}
+
+.campaigns-empty h3 {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--gray-900);
+  margin: 0 0 8px 0;
+}
+
+.campaigns-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 24px;
+}
+
+/* Mobile responsive */
+@media (max-width: 1024px) {
+  .campaigns-content {
+    grid-template-columns: 1fr;
+  }
+
+  .campaigns-sidebar {
+    position: static;
+  }
+
+  .campaigns-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .campaigns-page {
+    padding: 16px;
+  }
+
+  .campaigns-header-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .campaigns-header h1 {
+    font-size: 24px;
+  }
+
+  .campaigns-tabs {
+    overflow-x: auto;
+    width: 100%;
+  }
+
+  .campaigns-tabs .tab {
+    padding: 10px 16px;
+    font-size: 14px;
+    white-space: nowrap;
+  }
+
+  .filter-section {
+    padding: 16px;
+  }
+}

@@ -1,0 +1,287 @@
+.collaboration-feedback-modal {
+  background: white;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 550px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.collaboration-feedback-modal .modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 24px 16px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.collaboration-feedback-modal .modal-header h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.collaboration-feedback-modal .close-button {
+  background: none;
+  border: none;
+  font-size: 32px;
+  color: #666;
+  cursor: pointer;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+
+.collaboration-feedback-modal .close-button:hover {
+  background: #f0f0f0;
+  color: #333;
+}
+
+.collaboration-feedback-modal .modal-body {
+  padding: 24px;
+}
+
+.collaboration-feedback-modal .partner-name {
+  margin: 0 0 24px;
+  font-size: 16px;
+  color: #555;
+}
+
+.collaboration-feedback-modal .partner-name strong {
+  color: #1a1a1a;
+  font-weight: 600;
+}
+
+.collaboration-feedback-modal .rating-section {
+  margin-bottom: 24px;
+}
+
+.collaboration-feedback-modal .rating-section label {
+  display: block;
+  margin-bottom: 12px;
+  font-weight: 500;
+  color: #333;
+  font-size: 14px;
+}
+
+.collaboration-feedback-modal .star-rating {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.collaboration-feedback-modal .star {
+  background: none;
+  border: none;
+  font-size: 40px;
+  color: #ddd;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.2s;
+  line-height: 1;
+}
+
+.collaboration-feedback-modal .star:hover {
+  transform: scale(1.1);
+}
+
+.collaboration-feedback-modal .star.filled {
+  color: #ffc107;
+  text-shadow: 0 2px 4px rgba(255, 193, 7, 0.3);
+}
+
+.collaboration-feedback-modal .rating-label {
+  display: inline-block;
+  font-size: 14px;
+  color: #666;
+  font-weight: 500;
+}
+
+.collaboration-feedback-modal .form-group {
+  margin-bottom: 20px;
+}
+
+.collaboration-feedback-modal .form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #333;
+  font-size: 14px;
+}
+
+.collaboration-feedback-modal .form-select,
+.collaboration-feedback-modal .form-input,
+.collaboration-feedback-modal .form-textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+
+.collaboration-feedback-modal .form-select:focus,
+.collaboration-feedback-modal .form-input:focus,
+.collaboration-feedback-modal .form-textarea:focus {
+  outline: none;
+  border-color: #1877f2;
+  box-shadow: 0 0 0 3px rgba(24, 119, 242, 0.1);
+}
+
+.collaboration-feedback-modal .form-textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.collaboration-feedback-modal .char-count {
+  display: block;
+  text-align: right;
+  font-size: 12px;
+  color: #999;
+  margin-top: 4px;
+}
+
+.collaboration-feedback-modal .input-with-suffix {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.collaboration-feedback-modal .input-with-suffix .form-input {
+  padding-right: 40px;
+}
+
+.collaboration-feedback-modal .input-suffix {
+  position: absolute;
+  right: 12px;
+  color: #666;
+  font-weight: 500;
+  pointer-events: none;
+}
+
+.collaboration-feedback-modal .form-hint {
+  display: block;
+  margin-top: 4px;
+  font-size: 12px;
+  color: #666;
+}
+
+.collaboration-feedback-modal .checkbox-group {
+  margin-bottom: 0;
+}
+
+.collaboration-feedback-modal .checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-weight: normal;
+  margin: 0;
+}
+
+.collaboration-feedback-modal .form-checkbox {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.collaboration-feedback-modal .modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 16px 24px;
+  border-top: 1px solid #e0e0e0;
+  background: #f8f9fa;
+  border-radius: 0 0 12px 12px;
+}
+
+.collaboration-feedback-modal .btn-secondary,
+.collaboration-feedback-modal .btn-primary {
+  padding: 10px 24px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+}
+
+.collaboration-feedback-modal .btn-secondary {
+  background: white;
+  color: #666;
+  border: 1px solid #ddd;
+}
+
+.collaboration-feedback-modal .btn-secondary:hover:not(:disabled) {
+  background: #f0f0f0;
+  border-color: #ccc;
+}
+
+.collaboration-feedback-modal .btn-primary {
+  background: #1877f2;
+  color: white;
+}
+
+.collaboration-feedback-modal .btn-primary:hover:not(:disabled) {
+  background: #166fe5;
+}
+
+.collaboration-feedback-modal .btn-primary:disabled,
+.collaboration-feedback-modal .btn-secondary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .collaboration-feedback-modal {
+    width: 95%;
+    max-height: 95vh;
+  }
+
+  .collaboration-feedback-modal .modal-header {
+    padding: 20px 16px 12px;
+  }
+
+  .collaboration-feedback-modal .modal-header h2 {
+    font-size: 20px;
+  }
+
+  .collaboration-feedback-modal .modal-body {
+    padding: 16px;
+  }
+
+  .collaboration-feedback-modal .star {
+    font-size: 36px;
+  }
+
+  .collaboration-feedback-modal .modal-footer {
+    padding: 12px 16px;
+    flex-direction: column-reverse;
+  }
+
+  .collaboration-feedback-modal .btn-secondary,
+  .collaboration-feedback-modal .btn-primary {
+    width: 100%;
+  }
+}

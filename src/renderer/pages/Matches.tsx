@@ -1,42 +1,104 @@
-import { useState } from 'react';
-import { Card, CardHeader, CardBody, MatchCard, MatchCardSkeleton, FilterPanel } from '../components';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Card, CardHeader, CardBody, MatchCard, MatchCardSkeleton, FilterPanel, Button } from '../components';
+import { ComparisonBar } from '../components/ComparisonBar/ComparisonBar';
+import { CollaborationFeedbackModal } from '../components/CollaborationFeedbackModal/CollaborationFeedbackModal';
 import { useMatchFilters } from '../hooks/useMatchFilters';
 import { useToast } from '../contexts/ToastContext';
-import { HiUserGroup } from 'react-icons/hi';
+import { useAuth } from '../contexts/AuthContext';
+import { useCollaborationOutcomes } from '../hooks/useCollaborationOutcomes';
+import { matchingService, Match } from '../services/matching.service';
+import { isFeatureEnabled } from '../config/features';
+import { HiUserGroup, HiChartBar } from 'react-icons/hi';
+import './Matches.css';
 
 export const Matches = () => {
+  const navigate = useNavigate();
+  const { user } = useAuth();
   const { filters, debouncedFilters, updateFilters, clearFilters, hasActiveFilters } = useMatchFilters();
-  const [matches, setMatches] = useState<any[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [matches, setMatches] = useState<Match[]>([]);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [meta, setMeta] = useState<any>(null);
   const { showToast } = useToast();
+  const [feedbackModalOpen, setFeedbackModalOpen] = useState(false);
+  const [selectedMatch, setSelectedMatch] = useState<any>(null);
+  const { recordOutcome } = useCollaborationOutcomes();
 
-  // TODO: Replace with actual API call using matchingService.getMatches(debouncedFilters)
-  // For now, using mock data until backend is connected
-  
-  const userRole = 'influencer'; // TODO: Get from auth context
+  // Load matches when filters change
+  useEffect(() => {
+    loadMatches();
+  }, [debouncedFilters]);
+
+  const loadMatches = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      const response = await matchingService.getMatches(debouncedFilters);
+      setMatches(response.data);
+      setMeta(response.meta);
+    } catch (err: any) {
+      const errorMessage = err.message || 'Failed to load matches. Please try again.';
+      setError(errorMessage);
+      showToast(errorMessage, 'error');
+      console.error('Error loading matches:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleRateMatch = (match: Match) => {
+    setSelectedMatch(match);
+    setFeedbackModalOpen(true);
+  };
+
+  const handleFeedbackSubmit = async (feedbackData: any) => {
+    try {
+      await recordOutcome(feedbackData);
+      setFeedbackModalOpen(false);
+      showToast('Thank you for your feedback! This helps improve our matching algorithm.', 'success');
+    } catch (error) {
+      console.error('Failed to submit feedback:', error);
+      showToast('Failed to submit feedback. Please try again.', 'error');
+    }
+  };
+
+  const userRole = user?.role === 'INFLUENCER' ? 'influencer' : 'company';
 
   return (
     <>
       <Card style={{ marginBottom: '1rem' }}>
         <CardHeader>
-          <h2 style={{ fontSize: '1.5rem', fontWeight: '700', color: '#050505', margin: 0 }}>
-            All Matches
-          </h2>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <h2 style={{ fontSize: '1.5rem', fontWeight: '700', color: '#050505', margin: 0 }}>
+              Discover Matches
+            </h2>
+            {isFeatureEnabled('MATCH_HISTORY_ENABLED') && (
+              <Button
+                variant="secondary"
+                onClick={() => navigate('/matches/history')}
+                style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}
+              >
+                <HiChartBar size={18} />
+                View Analytics
+              </Button>
+            )}
+          </div>
         </CardHeader>
         <CardBody>
           <p style={{ fontSize: '0.9375rem', color: '#65676B' }}>
-            Browse all your compatibility matches
+            {meta ? `Showing ${matches.length} of ${meta.total} matches` : 'Browse all your compatibility matches'}
           </p>
         </CardBody>
       </Card>
+
+      <ComparisonBar />
 
       <FilterPanel
         filters={filters}
         onFiltersChange={updateFilters}
         onClearFilters={clearFilters}
-        userRole={userRole as 'influencer' | 'company'}
+        userRole={userRole}
       />
 
       {loading && (
@@ -52,21 +114,9 @@ export const Matches = () => {
           <CardBody>
             <div style={{ textAlign: 'center', padding: '2rem' }}>
               <p style={{ color: '#EF4444', marginBottom: '1rem' }}>{error}</p>
-              <button
-                onClick={() => window.location.reload()}
-                style={{
-                  padding: '0.75rem 1.5rem',
-                  backgroundColor: 'var(--color-primary)',
-                  color: 'white',
-                  border: 'none',
-                  borderRadius: 'var(--radius-md)',
-                  cursor: 'pointer',
-                  fontSize: '1rem',
-                  fontWeight: '500'
-                }}
-              >
+              <Button variant="primary" onClick={loadMatches}>
                 Retry
-              </button>
+              </Button>
             </div>
           </CardBody>
         </Card>
@@ -78,7 +128,17 @@ export const Matches = () => {
             <div className="empty-state">
               <HiUserGroup size={64} className="empty-icon" aria-hidden="true" />
               <h3>No matches found</h3>
-              <p>{hasActiveFilters ? 'Try adjusting your filters' : 'Check back later for new matches based on your profile'}</p>
+              <p>
+                {hasActiveFilters 
+                  ? 'Try adjusting your filters to see more matches' 
+                  : 'Complete your profile to start getting matched with ' + (userRole === 'influencer' ? 'companies' : 'influencers')
+                }
+              </p>
+              {hasActiveFilters && (
+                <Button variant="primary" onClick={clearFilters} style={{ marginTop: '1rem' }}>
+                  Clear Filters
+                </Button>
+              )}
             </div>
           </CardBody>
         </Card>
@@ -92,40 +152,38 @@ export const Matches = () => {
         <Card style={{ marginTop: '1rem' }}>
           <CardBody>
             <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem', alignItems: 'center' }}>
-              <button
+              <Button
+                variant="secondary"
+                size="sm"
                 onClick={() => updateFilters({ page: (filters.page || 1) - 1 })}
                 disabled={filters.page === 1}
-                style={{
-                  padding: '0.5rem 1rem',
-                  backgroundColor: filters.page === 1 ? '#E5E7EB' : 'var(--color-primary)',
-                  color: filters.page === 1 ? '#9CA3AF' : 'white',
-                  border: 'none',
-                  borderRadius: 'var(--radius-md)',
-                  cursor: filters.page === 1 ? 'not-allowed' : 'pointer',
-                }}
               >
                 Previous
-              </button>
-              <span style={{ color: '#65676B' }}>
+              </Button>
+              <span style={{ color: '#65676B', padding: '0 1rem' }}>
                 Page {filters.page || 1} of {meta.totalPages}
               </span>
-              <button
+              <Button
+                variant="secondary"
+                size="sm"
                 onClick={() => updateFilters({ page: (filters.page || 1) + 1 })}
                 disabled={filters.page === meta.totalPages}
-                style={{
-                  padding: '0.5rem 1rem',
-                  backgroundColor: filters.page === meta.totalPages ? '#E5E7EB' : 'var(--color-primary)',
-                  color: filters.page === meta.totalPages ? '#9CA3AF' : 'white',
-                  border: 'none',
-                  borderRadius: 'var(--radius-md)',
-                  cursor: filters.page === meta.totalPages ? 'not-allowed' : 'pointer',
-                }}
               >
                 Next
-              </button>
+              </Button>
             </div>
           </CardBody>
         </Card>
+      )}
+
+      {/* Collaboration Feedback Modal */}
+      {feedbackModalOpen && selectedMatch && (
+        <CollaborationFeedbackModal
+          connectionId={selectedMatch.id}
+          partnerName={selectedMatch.profile?.name || 'Partner'}
+          onClose={() => setFeedbackModalOpen(false)}
+          onSubmit={handleFeedbackSubmit}
+        />
       )}
     </>
   );

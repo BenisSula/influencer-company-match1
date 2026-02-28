@@ -1,0 +1,192 @@
+.suggested-match-card {
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 8px;
+  background: white;
+  border: 1px solid #E4E6EB;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.suggested-match-card:hover {
+  background: #F7F8FA;
+  border-color: var(--color-secondary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.suggested-match-card:focus-visible {
+  outline: 2px solid var(--color-secondary);
+  outline-offset: 2px;
+}
+
+.suggested-match-avatar-wrapper {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.suggested-match-score-badge {
+  position: absolute;
+  bottom: -4px;
+  right: -4px;
+  min-width: 28px;
+  height: 20px;
+  padding: 0 6px;
+  background: #10B981;
+  color: white;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.suggested-match-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.suggested-match-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #050505;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.suggested-match-meta {
+  font-size: 12px;
+  color: #65676B;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.suggested-match-stats {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 2px;
+}
+
+.suggested-match-stats .stat {
+  font-size: 11px;
+  color: #65676B;
+  background: #F0F2F5;
+  padding: 2px 6px;
+  border-radius: 4px;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.suggested-match-stats .stat-icon {
+  font-size: 13px;
+  flex-shrink: 0;
+  width: 13px;
+  height: 13px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.suggested-match-tier {
+  margin-top: 4px;
+}
+
+.tier-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.tier-badge.tier-perfect {
+  background: #D1FAE5;
+  color: #065F46;
+}
+
+.tier-badge.tier-excellent {
+  background: #DBEAFE;
+  color: #1E40AF;
+}
+
+.tier-badge.tier-good {
+  background: #FEF3C7;
+  color: #92400E;
+}
+
+.tier-badge.tier-fair {
+  background: #F3F4F6;
+  color: #374151;
+}
+
+/* Compact variant */
+.suggested-match-card.compact {
+  padding: 8px;
+  gap: 8px;
+}
+
+.suggested-match-card.compact .suggested-match-name {
+  font-size: 13px;
+}
+
+.suggested-match-card.compact .suggested-match-meta {
+  font-size: 11px;
+}
+
+/* Responsive */
+@media (max-width: 1440px) {
+  .suggested-match-card {
+    padding: 10px;
+  }
+  
+  .suggested-match-name {
+    font-size: 13px;
+  }
+}
+
+/* Tier icon inline styling */
+.tier-icon-inline {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 4px;
+}
+
+.tier-badge {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Tier-specific colors */
+.tier-badge.tier-perfect .tier-icon-inline {
+  color: #10B981;
+  animation: sparkle 2s ease-in-out infinite;
+}
+
+.tier-badge.tier-excellent .tier-icon-inline {
+  color: #3B82F6;
+}
+
+.tier-badge.tier-good .tier-icon-inline {
+  color: #F59E0B;
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.1); }
+}

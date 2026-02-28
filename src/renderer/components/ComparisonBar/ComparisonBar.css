@@ -1,0 +1,187 @@
+.comparison-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  border-top: 2px solid var(--primary-color);
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.comparison-bar-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.comparison-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.comparison-count {
+  font-size: 16px;
+  font-weight: 600;
+  color: #050505;
+}
+
+.comparison-ready {
+  font-size: 14px;
+  color: #10B981;
+  font-weight: 500;
+}
+
+.comparison-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.btn-clear,
+.btn-compare {
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+}
+
+.btn-clear {
+  background: transparent;
+  color: #65676B;
+  border: 1px solid #E4E6EB;
+}
+
+.btn-clear:hover {
+  background: #F0F2F5;
+  color: #050505;
+}
+
+.btn-compare {
+  background: #2563EB;
+  color: white;
+}
+
+.btn-compare:hover:not(:disabled) {
+  background: #1D4ED8;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(37, 99, 235, 0.3);
+}
+
+.btn-compare:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: #93C5FD;
+}
+
+.btn-compare:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: #93C5FD;
+}
+
+/* Tablet Responsive (768px and below) */
+@media (max-width: 768px) {
+  .comparison-bar-content {
+    flex-direction: column;
+    gap: 12px;
+    padding: 12px 16px;
+  }
+
+  .comparison-info {
+    width: 100%;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .comparison-count {
+    font-size: 15px;
+  }
+
+  .comparison-ready {
+    font-size: 13px;
+  }
+
+  .comparison-actions {
+    width: 100%;
+  }
+
+  .btn-clear,
+  .btn-compare {
+    flex: 1;
+    padding: 12px 16px;
+    min-height: 44px;
+  }
+}
+
+/* Mobile Responsive (480px and below) */
+@media (max-width: 480px) {
+  .comparison-bar-content {
+    padding: 10px 12px;
+    gap: 10px;
+  }
+
+  .comparison-info {
+    flex-direction: column;
+    gap: 6px;
+    text-align: center;
+  }
+
+  .comparison-count {
+    font-size: 14px;
+  }
+
+  .comparison-ready {
+    font-size: 12px;
+  }
+
+  .comparison-actions {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .btn-clear,
+  .btn-compare {
+    width: 100%;
+    padding: 12px;
+    font-size: 13px;
+    min-height: 44px;
+  }
+}
+
+/* Extra Small Mobile (375px and below) */
+@media (max-width: 375px) {
+  .comparison-bar-content {
+    padding: 8px 10px;
+  }
+
+  .comparison-count {
+    font-size: 13px;
+  }
+
+  .comparison-ready {
+    font-size: 11px;
+  }
+
+  .btn-clear,
+  .btn-compare {
+    padding: 10px;
+    font-size: 12px;
+  }
+}

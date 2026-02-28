@@ -1,191 +1,55 @@
-.auth-container {
+/* ========================================
+   INSTAGRAM-STYLE SPLIT AUTH LAYOUT
+   ======================================== */
+
+.auth-split-container {
+  display: flex;
   min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  padding: 2rem;
-}
-
-.auth-box {
-  width: 100%;
-  max-width: 480px;
-}
-
-.auth-header {
-  text-align: center;
-  margin-bottom: 2rem;
-  color: white;
-}
-
-.auth-header h1 {
-  font-size: 2rem;
-  font-weight: 700;
-  margin: 0 0 0.5rem 0;
-}
-
-.auth-header p {
-  font-size: 1rem;
-  opacity: 0.9;
-  margin: 0;
-}
-
-.auth-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.form-group label {
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: #050505;
-}
-
-.auth-footer {
-  margin-top: 1.5rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid #E4E6EB;
-  text-align: center;
-}
-
-.auth-footer p {
-  font-size: 0.875rem;
-  color: #65676B;
-  margin: 0;
-}
-
-.auth-link {
-  color: #2563EB;
-  text-decoration: none;
-  font-weight: 600;
-}
-
-.auth-link:hover {
-  text-decoration: underline;
-}
-
-.auth-demo {
-  margin-top: 1.5rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid #E4E6EB;
-}
-
-.demo-title {
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: #65676B;
-  margin: 0 0 0.75rem 0;
-  text-align: center;
-}
-
-.demo-accounts {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  font-size: 0.8125rem;
-}
-
-.demo-account {
-  display: flex;
-  justify-content: space-between;
-  padding: 0.5rem;
-  background: #F8FAFC;
-  border-radius: 0.375rem;
-}
-
-.demo-account strong {
-  color: #050505;
-}
-
-.demo-account span {
-  color: #65676B;
-  font-family: 'Courier New', monospace;
-}
-
-.demo-password {
-  text-align: center;
-  padding: 0.5rem;
-  background: #FEF3C7;
-  border-radius: 0.375rem;
-  color: #92400E;
-}
-
-.demo-password strong {
-  margin-right: 0.5rem;
-}
-
-/* Role Selector */
-.role-selector {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-}
-
-.role-option {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 1.5rem 1rem;
-  border: 2px solid #E4E6EB;
-  border-radius: 0.75rem;
+  max-height: 100vh; /* NEW: Prevent overflow */
   background: white;
-  cursor: pointer;
-  transition: all 0.2s;
-  text-align: center;
+  overflow: hidden;
 }
 
-.role-option:hover {
-  border-color: #2563EB;
-  background: #F0F7FF;
+/* Hide scrollbars but allow scrolling */
+.auth-split-container *::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
 }
 
-.role-option.active {
-  border-color: #2563EB;
-  background: #EFF6FF;
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+.auth-split-container * {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 
-.role-option:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
+/* ========================================
+   RESPONSIVE BREAKPOINTS
+   ======================================== */
 
-.role-icon {
-  font-size: 2.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.role-label {
-  font-size: 1rem;
-  font-weight: 600;
-  color: #050505;
-  margin-bottom: 0.25rem;
-}
-
-.role-description {
-  font-size: 0.75rem;
-  color: #65676B;
-  line-height: 1.4;
-}
-
-/* Responsive */
-@media (max-width: 640px) {
-  .auth-container {
-    padding: 1rem;
+/* Desktop: Side by side */
+@media (min-width: 769px) {
+  .auth-split-container {
+    flex-direction: row;
   }
+}
 
-  .auth-header h1 {
-    font-size: 1.5rem;
+/* Mobile: Stacked */
+@media (max-width: 768px) {
+  .auth-split-container {
+    flex-direction: column;
+    max-height: 100vh;
+    overflow-y: auto; /* Allow scroll on mobile */
   }
+}
 
-  .role-selector {
-    grid-template-columns: 1fr;
+/* Ensure full viewport height on mobile */
+@media (max-width: 768px) {
+  .auth-split-container {
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
   }
+}
+
+/* Prevent horizontal scroll */
+.auth-split-container * {
+  max-width: 100%;
 }

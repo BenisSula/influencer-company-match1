@@ -1,0 +1,183 @@
+.campaign-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 24px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.campaign-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.campaign-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.campaign-company-info {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.campaign-company-details h4 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--gray-900);
+}
+
+.campaign-company-industry {
+  font-size: 14px;
+  color: var(--gray-600);
+}
+
+.campaign-status-badge {
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.status-draft {
+  background: var(--gray-100);
+  color: var(--gray-700);
+}
+
+.status-active {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.status-closed {
+  background: #ffebee;
+  color: #c62828;
+}
+
+.status-completed {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+.campaign-card-body {
+  margin-bottom: 20px;
+}
+
+.campaign-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--gray-900);
+  margin: 0 0 12px 0;
+}
+
+.campaign-description {
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--gray-700);
+  margin: 0 0 16px 0;
+}
+
+.campaign-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.campaign-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.meta-label {
+  font-weight: 600;
+  color: var(--gray-600);
+  min-width: 80px;
+}
+
+.meta-value {
+  color: var(--gray-900);
+}
+
+.meta-value.budget {
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.meta-value.deadline-soon {
+  color: #f57c00;
+  font-weight: 600;
+}
+
+.campaign-platforms {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.platform-tag {
+  padding: 4px 10px;
+  background: var(--gray-100);
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--gray-700);
+}
+
+.campaign-card-actions {
+  display: flex;
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 1px solid var(--gray-200);
+}
+
+.campaign-card-actions button {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.campaign-card-actions button svg {
+  flex-shrink: 0;
+}
+
+/* Mobile responsive */
+@media (max-width: 640px) {
+  .campaign-card {
+    padding: 16px;
+  }
+
+  .campaign-title {
+    font-size: 18px;
+  }
+
+  .campaign-description {
+    font-size: 14px;
+  }
+
+  .campaign-card-actions {
+    flex-direction: column;
+  }
+
+  .campaign-card-actions button {
+    width: 100%;
+  }
+
+  .meta-label {
+    min-width: 70px;
+    font-size: 13px;
+  }
+
+  .meta-value {
+    font-size: 13px;
+  }
+}

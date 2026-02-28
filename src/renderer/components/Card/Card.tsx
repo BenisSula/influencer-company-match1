@@ -4,28 +4,33 @@ import './Card.css';
 export interface CardProps {
   children: React.ReactNode;
   className?: string;
-  padding?: 'none' | 'sm' | 'md' | 'lg';
+  size?: 'sm' | 'md' | 'lg' | 'xl';
   hover?: boolean;
+  shadow?: 'sm' | 'md' | 'lg' | 'xl';
   style?: React.CSSProperties;
 }
 
-export const Card: React.FC<CardProps> = ({
-  children,
-  className = '',
-  padding = 'md',
+export const Card: React.FC<CardProps> = ({ 
+  children, 
+  className = '', 
+  size = 'md',
   hover = false,
-  style,
+  shadow = 'md',
+  style 
 }) => {
-  const classes = [
+  const cardClasses = [
     'card',
-    `card-padding-${padding}`,
-    hover && 'card-hover',
-    className,
-  ]
-    .filter(Boolean)
-    .join(' ');
+    `card-${size}`,
+    `card-shadow-${shadow}`,
+    hover ? 'card-hover' : '',
+    className
+  ].filter(Boolean).join(' ');
 
-  return <div className={classes} style={style}>{children}</div>;
+  return (
+    <div className={cardClasses} style={style}>
+      {children}
+    </div>
+  );
 };
 
 export interface CardHeaderProps {

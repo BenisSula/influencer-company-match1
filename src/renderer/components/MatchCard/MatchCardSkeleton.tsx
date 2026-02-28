@@ -10,7 +10,8 @@ export const MatchCardSkeleton: React.FC = () => {
         <div className="match-card-header">
           <Skeleton width={56} height={56} circle />
           <div style={{ flex: 1 }}>
-            <Skeleton width="60%" height={20} style={{ marginBottom: '0.5rem' }} />
+            <Skeleton width="60%" height={20} />
+            <div style={{ marginBottom: '0.5rem' }} />
             <Skeleton width="40%" height={16} />
           </div>
           <Skeleton width={70} height={60} />
@@ -28,7 +29,8 @@ export const MatchCardSkeleton: React.FC = () => {
           <Skeleton width={70} height={24} />
         </div>
 
-        <Skeleton width="100%" height={40} style={{ marginBottom: '1rem' }} />
+        <Skeleton width="100%" height={40} />
+        <div style={{ marginBottom: '1rem' }} />
 
         <div className="match-actions">
           <Skeleton width={100} height={32} />

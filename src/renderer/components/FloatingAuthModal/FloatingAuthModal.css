@@ -1,0 +1,243 @@
+/* ========================================
+   FLOATING AUTH MODAL - OVERLAY & CONTAINER
+   ======================================== */
+
+.floating-auth-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 1.5rem;
+  overflow-y: auto;
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Modal Container */
+.floating-auth-modal {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  max-height: 90vh;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  animation: scaleIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Close Button */
+.floating-auth-close {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  z-index: 10;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.floating-auth-close:hover {
+  background: white;
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.floating-auth-close:active {
+  transform: scale(0.95);
+}
+
+.floating-auth-close svg {
+  color: #1a1a1a;
+  stroke-width: 2.5;
+}
+
+/* Auth Content - Reuses existing split layout */
+.floating-auth-content {
+  display: flex;
+  min-height: 600px;
+  max-height: 85vh;
+  overflow: hidden;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+/* Desktop: Side by side */
+@media (min-width: 769px) {
+  .floating-auth-content {
+    flex-direction: row;
+  }
+  
+  .floating-auth-modal {
+    max-width: 1100px;
+  }
+}
+
+/* Tablet (768px - 1023px) */
+@media (max-width: 1023px) and (min-width: 769px) {
+  .floating-auth-modal {
+    max-width: 900px;
+  }
+  
+  .floating-auth-content {
+    min-height: 550px;
+  }
+}
+
+/* Mobile: Stacked */
+@media (max-width: 768px) {
+  .floating-auth-overlay {
+    padding: 1rem;
+    align-items: flex-start;
+  }
+  
+  .floating-auth-modal {
+    max-width: 100%;
+    max-height: 95vh;
+    border-radius: 16px;
+    margin-top: 1rem;
+  }
+  
+  .floating-auth-content {
+    flex-direction: column;
+    min-height: auto;
+    max-height: 95vh;
+    overflow-y: auto;
+  }
+  
+  .floating-auth-close {
+    top: 1rem;
+    right: 1rem;
+    width: 36px;
+    height: 36px;
+  }
+  
+  .floating-auth-close svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* Small Mobile (< 480px) */
+@media (max-width: 480px) {
+  .floating-auth-overlay {
+    padding: 0.5rem;
+  }
+  
+  .floating-auth-modal {
+    border-radius: 12px;
+  }
+  
+  .floating-auth-close {
+    top: 0.75rem;
+    right: 0.75rem;
+    width: 32px;
+    height: 32px;
+  }
+}
+
+/* Landscape Mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+  .floating-auth-overlay {
+    align-items: flex-start;
+  }
+  
+  .floating-auth-modal {
+    max-height: 98vh;
+    margin: 0.5rem 0;
+  }
+  
+  .floating-auth-content {
+    max-height: 98vh;
+  }
+}
+
+/* Very Small Screens */
+@media (max-height: 600px) {
+  .floating-auth-content {
+    min-height: auto;
+  }
+  
+  .floating-auth-modal {
+    max-height: 98vh;
+  }
+}
+
+/* ========================================
+   ACCESSIBILITY & FOCUS STATES
+   ======================================== */
+
+.floating-auth-close:focus-visible {
+  outline: 3px solid #E1306C;
+  outline-offset: 2px;
+}
+
+/* Smooth scrolling for modal content */
+.floating-auth-content {
+  scroll-behavior: smooth;
+}
+
+/* Hide scrollbar but allow scrolling */
+.floating-auth-content::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+}
+
+.floating-auth-content {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ========================================
+   PANEL ADJUSTMENTS FOR MODAL CONTEXT
+   ======================================== */
+
+/* Adjust panels within modal to fit better */
+.floating-auth-modal .auth-left-panel,
+.floating-auth-modal .auth-right-panel {
+  max-height: 85vh;
+}
+
+/* Ensure panels scroll independently if needed */
+.floating-auth-modal .auth-left-panel,
+.floating-auth-modal .auth-right-panel {
+  overflow-y: auto;
+}

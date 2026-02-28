@@ -1,0 +1,61 @@
+.application-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 600;
+  animation: fadeIn 0.3s ease-in;
+  white-space: nowrap;
+}
+
+.application-status-badge.size-sm {
+  padding: 4px 8px;
+  font-size: 12px;
+  gap: 4px;
+}
+
+.application-status-badge.size-lg {
+  padding: 8px 16px;
+  font-size: 14px;
+  gap: 8px;
+}
+
+.application-status-badge .status-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.application-status-badge .status-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.application-status-badge.size-sm .status-icon svg {
+  width: 14px;
+  height: 14px;
+}
+
+.application-status-badge.size-lg .status-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.application-status-badge .status-label {
+  line-height: 1;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+

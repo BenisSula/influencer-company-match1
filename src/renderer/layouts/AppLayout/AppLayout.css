@@ -40,8 +40,9 @@
 .header-left {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 1rem;
   flex: 1;
+  max-width: 600px;
 }
 
 .mobile-menu-btn {
@@ -55,6 +56,7 @@
   align-items: center;
   justify-content: center;
   transition: background-color 0.2s;
+  flex-shrink: 0;
 }
 
 .mobile-menu-btn:hover {
@@ -73,134 +75,23 @@
   color: var(--color-secondary);
   margin: 0;
   cursor: pointer;
-}
-
-.search-bar {
-  position: relative;
-  width: 240px;
-}
-
-.search-icon {
-  position: absolute;
-  left: 0.75rem;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #65676B;
-  pointer-events: none;
-}
-
-.search-input {
-  width: 100%;
-  padding: 0.5rem 2.5rem 0.5rem 2.5rem;
-  border: none;
-  background-color: #F0F2F5;
-  border-radius: 50px;
-  font-size: 0.9375rem;
-  outline: none;
-}
-
-.search-input:focus {
-  background-color: white;
-  box-shadow: 0 0 0 2px var(--color-secondary);
-}
-
-.search-clear {
-  position: absolute;
-  right: 0.75rem;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 24px;
-  height: 24px;
-  border: none;
-  background: transparent;
-  color: #65676B;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  transition: background-color 0.2s;
-}
-
-.search-clear:hover {
-  background-color: #E4E6EB;
-}
-
-.search-clear:focus-visible {
-  outline: 2px solid var(--color-secondary);
-  outline-offset: 2px;
-}
-
-.search-results {
-  position: absolute;
-  top: calc(100% + 0.5rem);
-  left: 0;
-  right: 0;
-  background: white;
-  border: 1px solid #E4E6EB;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  max-height: 400px;
-  overflow-y: auto;
-  z-index: 1000;
-}
-
-.search-result-item {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.75rem;
-  width: 100%;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  transition: background-color 0.2s;
-  text-align: left;
-}
-
-.search-result-item:hover {
-  background-color: #F0F2F5;
-}
-
-.search-result-item:focus-visible {
-  outline: 2px solid var(--color-secondary);
-  outline-offset: -2px;
-}
-
-.search-result-avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-weight: 600;
-  font-size: 1rem;
+  white-space: nowrap;
   flex-shrink: 0;
 }
 
-.search-result-info {
+/* Enhanced Search Wrapper */
+.header-search-wrapper {
   flex: 1;
+  max-width: 500px;
   min-width: 0;
 }
 
-.search-result-name {
-  font-weight: 600;
-  font-size: 0.9375rem;
-  color: #050505;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.search-result-meta {
-  font-size: 0.8125rem;
-  color: #65676B;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+/* Header Center - Navigation */
+.header-center {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  flex-shrink: 0;
 }
 
 .search-result-score {
@@ -232,7 +123,10 @@
   cursor: pointer;
   border-radius: 0.5rem;
   transition: background-color 0.2s;
-  position: relative;
+  position: relative; /* Required for badge positioning */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .header-nav-btn:hover {
@@ -251,10 +145,12 @@
 
 .header-right {
   display: flex;
+  flex-direction: row; /* Ensure horizontal layout */
   align-items: center;
   gap: 0.5rem;
   flex: 1;
   justify-content: flex-end;
+  min-width: 0; /* Prevent flex item overflow */
 }
 
 .header-icon-btn {
@@ -268,11 +164,17 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  transition: background-color 0.2s;
+  transition: all 0.2s ease;
+  flex-shrink: 0; /* Prevent shrinking */
 }
 
 .header-icon-btn:hover {
   background-color: #D8DADF;
+  transform: scale(1.05);
+}
+
+.header-icon-btn:active {
+  transform: scale(0.95);
 }
 
 .header-icon-btn:focus-visible {
@@ -280,22 +182,60 @@
   outline-offset: 2px;
 }
 
+.notification-bell-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.notification-bell-wrapper .header-icon-btn[aria-expanded="true"] {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+.notification-bell-wrapper .header-icon-btn[aria-expanded="true"] svg {
+  color: white;
+}
+
 .notification-badge {
   position: absolute;
-  top: -2px;
-  right: -2px;
-  background-color: var(--color-error);
+  top: -4px;
+  right: -4px;
+  background: linear-gradient(135deg, #E1306C, #FD8D32);
   color: white;
-  font-size: 0.75rem;
-  font-weight: 600;
-  padding: 0.125rem 0.375rem;
-  border-radius: 10px;
-  min-width: 18px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.15rem 0.4rem;
+  border-radius: 12px;
+  min-width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
+  box-shadow: 0 2px 8px rgba(225, 48, 108, 0.4);
+  border: 2px solid white;
+  animation: pulse 2s ease-in-out infinite;
+  z-index: 1; /* Ensure badge is above button */
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.notification-bell-wrapper {
+  position: relative;
 }
 
 .user-profile-btn {
   position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .user-profile-btn > button {
@@ -306,6 +246,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0; /* Prevent shrinking */
 }
 
 .user-profile-btn > button:focus-visible {
@@ -325,6 +268,7 @@
   color: white;
   font-weight: 600;
   font-size: 1rem;
+  flex-shrink: 0; /* Prevent shrinking */
 }
 
 .user-menu-dropdown {
@@ -405,22 +349,32 @@
 .app-body {
   display: flex;
   flex: 1;
-  overflow: hidden;
+  overflow-y: auto; /* ✅ Scrollbar at body level */
+  overflow-x: hidden;
 }
 
 /* Left Sidebar */
 .left-sidebar {
   width: 280px;
   background-color: white;
-  padding: 1rem 0.5rem;
+  padding: 0 0.5rem; /* ✅ No top/bottom padding to eliminate gap */
   overflow-y: auto;
   border-right: 1px solid #E4E6EB;
+  position: sticky; /* ✅ Sticky positioning - always visible */
+  top: 0; /* ✅ Stick to top of app-body (no gap) */
+  height: 100vh; /* ✅ Full viewport height */
+  align-self: flex-start; /* ✅ Align to top of container */
+  z-index: 50; /* ✅ Below header (100), above main content */
 }
 
 .sidebar-nav {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+  padding-top: 1rem; /* ✅ Add top padding to content, not container */
+  padding-bottom: 1rem; /* ✅ Add bottom padding for spacing */
+  position: relative; /* ✅ Enable z-index */
+  z-index: 51; /* ✅ Above sidebar container, below header */
 }
 
 .sidebar-item {
@@ -433,6 +387,8 @@
   text-decoration: none;
   font-weight: 500;
   transition: background-color 0.2s;
+  position: relative; /* ✅ Enable z-index */
+  z-index: 52; /* ✅ Above sidebar containers (51), below header (100) */
 }
 
 .sidebar-item:hover {
@@ -452,29 +408,48 @@
 .sidebar-icon {
   font-size: 1.5rem;
   flex-shrink: 0;
+  position: relative; /* ✅ Enable z-index */
+  z-index: 52; /* ✅ Above sidebar containers (51), below header (100) */
 }
 
 /* Main Feed */
 .main-feed {
   flex: 1;
-  overflow-y: auto;
+  overflow-y: visible; /* ✅ No scrollbar here - content flows naturally */
   padding: 1.5rem;
-  max-width: 680px;
+  max-width: 680px; /* ✅ Fixed width always */
   margin: 0 auto;
   width: 100%;
+  min-height: 100%;
 }
 
 /* Right Sidebar */
 .right-sidebar {
   width: 280px;
   background-color: white;
-  padding: 1rem;
+  padding: 0 1rem; /* ✅ No top/bottom padding to eliminate gap */
   overflow-y: auto;
   border-left: 1px solid #E4E6EB;
+  position: sticky; /* ✅ Sticky positioning - always visible */
+  top: 0; /* ✅ Stick to top of app-body (no gap) */
+  height: 100vh; /* ✅ Full viewport height */
+  align-self: flex-start; /* ✅ Align to top of container */
+  z-index: 50; /* ✅ Below header (100), above main content */
 }
 
 .sidebar-section {
   margin-bottom: 1.5rem;
+  padding-top: 1rem; /* ✅ Add top padding to first section */
+  position: relative; /* ✅ Enable z-index */
+  z-index: 51; /* ✅ Above sidebar container, below header */
+}
+
+.sidebar-section:first-child {
+  padding-top: 1rem; /* ✅ Ensure first section has top padding */
+}
+
+.sidebar-section:last-child {
+  padding-bottom: 1rem; /* ✅ Add bottom padding to last section */
 }
 
 .sidebar-title {
@@ -482,6 +457,8 @@
   font-weight: 600;
   color: #65676B;
   margin-bottom: 1rem;
+  position: relative; /* ✅ Enable z-index */
+  z-index: 52; /* ✅ Above sidebar containers (51), below header (100) */
 }
 
 .suggested-list {
@@ -498,6 +475,8 @@
   border-radius: 0.5rem;
   cursor: pointer;
   transition: background-color 0.2s;
+  position: relative; /* ✅ Enable z-index */
+  z-index: 52; /* ✅ Above sidebar containers (51), below header (100) */
 }
 
 .suggested-item:hover {
@@ -516,6 +495,8 @@
   font-weight: 600;
   font-size: 0.875rem;
   flex-shrink: 0;
+  position: relative; /* ✅ Enable z-index */
+  z-index: 52; /* ✅ Above sidebar containers (51), below header (100) */
 }
 
 .suggested-info {
@@ -530,6 +511,8 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  position: relative; /* ✅ Enable z-index */
+  z-index: 52; /* ✅ Above sidebar containers (51), below header (100) */
 }
 
 .suggested-meta {
@@ -538,24 +521,38 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  position: relative; /* ✅ Enable z-index */
+  z-index: 52; /* ✅ Above sidebar containers (51), below header (100) */
 }
 
 /* Scrollbar Styling */
-.left-sidebar::-webkit-scrollbar,
-.main-feed::-webkit-scrollbar,
-.right-sidebar::-webkit-scrollbar {
+/* Main scrollbar on app-body */
+.app-body::-webkit-scrollbar {
   width: 8px;
 }
 
+.app-body::-webkit-scrollbar-thumb {
+  background: #BCC0C4;
+  border-radius: 4px;
+}
+
+.app-body::-webkit-scrollbar-thumb:hover {
+  background: #8E9196;
+}
+
+/* Sidebar scrollbars (thinner for independent scrolling) */
+.left-sidebar::-webkit-scrollbar,
+.right-sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
 .left-sidebar::-webkit-scrollbar-thumb,
-.main-feed::-webkit-scrollbar-thumb,
 .right-sidebar::-webkit-scrollbar-thumb {
   background: #BCC0C4;
   border-radius: 4px;
 }
 
 .left-sidebar::-webkit-scrollbar-thumb:hover,
-.main-feed::-webkit-scrollbar-thumb:hover,
 .right-sidebar::-webkit-scrollbar-thumb:hover {
   background: #8E9196;
 }
@@ -588,11 +585,11 @@
   }
   
   .left-sidebar {
-    position: fixed;
+    position: fixed; /* ✅ Override sticky with fixed on mobile */
     left: -280px;
     top: 56px;
     height: calc(100vh - 56px);
-    z-index: 90;
+    z-index: 200; /* ✅ Above header for mobile overlay */
     transition: left 0.3s ease-out;
     box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
   }
@@ -607,6 +604,47 @@
   
   .search-bar {
     width: 180px;
+  }
+  
+  .header-right {
+    display: flex;
+    flex-direction: row !important; /* Force horizontal layout on mobile */
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: nowrap; /* Prevent wrapping */
+  }
+  
+  .notification-bell-wrapper {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  
+  .header-icon-btn {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+  }
+  
+  .user-profile-btn {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  
+  .user-profile-btn > button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+  }
+  
+  .user-avatar-small {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
   }
   
   .main-feed {
@@ -633,18 +671,45 @@
   }
   
   .header-right {
-    gap: 0.25rem;
+    display: flex;
+    flex-direction: row !important; /* Force horizontal layout on small mobile */
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: nowrap; /* Prevent wrapping */
+  }
+  
+  .notification-bell-wrapper {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
   }
   
   .header-icon-btn {
-    width: 36px;
-    height: 36px;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+  }
+  
+  .user-profile-btn {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  
+  .user-profile-btn > button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
   }
   
   .user-avatar-small {
-    width: 36px;
-    height: 36px;
+    width: 40px;
+    height: 40px;
     font-size: 0.875rem;
+    flex-shrink: 0;
   }
   
   .main-feed {
@@ -653,5 +718,319 @@
   
   .app-logo {
     font-size: 1.125rem;
+  }
+}
+
+/* ========================================
+   SIDEBAR COLLAPSE FUNCTIONALITY
+   ======================================== */
+
+/* Collapse buttons */
+.sidebar-collapse-btn {
+  position: absolute;
+  top: 1rem;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid #E4E6EB;
+  background: white;
+  color: #65676B;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  z-index: 10;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-collapse-btn:hover {
+  background: #F0F2F5;
+  color: var(--color-secondary);
+  transform: scale(1.1);
+}
+
+.sidebar-collapse-btn:active {
+  transform: scale(0.95);
+}
+
+.left-collapse-btn {
+  right: -16px;
+}
+
+.right-collapse-btn {
+  left: -16px;
+}
+
+/* Left sidebar collapsed state */
+.left-sidebar.collapsed {
+  width: 60px;
+  min-width: 60px;
+  position: sticky; /* ✅ Maintain sticky when collapsed */
+  top: 0; /* ✅ No gap */
+  height: 100vh;
+  align-self: flex-start;
+  z-index: 50; /* ✅ Maintain z-index when collapsed */
+}
+
+.left-sidebar.collapsed .sidebar-item {
+  justify-content: center;
+  padding: 0.75rem;
+}
+
+.left-sidebar.collapsed .sidebar-item span {
+  display: none;
+}
+
+.left-sidebar.collapsed .sidebar-icon {
+  margin: 0;
+}
+
+.left-sidebar.collapsed .left-collapse-btn {
+  right: -16px;
+}
+
+/* Right sidebar collapsed state */
+.right-sidebar.collapsed {
+  width: 40px; /* Keep minimal width for button */
+  min-width: 40px;
+  padding: 0;
+  overflow-y: auto; /* Enable scrolling when collapsed */
+  overflow-x: visible; /* Allow button to show */
+  border-left: none;
+  position: sticky; /* ✅ Maintain sticky when collapsed */
+  top: 0; /* ✅ No gap */
+  height: 100vh;
+  align-self: flex-start;
+  z-index: 50; /* ✅ Maintain z-index when collapsed */
+}
+
+.right-sidebar.collapsed .sidebar-content {
+  opacity: 0;
+  visibility: hidden;
+  display: none; /* Completely hide content */
+}
+
+.right-sidebar.collapsed .right-collapse-btn {
+  left: 50%;
+  transform: translateX(-50%);
+  position: sticky; /* Make button stick to top when scrolling */
+  top: 1rem;
+}
+
+/* App body grid layout for independent collapse */
+.app-body {
+  display: grid;
+  grid-template-columns: 240px 1fr 300px;
+  transition: grid-template-columns 0.3s ease;
+  gap: 0;
+  overflow-y: auto; /* ✅ Scrollbar here */
+  overflow-x: hidden;
+}
+
+.app-body.left-collapsed {
+  grid-template-columns: 60px 1fr 300px;
+}
+
+.app-body.right-collapsed {
+  grid-template-columns: 240px 1fr 40px; /* ✅ Cards stay 680px, extra space on sides */
+}
+
+.app-body.left-collapsed.right-collapsed {
+  grid-template-columns: 60px 1fr 40px; /* ✅ Cards stay 680px, maximum space on sides */
+}
+
+/* Sidebar content wrapper for smooth transitions */
+.right-sidebar .sidebar-content {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Smooth transitions for sidebars */
+.left-sidebar,
+.right-sidebar {
+  transition: all 0.3s ease;
+}
+
+/* Hide collapse buttons on mobile */
+@media (max-width: 768px) {
+  .sidebar-collapse-btn {
+    display: none;
+  }
+  
+  /* Reset grid layout for mobile */
+  .app-body,
+  .app-body.left-collapsed,
+  .app-body.right-collapsed,
+  .app-body.left-collapsed.right-collapsed {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .left-sidebar.collapsed {
+    width: 240px;
+  }
+  
+  .left-sidebar.collapsed .sidebar-item span {
+    display: inline;
+  }
+  
+  .left-sidebar.collapsed .sidebar-icon {
+    margin-right: 0.75rem;
+  }
+}
+
+/* Tablet adjustments */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .app-body {
+    grid-template-columns: 240px 1fr 0;
+  }
+  
+  .app-body.left-collapsed {
+    grid-template-columns: 60px 1fr 0;
+  }
+  
+  .left-sidebar {
+    position: sticky; /* ✅ Keep sticky on tablet */
+    top: 0; /* ✅ No gap */
+    height: 100vh;
+    align-self: flex-start;
+    z-index: 50; /* ✅ Maintain z-index on tablet */
+  }
+  
+  .right-sidebar {
+    display: none;
+  }
+  
+  .right-collapse-btn {
+    display: none;
+  }
+}
+
+/* Large screens - optimize spacing */
+@media (min-width: 1440px) {
+  .app-body {
+    grid-template-columns: 280px 1fr 320px;
+  }
+  
+  .app-body.left-collapsed {
+    grid-template-columns: 60px 1fr 320px;
+  }
+  
+  .app-body.right-collapsed {
+    grid-template-columns: 280px 1fr 40px; /* ✅ Cards stay fixed width */
+  }
+  
+  .app-body.left-collapsed.right-collapsed {
+    grid-template-columns: 60px 1fr 40px; /* ✅ Cards stay fixed width */
+  }
+  
+  .left-sidebar {
+    width: 280px;
+    position: sticky; /* ✅ Keep sticky on large screens */
+    top: 0; /* ✅ No gap */
+    height: 100vh;
+    align-self: flex-start;
+    z-index: 50; /* ✅ Maintain z-index on large screens */
+  }
+  
+  .right-sidebar {
+    width: 320px;
+    position: sticky; /* ✅ Keep sticky on large screens */
+    top: 0; /* ✅ No gap */
+    height: 100vh;
+    align-self: flex-start;
+    z-index: 50; /* ✅ Maintain z-index on large screens */
+  }
+  
+  /* Optional: Slightly larger cards on very large screens */
+  .main-feed {
+    max-width: 720px; /* ✅ Still fixed, just slightly larger */
+  }
+}
+
+/* Accessibility - Focus states */
+.sidebar-collapse-btn:focus-visible {
+  outline: 2px solid var(--color-secondary);
+  outline-offset: 2px;
+}
+
+/* Animation for smooth collapse */
+@keyframes slideOut {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.left-sidebar.collapsed .sidebar-item span {
+  animation: slideOut 0.2s ease;
+}
+
+.left-sidebar:not(.collapsed) .sidebar-item span {
+  animation: slideIn 0.2s ease;
+}
+
+/* ========================================
+   ENHANCED SEARCH RESPONSIVE STYLES
+   ======================================== */
+
+/* Desktop - Full search visible */
+@media (min-width: 1025px) {
+  .header-search-wrapper {
+    display: block;
+  }
+}
+
+/* Tablet - Reduced search width */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .header-search-wrapper {
+    max-width: 350px;
+  }
+  
+  .header-left {
+    max-width: 500px;
+  }
+}
+
+/* Mobile - Hide search, show search icon button */
+@media (max-width: 768px) {
+  .header-search-wrapper {
+    display: none;
+  }
+  
+  .header-left {
+    gap: 0.5rem;
+  }
+  
+  .app-logo {
+    font-size: 1.25rem;
+  }
+}
+
+/* Small Mobile - Further optimizations */
+@media (max-width: 480px) {
+  .app-logo {
+    font-size: 1.125rem;
+  }
+  
+  .header-left {
+    gap: 0.25rem;
   }
 }

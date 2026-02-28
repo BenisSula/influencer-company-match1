@@ -1,8 +1,10 @@
 .card {
-  background-color: white;
+  background-color: var(--color-bg-secondary);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
-  transition: all 0.2s ease;
+  border: 1px solid var(--color-border);
+  transition: all var(--transition-base);
+  overflow: hidden;
 }
 
 .card-padding-none {
@@ -22,22 +24,98 @@
 }
 
 .card-hover:hover {
-  box-shadow: var(--shadow-md);
-  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+  border-color: var(--color-primary);
 }
 
 .card-header {
-  padding-bottom: 1rem;
-  border-bottom: 1px solid #E2E8F0;
-  margin-bottom: 1rem;
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--color-border);
+  background-color: var(--color-bg-primary);
 }
 
 .card-body {
   flex: 1;
+  padding: 1.5rem;
 }
 
 .card-footer {
-  padding-top: 1rem;
-  border-top: 1px solid #E2E8F0;
-  margin-top: 1rem;
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--color-border);
+  background-color: var(--color-bg-primary);
+}
+
+
+/* Mobile Responsive Card Styles */
+@media (max-width: 768px) {
+  .card {
+    border-radius: var(--radius-md);
+    margin-bottom: 0.75rem;
+  }
+  
+  .card-padding-sm {
+    padding: 0.75rem;
+  }
+  
+  .card-padding-md {
+    padding: 1rem;
+  }
+  
+  .card-padding-lg {
+    padding: 1.25rem;
+  }
+  
+  .card-header {
+    padding: 1rem;
+  }
+  
+  .card-body {
+    padding: 1rem;
+  }
+  
+  .card-footer {
+    padding: 0.75rem 1rem;
+  }
+  
+  .card-hover:hover {
+    transform: translateY(-2px);
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    border-radius: var(--radius-sm);
+    margin-bottom: 0.625rem;
+  }
+  
+  .card-padding-sm {
+    padding: 0.625rem;
+  }
+  
+  .card-padding-md {
+    padding: 0.875rem;
+  }
+  
+  .card-padding-lg {
+    padding: 1rem;
+  }
+  
+  .card-header {
+    padding: 0.875rem;
+  }
+  
+  .card-body {
+    padding: 0.875rem;
+  }
+  
+  .card-footer {
+    padding: 0.625rem 0.875rem;
+  }
+  
+  /* Disable hover effects on mobile */
+  .card-hover:hover {
+    transform: none;
+    box-shadow: var(--shadow-sm);
+  }
 }

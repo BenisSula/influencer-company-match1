@@ -13,10 +13,10 @@ export class Bookmark {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @ManyToOne(() => User, { eager: true })
+  @ManyToOne(() => User)
   user: User;
 
-  @ManyToOne(() => User, { eager: true })
+  @ManyToOne(() => User)
   bookmarkedProfile: User;
 
   @CreateDateColumn()

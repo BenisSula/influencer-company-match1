@@ -3,46 +3,60 @@ import { apiClient } from './api-client';
 export interface ProfileData {
   id: string;
   name: string;
-  type: 'influencer' | 'company';
+  email?: string;
+  role?: 'INFLUENCER' | 'COMPANY';
+  type?: 'influencer' | 'company';
+  avatarUrl?: string;
+  location?: string;
+  bio?: string;
+  description?: string;
   niche?: string;
   industry?: string;
   audienceSize?: number;
   engagementRate?: number;
-  budget?: number;
-  location?: string;
   platforms?: string[];
-  bio?: string;
-  description?: string;
+  budget?: number;
+  budgetRange?: { min?: number; max?: number };
+  minBudget?: number;
+  maxBudget?: number;
+  companySize?: string;
   portfolioUrl?: string;
   website?: string;
-  budgetRange?: {
-    min?: number;
-    max?: number;
-  };
-  contentType?: string[];
+  contentType?: string | string[];
   collaborationPreference?: string;
-  verificationStatus?: boolean;
-  companySize?: string;
-  campaignType?: string[];
+  verificationStatus?: string | boolean;
+  campaignType?: string | string[];
+  preferredInfluencerNiches?: string;
+  collaborationDuration?: string;
+  minAudienceSize?: number;
+  maxAudienceSize?: number;
+  savedAt?: string;
+  notes?: string;
+  tags?: string[];
+  createdAt?: string | Date;
+  updatedAt?: string | Date;
 }
 
-export class ProfileService {
-  async getMyProfile(): Promise<ProfileData> {
-    const response = await apiClient.get('/auth/me');
-    return response.profile;
+class ProfileService {
+  async saveProfile(profileId: string, notes?: string, tags?: string[]): Promise<void> {
+    await apiClient.post(`/profiles/${profileId}/save`, { notes, tags });
   }
 
-  async getProfileById(id: string): Promise<ProfileData> {
-    const response = await apiClient.get(`/profiles/user/${id}`);
-    return response;
+  async unsaveProfile(profileId: string): Promise<void> {
+    await apiClient.delete(`/profiles/${profileId}/save`);
   }
 
-  async updateInfluencerProfile(profileId: string, data: any) {
-    return apiClient.patch(`/profiles/influencer/${profileId}`, data);
+  async getSavedProfiles(): Promise<ProfileData[]> {
+    return apiClient.get('/profiles/saved');
   }
 
-  async updateCompanyProfile(profileId: string, data: any) {
-    return apiClient.patch(`/profiles/company/${profileId}`, data);
+  async isProfileSaved(profileId: string): Promise<boolean> {
+    const response = await apiClient.get<{ saved: boolean }>(`/profiles/${profileId}/saved-status`);
+    return response.saved;
+  }
+
+  async getProfile(userId: string): Promise<ProfileData> {
+    return apiClient.get(`/profiles/user/${userId}`);
   }
 }
 

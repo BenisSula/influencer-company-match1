@@ -1,0 +1,86 @@
+.compatibility-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  background: linear-gradient(135deg, #F7FAFC 0%, #EDF2F7 100%);
+  border-radius: 12px;
+  border: 2px solid #E2E8F0;
+  margin-bottom: 1.5rem;
+}
+
+.compatibility-score {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.compatibility-emoji {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.compatibility-percentage {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.compatibility-label {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.compatibility-details-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1rem;
+  background-color: #FFFFFF;
+  color: #1877F2;
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.compatibility-details-btn:hover {
+  background-color: #F7FAFC;
+  border-color: #1877F2;
+}
+
+.compatibility-indicator-compact {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.375rem 0.75rem;
+  background-color: #F7FAFC;
+  border-radius: 6px;
+}
+
+.compatibility-indicator-compact .compatibility-emoji {
+  font-size: 1.25rem;
+}
+
+.compatibility-indicator-compact .compatibility-percentage {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .compatibility-indicator {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+  }
+
+  .compatibility-score {
+    justify-content: center;
+  }
+
+  .compatibility-details-btn {
+    justify-content: center;
+  }
+}

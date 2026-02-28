@@ -1,0 +1,85 @@
+.profile-tabs {
+  width: 100%;
+}
+
+.profile-tabs-header {
+  display: flex;
+  gap: 0.5rem;
+  border-bottom: 2px solid #E4E6EB;
+  margin-bottom: 1.5rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.profile-tabs-header::-webkit-scrollbar {
+  height: 4px;
+}
+
+.profile-tabs-header::-webkit-scrollbar-thumb {
+  background: #CED0D4;
+  border-radius: 2px;
+}
+
+.profile-tab-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  color: #65676B;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+  margin-bottom: -2px;
+}
+
+.profile-tab-button:hover {
+  background: #F2F3F5;
+  color: #050505;
+}
+
+.profile-tab-button.active {
+  color: #1877F2;
+  border-bottom-color: #1877F2;
+}
+
+.profile-tab-icon {
+  display: flex;
+  align-items: center;
+  font-size: 1.125rem;
+}
+
+.profile-tabs-content {
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .profile-tab-button {
+    padding: 0.625rem 0.75rem;
+    font-size: 0.875rem;
+  }
+
+  .profile-tab-icon {
+    font-size: 1rem;
+  }
+
+  .profile-tabs-header {
+    gap: 0.25rem;
+  }
+}

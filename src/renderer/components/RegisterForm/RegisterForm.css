@@ -1,0 +1,309 @@
+/* ========================================
+   REGISTER FORM - CLEAN MODERN STYLE
+   ======================================== */
+
+/* Role Selector */
+.role-selector {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+
+.role-option {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid #e5e7eb;
+  background: white;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  text-align: left;
+}
+
+.role-option:hover:not(:disabled) {
+  border-color: #d1d5db;
+  background: #fafafa;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.role-option.active {
+  border-color: #E1306C;
+  background: rgba(225, 48, 108, 0.02);
+  box-shadow: 
+    0 0 0 1px #E1306C,
+    0 2px 4px rgba(225, 48, 108, 0.08);
+}
+
+.role-option:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.role-option:focus-visible {
+  outline: 2px solid #E1306C;
+  outline-offset: 2px;
+}
+
+.role-icon {
+  flex-shrink: 0;
+  color: #E1306C;
+}
+
+.role-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.role-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: #1a1a1a;
+  margin-bottom: 0.125rem;
+}
+
+.role-description {
+  font-size: 0.75rem;
+  color: #6b7280;
+  letter-spacing: 0.01em;
+}
+
+/* Input Wrapper */
+.form-input-wrapper {
+  position: relative;
+  display: block;
+  width: 100%;
+  background: transparent;
+}
+
+.input-icon {
+  position: absolute;
+  left: 1rem; /* 16px from left */
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6b7280; /* Darker for better visibility */
+  pointer-events: none;
+  z-index: 2; /* Lower than before, but still above input */
+  display: flex !important; /* Force display */
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  opacity: 1 !important; /* Ensure full opacity */
+  visibility: visible !important; /* Force visibility */
+  transition: color 0.2s ease;
+}
+
+/* Icon color change when wrapper contains focused input */
+.form-input-wrapper:focus-within .input-icon {
+  color: #E1306C;
+}
+
+.form-input {
+  position: relative;
+  width: 100%;
+  padding: 0.625rem 0.875rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  font-family: var(--font-primary);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  background: white;
+  color: #1a1a1a;
+  z-index: 1; /* Below icon */
+  
+  /* Text decoration reset */
+  text-decoration: none !important;
+  text-decoration-line: none !important;
+  text-decoration-style: none !important;
+  text-decoration-color: transparent !important;
+  
+  /* Font rendering improvements */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-smooth: always;
+  text-rendering: optimizeLegibility;
+}
+
+/* Browser autofill override */
+.form-input:-webkit-autofill,
+.form-input:-webkit-autofill:hover,
+.form-input:-webkit-autofill:focus,
+.form-input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px white inset !important;
+  -webkit-text-fill-color: #1a1a1a !important;
+  box-shadow: 0 0 0 1000px white inset !important;
+  background-color: white !important;
+  background-clip: content-box !important;
+  transition: background-color 5000s ease-in-out 0s;
+  text-decoration: none !important;
+  font-family: var(--font-primary) !important;
+  border-color: #d1d5db !important;
+}
+
+.form-input.with-icon {
+  padding-left: 2.5rem !important; /* Force space for icon - 40px */
+}
+
+.form-input.with-action {
+  padding-right: 2.5rem !important; /* Force space for password toggle - 40px */
+}
+
+.form-input.with-icon.with-action {
+  padding-left: 2.5rem !important;
+  padding-right: 2.5rem !important;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #E1306C;
+  box-shadow: 
+    0 0 0 3px rgba(225, 48, 108, 0.08),
+    0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.form-input:disabled {
+  background: #f9fafb;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.form-input::placeholder {
+  color: #9ca3af;
+}
+
+/* Password Toggle */
+.password-toggle {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #9ca3af;
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+  z-index: 1;
+  width: 20px;
+  height: 20px;
+}
+
+.password-toggle:hover {
+  color: #1a1a1a;
+}
+
+.password-toggle:focus-visible {
+  outline: 2px solid #E1306C;
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* Terms Link */
+.terms-link {
+  color: #E1306C;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.terms-link:hover {
+  color: #c41f5c;
+  text-decoration: underline;
+}
+
+.terms-link:focus-visible {
+  outline: 2px solid #E1306C;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Checkbox Label for Terms */
+.form-group .checkbox-label {
+  font-size: 0.8125rem;
+  line-height: 1.4;
+}
+
+.form-group .checkbox-label input[type="checkbox"] {
+  margin-top: 0.125rem;
+  align-self: flex-start;
+  accent-color: #E1306C;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+/* Mobile (< 768px) */
+@media (max-width: 768px) {
+  .role-selector {
+    gap: 0.75rem;
+  }
+
+  .role-option {
+    padding: 0.875rem 1rem;
+    gap: 0.75rem;
+  }
+
+  .role-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .role-label {
+    font-size: 0.9375rem;
+  }
+
+  .role-description {
+    font-size: 0.75rem;
+  }
+
+  .form-input {
+    padding: 0.75rem 1rem;
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+
+  .form-input.with-icon {
+    padding-left: 3rem;
+  }
+
+  .form-input.with-action {
+    padding-right: 3rem;
+  }
+
+  .input-icon {
+    left: 1rem;
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* Small Mobile (< 480px) */
+@media (max-width: 480px) {
+  .role-selector {
+    grid-template-columns: 1fr;
+    gap: 0.625rem;
+  }
+
+  .role-option {
+    padding: 0.875rem 1rem;
+  }
+
+  .form-group .checkbox-label {
+    font-size: 0.8125rem;
+  }
+}
+
+/* Landscape Mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+  .role-selector {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
