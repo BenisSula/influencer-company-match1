@@ -9,7 +9,7 @@ import { Invoice, InvoiceStatus } from '../entities/invoice.entity';
 
 @Injectable()
 export class StripeService {
-  private stripe: Stripe;
+  private stripe: Stripe | null = null;
 
   constructor(
     @InjectRepository(Tenant)
@@ -21,12 +21,21 @@ export class StripeService {
     @InjectRepository(Invoice)
     private invoiceRepository: Repository<Invoice>,
   ) {
-    this.stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', {
-      apiVersion: '2026-01-28.clover' as any,
-    });
+    // Only initialize Stripe if API key is provided
+    if (process.env.STRIPE_SECRET_KEY) {
+      this.stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+        apiVersion: '2026-01-28.clover' as any,
+      });
+    } else {
+      console.warn('Stripe not configured - admin payment features disabled');
+    }
   }
 
   async createCustomer(tenant: Tenant, email: string): Promise<string> {
+    if (!this.stripe) {
+      throw new BadRequestException('Stripe not configured');
+    }
+    
     const customer = await this.stripe.customers.create({
       email,
       metadata: {
@@ -46,6 +55,10 @@ export class StripeService {
     priceId: string,
     paymentMethodId?: string,
   ): Promise<Subscription> {
+    if (!this.stripe) {
+      throw new BadRequestException('Stripe not configured');
+    }
+    
     const tenant = await this.tenantRepository.findOne({ where: { id: tenantId } });
     if (!tenant) {
       throw new BadRequestException('Tenant not found');
@@ -95,6 +108,10 @@ export class StripeService {
   }
 
   async cancelSubscription(subscriptionId: string, immediate: boolean = false): Promise<Subscription> {
+    if (!this.stripe) {
+      throw new BadRequestException('Stripe not configured');
+    }
+    
     const subscription = await this.subscriptionRepository.findOne({
       where: { id: subscriptionId },
     });
@@ -122,6 +139,10 @@ export class StripeService {
   }
 
   async handleWebhook(signature: string, payload: Buffer): Promise<void> {
+    if (!this.stripe) {
+      throw new BadRequestException('Stripe not configured');
+    }
+    
     const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
     if (!webhookSecret) {
       throw new Error('Stripe webhook secret not configured');
