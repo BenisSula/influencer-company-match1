@@ -36,7 +36,7 @@ async function bootstrap() {
   app.setGlobalPrefix('api');
 
   // Health check endpoint (before global prefix)
-  app.getHttpAdapter().get('/health', (req, res) => {
+  app.getHttpAdapter().get('/health', (req: any, res: any) => {
     res.status(200).json({ status: 'ok', timestamp: new Date().toISOString() });
   });
 
