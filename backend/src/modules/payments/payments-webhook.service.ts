@@ -14,7 +14,7 @@ import { InjectQueue } from '@nestjs/bull';
 @Injectable()
 export class PaymentsWebhookService {
   private readonly logger = new Logger(PaymentsWebhookService.name);
-  private readonly stripe: Stripe;
+  private readonly stripe: Stripe | null = null;
   private readonly webhookSecret: string;
 
   constructor(
@@ -27,17 +27,26 @@ export class PaymentsWebhookService {
     private readonly notificationsService: NotificationsService,
     @InjectQueue('payment-webhooks') private readonly webhookQueue: Queue,
   ) {
-    this.stripe = new Stripe(
-      this.configService.get<string>('STRIPE_SECRET_KEY'),
-      { apiVersion: '2026-01-28.clover' },
-    );
-    this.webhookSecret = this.configService.get<string>('STRIPE_WEBHOOK_SECRET');
+    const stripeKey = this.configService.get<string>('STRIPE_SECRET_KEY');
+    
+    // Only initialize Stripe if API key is provided
+    if (stripeKey) {
+      this.stripe = new Stripe(stripeKey, { apiVersion: '2026-01-28.clover' });
+      this.webhookSecret = this.configService.get<string>('STRIPE_WEBHOOK_SECRET');
+    } else {
+      this.logger.warn('Stripe not configured - webhook service disabled');
+      this.webhookSecret = '';
+    }
   }
 
   /**
    * Verify and process Stripe webhook
    */
   async handleWebhook(rawBody: Buffer, signature: string) {
+    if (!this.stripe) {
+      throw new BadRequestException('Stripe not configured');
+    }
+
     let event: Stripe.Event;
 
     try {
