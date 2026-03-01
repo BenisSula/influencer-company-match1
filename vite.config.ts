@@ -25,7 +25,7 @@ export default defineConfig({
     },
   },
   build: {
-    outDir: 'dist/renderer',
+    outDir: 'dist',
     chunkSizeWarningLimit: 2000, // Increased from 1000 to 2000 KB
     cssMinify: 'esbuild',
     rollupOptions: {

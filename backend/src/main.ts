@@ -40,6 +40,12 @@ async function bootstrap() {
     res.status(200).json({ status: 'ok', timestamp: new Date().toISOString() });
   });
 
+  // Root endpoint - redirect to frontend or show API info
+  app.getHttpAdapter().get('/', (req: any, res: any) => {
+    const frontendUrl = process.env.FRONTEND_URL || 'https://influencer-match-frontend.onrender.com';
+    res.redirect(frontendUrl);
+  });
+
   const port = process.env.PORT || 3000;
   await app.listen(port);
   
