@@ -12,9 +12,8 @@ export default defineConfig({
       '@/layouts': path.resolve(__dirname, './src/renderer/layouts'),
       '@/utils': path.resolve(__dirname, './src/renderer/utils'),
       '@/hooks': path.resolve(__dirname, './src/renderer/hooks'),
-      'react': path.resolve(__dirname, './node_modules/react'),
-      'react-dom': path.resolve(__dirname, './node_modules/react-dom'),
     },
+    dedupe: ['react', 'react-dom'],
   },
   base: '/',
   server: {
