@@ -124,7 +124,11 @@ export class LandingService {
   async getRealtimeStatistics(): Promise<RealtimeStatistics> {
     try {
       const response = await apiClient.get('/landing/statistics/realtime');
-      return response.data;
+      // Ensure we always return a valid object
+      if (response?.data) {
+        return response.data;
+      }
+      throw new Error('Invalid response data');
     } catch (error) {
       console.error('Failed to fetch realtime statistics:', error);
       // Fallback to base stats with simulated real-time data

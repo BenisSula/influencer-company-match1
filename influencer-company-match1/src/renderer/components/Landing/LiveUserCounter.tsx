@@ -28,7 +28,8 @@ export const LiveUserCounter: React.FC<LiveUserCounterProps> = ({
     const fetchRealTimeCount = async () => {
       try {
         const stats = await landingService.getRealtimeStatistics();
-        const realCount = stats.activeUsersNow || 0;
+        // Handle case where stats might be undefined or not have activeUsersNow
+        const realCount = stats?.activeUsersNow ?? 0;
         setCount(realCount);
         setLoading(false);
         setJustIncremented(true);

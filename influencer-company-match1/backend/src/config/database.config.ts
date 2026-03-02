@@ -1,4 +1,7 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { Logger } from '@nestjs/common';
+
+const logger = new Logger('DatabaseConfig');
 
 // Support both individual DB variables and DATABASE_URL
 const getDatabaseUrl = (): string | undefined => {
@@ -8,6 +11,14 @@ const getDatabaseUrl = (): string | undefined => {
   }
   return undefined;
 };
+
+const synchronizeEnabled = process.env.DB_SYNCHRONIZE === 'true' || process.env.NODE_ENV === 'development';
+
+// Log configuration for debugging
+logger.log(`Database synchronize enabled: ${synchronizeEnabled}`);
+logger.log(`Database URL: ${getDatabaseUrl() ? 'set' : 'not set'}`);
+logger.log(`DB_SYNCHRONIZE env: ${process.env.DB_SYNCHRONIZE}`);
+logger.log(`NODE_ENV: ${process.env.NODE_ENV}`);
 
 export const databaseConfig: TypeOrmModuleOptions = {
   type: 'postgres',
@@ -22,13 +33,13 @@ export const databaseConfig: TypeOrmModuleOptions = {
   entities: [__dirname + '/../**/*.entity{.ts,.js}'],
   // Enable synchronize for initial setup (disable after tables are created for security)
   // Note: DB_SYNCHRONIZE takes precedence over NODE_ENV
-  synchronize: process.env.DB_SYNCHRONIZE === 'true' || process.env.NODE_ENV === 'development',
+  synchronize: synchronizeEnabled,
   logging: process.env.NODE_ENV === 'development',
   // Connection retry options
   extra: {
     connectionLimit: 5,
   },
-  // Retry connection on startup
-  retryAttempts: 3,
-  retryDelay: 3000,
+  // Retry connection on startup - increased for production
+  retryAttempts: 5,
+  retryDelay: 5000,
 };
