@@ -1,0 +1,167 @@
+.payment-checkout-page {
+  min-height: 100vh;
+  background: var(--background-primary, #f7f9fa);
+  padding: 40px 20px;
+}
+
+.checkout-header {
+  max-width: 600px;
+  margin: 0 auto 32px;
+  text-align: center;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--primary-color, #405de6);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.back-link:hover {
+  opacity: 0.7;
+}
+
+.checkout-header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-primary, #1a1a1a);
+  margin: 0 0 8px 0;
+}
+
+.campaign-title {
+  font-size: 16px;
+  color: var(--text-secondary, #657786);
+  margin: 4px 0;
+}
+
+.influencer-name {
+  font-size: 14px;
+  color: var(--text-tertiary, #999);
+  margin: 4px 0;
+}
+
+.error-container,
+.info-container {
+  max-width: 500px;
+  margin: 60px auto;
+  padding: 40px;
+  background: var(--surface-color, #ffffff);
+  border: 1px solid var(--border-color, #e1e8ed);
+  border-radius: 12px;
+  text-align: center;
+}
+
+.error-icon,
+.info-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.error-container h2,
+.info-container h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--text-primary, #1a1a1a);
+  margin: 0 0 12px 0;
+}
+
+.error-container p,
+.info-container p {
+  font-size: 16px;
+  color: var(--text-secondary, #657786);
+  margin: 0 0 24px 0;
+  line-height: 1.5;
+}
+
+.back-button {
+  padding: 12px 24px;
+  background: var(--primary-color, #405de6);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.back-button:hover {
+  background: var(--primary-hover, #3651d4);
+  transform: translateY(-1px);
+}
+
+.payment-info {
+  max-width: 500px;
+  margin: 32px auto 0;
+  padding: 24px;
+  background: var(--surface-color, #ffffff);
+  border: 1px solid var(--border-color, #e1e8ed);
+  border-radius: 12px;
+}
+
+.payment-info h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary, #1a1a1a);
+  margin: 0 0 16px 0;
+}
+
+.payment-info ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.payment-info li {
+  font-size: 14px;
+  color: var(--text-secondary, #657786);
+  padding: 8px 0;
+  line-height: 1.5;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .payment-checkout-page {
+    padding: 20px 16px;
+  }
+
+  .checkout-header {
+    margin-bottom: 24px;
+  }
+
+  .checkout-header h1 {
+    font-size: 24px;
+  }
+
+  .error-container,
+  .info-container {
+    padding: 24px;
+    margin: 40px auto;
+  }
+
+  .payment-info {
+    padding: 16px;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .payment-checkout-page {
+    background: var(--background-dark, #0a0a0a);
+  }
+
+  .error-container,
+  .info-container,
+  .payment-info {
+    background: var(--surface-dark, #1a1a1a);
+    border-color: var(--border-dark, #333);
+  }
+}

@@ -1,0 +1,4 @@
+# SPA Fallback Configuration
+# This file is used by Netlify for SPA routing
+
+/*    /index.html   200

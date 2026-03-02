@@ -1,0 +1,259 @@
+.create-campaign-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.create-campaign-container {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.create-campaign-header {
+  padding: 32px;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.create-campaign-header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--gray-900);
+  margin: 0 0 24px 0;
+}
+
+.progress-steps {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+
+.progress-steps::before {
+  content: '';
+  position: absolute;
+  top: 20px;
+  left: 40px;
+  right: 40px;
+  height: 2px;
+  background: var(--gray-200);
+  z-index: 0;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  z-index: 1;
+}
+
+.step-number {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--gray-200);
+  color: var(--gray-600);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.step.active .step-number {
+  background: var(--primary-color);
+  color: white;
+}
+
+.step-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--gray-600);
+}
+
+.step.active .step-label {
+  color: var(--primary-color);
+}
+
+.create-campaign-content {
+  padding: 32px;
+  min-height: 400px;
+}
+
+.wizard-step h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--gray-900);
+  margin: 0 0 8px 0;
+}
+
+.step-description {
+  font-size: 15px;
+  color: var(--gray-600);
+  margin: 0 0 32px 0;
+}
+
+.form-group {
+  margin-bottom: 24px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gray-700);
+  margin-bottom: 8px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group input[type="date"],
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--gray-300);
+  border-radius: 8px;
+  font-size: 15px;
+  transition: border-color 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.form-group input.error,
+.form-group textarea.error {
+  border-color: #dc2626;
+}
+
+.form-group small {
+  display: block;
+  margin-top: 4px;
+  font-size: 13px;
+  color: var(--gray-500);
+}
+
+.error-message {
+  display: block;
+  margin-top: 4px;
+  font-size: 13px;
+  color: #dc2626;
+}
+
+.platform-checkboxes {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  color: var(--gray-700);
+  cursor: pointer;
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.budget-inputs {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.budget-inputs input {
+  flex: 1;
+}
+
+.budget-inputs span {
+  font-size: 14px;
+  color: var(--gray-600);
+}
+
+.create-campaign-actions {
+  display: flex;
+  justify-content: space-between;
+  padding: 24px 32px;
+  border-top: 1px solid var(--gray-200);
+  background: var(--gray-50);
+}
+
+.actions-left,
+.actions-right {
+  display: flex;
+  gap: 12px;
+}
+
+/* Mobile responsive */
+@media (max-width: 640px) {
+  .create-campaign-page {
+    padding: 16px;
+  }
+
+  .create-campaign-header {
+    padding: 24px 16px;
+  }
+
+  .create-campaign-header h1 {
+    font-size: 24px;
+  }
+
+  .progress-steps {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .progress-steps::before {
+    display: none;
+  }
+
+  .step {
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+
+  .create-campaign-content {
+    padding: 24px 16px;
+  }
+
+  .wizard-step h2 {
+    font-size: 20px;
+  }
+
+  .create-campaign-actions {
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .actions-left,
+  .actions-right {
+    width: 100%;
+  }
+
+  .actions-right {
+    flex-direction: column;
+  }
+
+  .actions-left button,
+  .actions-right button {
+    width: 100%;
+  }
+
+  .budget-inputs {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

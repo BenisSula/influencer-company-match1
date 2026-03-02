@@ -1,0 +1,167 @@
+/* ========================================
+   AnalyticsWidget Styles
+   Mobile‑first, fully responsive
+   Icons always visible, centered content
+   ======================================== */
+
+.analytics-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr; /* stacked on smallest screens */
+}
+
+.analytics-stat {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: #F8F9FA;
+  border-radius: 12px;
+  border: 1px solid #E4E6EB;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.analytics-stat:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Icon container – always visible, fixed size */
+.analytics-stat-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.analytics-stat-icon svg {
+  width: 24px;
+  height: 24px;
+  display: block;            /* removes extra space */
+  color: inherit;            /* ensures it picks up the inline style from the component */
+  stroke-width: 1.5;
+}
+
+/* Content area – centered text */
+.analytics-stat-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;        /* center horizontally */
+  justify-content: center;
+  min-width: 0;               /* prevent overflow */
+}
+
+.analytics-stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #050505;
+  display: flex;
+  align-items: center;
+  justify-content: center;     /* center the number and trend icon together */
+  gap: 0.25rem;
+  line-height: 1.2;
+  margin-bottom: 0.25rem;
+  width: 100%;                 /* take full width for centering */
+}
+
+/* Trend icon (up/down) inline with value */
+.analytics-stat-value svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.analytics-stat-label {
+  font-size: 0.75rem;
+  color: #65676B;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  font-weight: 500;
+  text-align: center;          /* explicit centering */
+  width: 100%;                  /* ensures centering works */
+}
+
+/* ========================================
+   Tablet (min-width: 481px)
+   ======================================== */
+@media (min-width: 481px) {
+  .analytics-grid {
+    grid-template-columns: repeat(2, 1fr); /* two columns */
+  }
+
+  .analytics-stat {
+    padding: 1.25rem;
+  }
+
+  .analytics-stat-icon {
+    width: 56px;
+    height: 56px;
+  }
+
+  .analytics-stat-icon svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .analytics-stat-value {
+    font-size: 1.75rem;
+  }
+
+  .analytics-stat-label {
+    font-size: 0.8125rem;
+  }
+}
+
+/* ========================================
+   Desktop (min-width: 769px)
+   ======================================== */
+@media (min-width: 769px) {
+  .analytics-grid {
+    grid-template-columns: repeat(3, 1fr); /* three columns */
+    gap: 1.5rem;
+  }
+
+  .analytics-stat {
+    padding: 1.5rem;
+    gap: 1.25rem;
+  }
+
+  .analytics-stat-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+  }
+
+  .analytics-stat-icon svg {
+    width: 32px;
+    height: 32px;
+  }
+
+  .analytics-stat-value {
+    font-size: 2rem;
+  }
+
+  .analytics-stat-label {
+    font-size: 0.875rem;
+  }
+}
+
+/* ========================================
+   Large Desktop (min-width: 1200px)
+   ======================================== */
+@media (min-width: 1200px) {
+  .analytics-grid {
+    gap: 2rem;
+  }
+
+  .analytics-stat {
+    padding: 2rem;
+  }
+}

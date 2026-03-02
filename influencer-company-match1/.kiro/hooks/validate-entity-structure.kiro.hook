@@ -1,0 +1,17 @@
+{
+  "enabled": true,
+  "name": "Validate Database Entity",
+  "description": "Checks database entities for proper structure, relationships, and indexing",
+  "version": "1",
+  "when": {
+    "type": "fileCreated",
+    "patterns": [
+      "**/entities/**/*.ts",
+      "**/*.entity.ts"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Review the entity file and verify: 1) Proper TypeORM/Prisma decorators, 2) Foreign keys for relationships, 3) Indexes on frequently queried columns, 4) Timestamps (createdAt, updatedAt), 5) Follows 3NF normalization. Suggest improvements."
+  }
+}

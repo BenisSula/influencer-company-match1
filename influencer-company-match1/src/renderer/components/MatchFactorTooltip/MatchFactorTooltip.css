@@ -1,0 +1,120 @@
+.match-factor-tooltip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 12px;
+  background: #1C1E21;
+  color: #E4E6EB;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  min-width: 250px;
+  max-width: 300px;
+  z-index: 1000;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  pointer-events: none;
+  animation: tooltipFadeIn 0.2s ease-out;
+}
+
+@keyframes tooltipFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.match-factor-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: #1C1E21;
+}
+
+.tooltip-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tooltip-score {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #3B82F6;
+}
+
+.tooltip-label {
+  font-weight: 600;
+  font-size: 0.8125rem;
+  color: #E4E6EB;
+}
+
+.tooltip-explanation {
+  margin-bottom: 8px;
+  color: #B0B3B8;
+  line-height: 1.5;
+}
+
+.tooltip-details {
+  margin-bottom: 8px;
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+  font-size: 0.8125rem;
+  color: #B0B3B8;
+}
+
+.tooltip-tip {
+  padding-top: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: #F59E0B;
+  font-size: 0.8125rem;
+  font-style: italic;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .match-factor-tooltip {
+    min-width: 200px;
+    max-width: 250px;
+    font-size: 0.8125rem;
+  }
+  
+  .tooltip-score {
+    font-size: 1.125rem;
+  }
+}
+
+/* Ensure tooltip doesn't overflow viewport */
+.breakdown-item:first-child .match-factor-tooltip,
+.breakdown-item:nth-child(2) .match-factor-tooltip {
+  left: 0;
+  transform: translateX(0);
+}
+
+.breakdown-item:first-child .match-factor-tooltip::after,
+.breakdown-item:nth-child(2) .match-factor-tooltip::after {
+  left: 20px;
+}
+
+.breakdown-item:nth-last-child(-n+2) .match-factor-tooltip {
+  left: auto;
+  right: 0;
+  transform: translateX(0);
+}
+
+.breakdown-item:nth-last-child(-n+2) .match-factor-tooltip::after {
+  left: auto;
+  right: 20px;
+  transform: translateX(0);
+}

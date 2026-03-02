@@ -1,0 +1,295 @@
+.messages-page {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #FAFAFA;
+  overflow: hidden;
+  position: relative;
+}
+
+.messages-container {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 350px 1fr;
+  overflow: hidden;
+  transition: grid-template-columns 0.3s ease;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+
+.messages-container.sidebar-collapsed {
+  grid-template-columns: 60px 1fr;
+}
+
+.conversations-panel {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  border-right: 1px solid #DBDBDB;
+  transition: all 0.3s ease;
+  position: relative;
+  min-height: 0;
+}
+
+.messages-panel {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  position: relative;
+  min-height: 0;
+}
+
+.sidebar-toggle {
+  position: absolute;
+  top: 20px;
+  right: -12px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: white;
+  border: 2px solid #DBDBDB;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 100;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  opacity: 1;
+  pointer-events: auto;
+  font-size: 16px;
+  color: #262626;
+}
+
+.sidebar-toggle:hover {
+  background: #F0F2F5;
+  transform: scale(1.15);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.sidebar-toggle:active {
+  transform: scale(0.95);
+}
+
+.loading-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-size: 16px;
+  color: #8E8E8E;
+}
+
+/* Empty state when no conversation selected */
+.no-conversation-selected {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 2rem;
+  text-align: center;
+  color: #8E8E8E;
+  background: #FAFAFA;
+}
+
+.empty-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  opacity: 0.5;
+}
+
+.no-conversation-selected h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #262626;
+  margin: 0 0 0.5rem 0;
+}
+
+.no-conversation-selected p {
+  font-size: 1rem;
+  margin: 0;
+  color: #8E8E8E;
+}
+
+.messages-thread-header {
+  padding: 1rem;
+  border-bottom: 1px solid #E4E6EB;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #FFFFFF;
+}
+
+.messages-thread-header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.messages-thread-title {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.messages-thread-rate-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: #F0F2F5;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: #050505;
+  transition: background-color 0.2s;
+}
+
+.messages-thread-rate-btn:hover {
+  background-color: #E4E6EB;
+}
+
+/* Loading overlay for conversation selection */
+.messages-loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #E4E6EB;
+  border-top-color: #1877F2;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Mobile: Stack layout - show conversation list by default */
+@media (max-width: 768px) {
+  .messages-page {
+    /* Add padding at bottom for mobile nav */
+    padding-bottom: 70px;
+  }
+
+  .messages-container {
+    grid-template-columns: 1fr;
+    position: relative;
+    /* Adjust height to account for mobile nav */
+    height: calc(100% - 70px);
+  }
+
+  /* Conversation list - visible by default */
+  .conversations-panel {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    transform: translateX(0);
+    transition: transform 0.3s ease;
+  }
+
+  /* Hide conversation list when thread is shown */
+  .messages-container.show-thread .conversations-panel {
+    transform: translateX(-100%);
+  }
+
+  /* Message thread - hidden by default */
+  .messages-panel {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+  }
+
+  /* Show thread when conversation selected */
+  .messages-container.show-thread .messages-panel {
+    transform: translateX(0);
+    z-index: 15;
+  }
+
+  .sidebar-toggle {
+    display: none;
+  }
+
+  /* Mobile back button in thread header */
+  .mobile-back-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    color: #262626;
+    font-size: 16px;
+    border-radius: 8px;
+    transition: background-color 0.2s;
+  }
+
+  .mobile-back-button:hover {
+    background: #F0F2F5;
+  }
+
+  .mobile-back-button:active {
+    opacity: 0.7;
+  }
+}
+
+/* Tablet: Narrower sidebar */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .messages-page {
+    /* Add padding at bottom for mobile nav on tablets */
+    padding-bottom: 70px;
+  }
+
+  .messages-container {
+    grid-template-columns: 280px 1fr;
+    /* Adjust height to account for mobile nav */
+    height: calc(100% - 70px);
+  }
+
+  .messages-container.sidebar-collapsed {
+    grid-template-columns: 60px 1fr;
+  }
+
+  .mobile-back-button {
+    display: none;
+  }
+}
+
+/* Desktop: Full layout */
+@media (min-width: 1025px) {
+  .mobile-back-button {
+    display: none;
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "intents": [
+    {
+      "tag": "greeting",
+      "patterns": ["hi", "hello", "hey", "greetings"],
+      "responses": ["Hello! I'm your IC Match assistant. How can I help you today?"]
+    },
+    {
+      "tag": "pricing",
+      "patterns": ["how much", "cost", "price", "fee", "charge"],
+      "responses": ["We charge 5% for companies and 10% for influencers on successful deals."]
+    },
+    {
+      "tag": "unknown",
+      "patterns": [],
+      "responses": ["I'm not sure I understand. Can you rephrase?"]
+    }
+  ]
+}

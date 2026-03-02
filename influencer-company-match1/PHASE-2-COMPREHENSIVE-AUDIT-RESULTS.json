@@ -1,0 +1,24 @@
+{
+  "backendConnectivity": {
+    "status": "offline"
+  },
+  "apiEndpoints": {},
+  "codeImplementation": {
+    "adminPayments": {
+      "usesMockTransactions": true,
+      "hasLiveStatsIntegration": true
+    },
+    "adminTenants": {
+      "usesLiveData": true,
+      "hasAllButtons": true
+    }
+  },
+  "dataIntegrity": {},
+  "issues": [
+    "Backend server not running - live functionality cannot be verified"
+  ],
+  "warnings": [
+    "AdminPayments uses mock transaction data (intentional design choice)"
+  ],
+  "recommendations": []
+}

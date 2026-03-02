@@ -1,0 +1,60 @@
+{
+  "codeAnalysis": {
+    "adminTenants": {
+      "hasViewButton": true,
+      "hasEditButton": true,
+      "hasAddButton": true,
+      "hasTenantDetailModal": true,
+      "hasCreateTenantModal": true,
+      "usesLiveData": true,
+      "hasErrorHandling": false,
+      "hasToastNotifications": true,
+      "hasLoadingStates": true
+    },
+    "adminPayments": {
+      "hasTransactionTable": true,
+      "hasExportButton": true,
+      "hasRefundButton": true,
+      "hasViewButton": true,
+      "usesLiveStats": true,
+      "usesMockTransactions": true,
+      "hasErrorHandling": true,
+      "hasLoadingStates": true
+    },
+    "tenantDetailModal": {
+      "hasCloseButton": true,
+      "displaysAllFields": true,
+      "hasProperStructure": true,
+      "isReusable": true,
+      "hasEscapeKey": false
+    },
+    "tenantService": {
+      "hasCreate": true,
+      "hasFindAll": true,
+      "hasFindOne": true,
+      "hasUpdate": true,
+      "hasRemove": true,
+      "usesDatabase": true,
+      "hasErrorHandling": true
+    },
+    "paymentController": {
+      "hasTransactionsEndpoint": false,
+      "hasRefundEndpoint": false,
+      "hasRevenueEndpoint": false,
+      "hasProperAuth": true
+    },
+    "adminApiClient": {
+      "hasBaseURL": true,
+      "hasAuthHeader": true,
+      "hasErrorInterceptor": false,
+      "exportsClient": true
+    }
+  },
+  "functionalityTests": {},
+  "issues": [],
+  "warnings": [
+    "AdminPayments: Transaction list uses mock data (not live from backend)",
+    "PaymentController: Transactions endpoint not implemented (frontend uses mock data)",
+    "PaymentController: Refund endpoint not implemented (frontend simulates)"
+  ]
+}

@@ -1,0 +1,485 @@
+/**
+ * FeatureTabs Styles
+ * Using brand colors from global.css
+ */
+
+.feature-tabs {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* ========================================
+   TAB NAVIGATION
+   ======================================== */
+
+.feature-tabs__nav {
+  margin-bottom: 3rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.feature-tabs__nav::-webkit-scrollbar {
+  display: none;
+}
+
+.feature-tabs__nav-inner {
+  display: flex;
+  gap: 1rem;
+  padding: 0.5rem;
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  min-width: min-content;
+}
+
+.feature-tabs__tab {
+  position: relative;
+  flex: 1;
+  min-width: 140px;
+  padding: 1rem 1.5rem;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  overflow: hidden;
+}
+
+.feature-tabs__tab:hover {
+  background: var(--color-bg-primary);
+}
+
+.feature-tabs__tab--active {
+  background: linear-gradient(135deg, 
+    color-mix(in srgb, var(--tab-color) 10%, transparent),
+    color-mix(in srgb, var(--tab-color) 5%, transparent)
+  );
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--tab-color) 20%, transparent);
+}
+
+.feature-tabs__tab-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  background: var(--color-bg-secondary);
+  transition: all var(--transition-base);
+}
+
+.feature-tabs__tab--active .feature-tabs__tab-icon {
+  background: var(--tab-color);
+  color: white;
+  transform: scale(1.1);
+}
+
+.feature-tabs__tab-icon svg {
+  color: var(--color-text-secondary);
+  transition: color var(--transition-base);
+}
+
+.feature-tabs__tab--active .feature-tabs__tab-icon svg {
+  color: white;
+}
+
+.feature-tabs__tab-label {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  transition: color var(--transition-base);
+}
+
+.feature-tabs__tab--active .feature-tabs__tab-label {
+  color: var(--tab-color);
+}
+
+/* Progress Indicator */
+.feature-tabs__tab-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  background: var(--tab-color);
+  transition: width 0.1s linear;
+  border-radius: var(--radius-full);
+}
+
+/* ========================================
+   TAB CONTENT
+   ======================================== */
+
+.feature-tabs__content {
+  animation: fadeInUp 0.5s ease-out;
+}
+
+.feature-tabs__features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+/* ========================================
+   FEATURE DEMO CARD
+   ======================================== */
+
+.feature-demo-card {
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: all var(--transition-base);
+  animation: fadeInUp 0.6s ease-out both;
+  display: flex;
+  flex-direction: column;
+}
+
+.feature-demo-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+  border-color: var(--color-primary);
+}
+
+/* Visual/Screenshot */
+.feature-demo-card__visual {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 aspect ratio */
+  background: var(--color-bg-primary);
+  overflow: hidden;
+}
+
+.feature-demo-card__screenshot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: transform var(--transition-slow);
+}
+
+.feature-demo-card:hover .feature-demo-card__screenshot {
+  transform: scale(1.05);
+}
+
+/* Play Button Overlay */
+.feature-demo-card__play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--gradient-primary);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: var(--radius-full);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 8px 24px rgba(225, 48, 108, 0.4);
+  transition: all var(--transition-base);
+  opacity: 0;
+}
+
+.feature-demo-card:hover .feature-demo-card__play-btn {
+  opacity: 1;
+}
+
+.feature-demo-card__play-btn:hover {
+  transform: translate(-50%, -50%) scale(1.05);
+  box-shadow: 0 12px 32px rgba(225, 48, 108, 0.5);
+}
+
+/* Content */
+.feature-demo-card__content {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  flex: 1;
+}
+
+.feature-demo-card__title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.feature-demo-card__description {
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Benefits List */
+.feature-demo-card__benefits {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.feature-demo-card__benefit {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.9375rem;
+  color: var(--color-text-secondary);
+}
+
+.feature-demo-card__benefit svg {
+  color: var(--color-success);
+  flex-shrink: 0;
+}
+
+/* Stats */
+.feature-demo-card__stats {
+  display: flex;
+  gap: 2rem;
+  padding-top: 1rem;
+  margin-top: auto;
+  border-top: 1px solid var(--color-border);
+}
+
+.feature-demo-card__stat {
+  flex: 1;
+  text-align: center;
+}
+
+.feature-demo-card__stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.25rem;
+}
+
+.feature-demo-card__stat-label {
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+  font-weight: 500;
+}
+
+/* ========================================
+   CONTROL BUTTON
+   ======================================== */
+
+.feature-tabs__control {
+  display: block;
+  margin: 2rem auto 0;
+  padding: 0.75rem 1.5rem;
+  background: transparent;
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-full);
+  color: var(--color-text-secondary);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.feature-tabs__control:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  background: color-mix(in srgb, var(--color-primary) 5%, transparent);
+}
+
+/* ========================================
+   ANIMATIONS
+   ======================================== */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========================================
+   RESPONSIVE - TABLET
+   ======================================== */
+
+@media (max-width: 1023px) {
+  .feature-tabs__nav-inner {
+    justify-content: flex-start;
+  }
+
+  .feature-tabs__tab {
+    min-width: 120px;
+  }
+
+  .feature-tabs__features {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ========================================
+   RESPONSIVE - MOBILE
+   ======================================== */
+
+@media (max-width: 768px) {
+  .feature-tabs__nav {
+    margin-bottom: 2rem;
+  }
+
+  .feature-tabs__nav-inner {
+    gap: 0.5rem;
+    padding: 0.25rem;
+  }
+
+  .feature-tabs__tab {
+    min-width: 100px;
+    padding: 0.75rem 1rem;
+  }
+
+  .feature-tabs__tab-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .feature-tabs__tab-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .feature-tabs__tab-label {
+    font-size: 0.8125rem;
+  }
+
+  .feature-demo-card__content {
+    padding: 1.5rem;
+  }
+
+  .feature-demo-card__title {
+    font-size: 1.25rem;
+  }
+
+  .feature-demo-card__description {
+    font-size: 0.9375rem;
+  }
+
+  .feature-demo-card__stats {
+    gap: 1rem;
+  }
+
+  .feature-demo-card__stat-value {
+    font-size: 1.25rem;
+  }
+}
+
+/* ========================================
+   ACCESSIBILITY
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .feature-tabs__tab,
+  .feature-demo-card,
+  .feature-demo-card__screenshot,
+  .feature-demo-card__play-btn {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .feature-tabs__tab-progress {
+    transition: none !important;
+  }
+}
+
+/* Focus visible for keyboard navigation */
+.feature-tabs__tab:focus-visible,
+.feature-demo-card__play-btn:focus-visible,
+.feature-tabs__control:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .feature-tabs__tab--active {
+    border: 2px solid var(--tab-color);
+  }
+
+  .feature-demo-card {
+    border-width: 2px;
+  }
+}
+
+
+/* ========================================
+   RESPONSIVE DESIGN - TABLET & MOBILE
+   ======================================== */
+
+/* Tablet: Optimize tab navigation */
+@media (min-width: 769px) and (max-width: 1023px) {
+  .feature-tabs__nav-inner {
+    gap: 0.75rem;
+  }
+  
+  .feature-tabs__tab {
+    min-width: 130px;
+    padding: 1rem 1.25rem;
+  }
+  
+  .feature-tabs__features {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+/* Mobile: Improve tab scrolling UX */
+@media (max-width: 768px) {
+  .feature-tabs__nav {
+    margin-left: -1rem;
+    margin-right: -1rem;
+    padding: 0 1rem;
+  }
+  
+  .feature-tabs__tab {
+    min-width: 90px;
+    padding: 0.875rem 0.75rem;
+    gap: 0.375rem;
+  }
+  
+  .feature-tabs__tab-icon {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .feature-tabs__tab-label {
+    font-size: 0.75rem;
+  }
+  
+  /* Add scroll hint */
+  .feature-tabs__nav::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 30px;
+    background: linear-gradient(to left, white, transparent);
+    pointer-events: none;
+  }
+}

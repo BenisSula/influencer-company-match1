@@ -1,0 +1,105 @@
+.dashboard-widgets-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  min-height: 300px;
+  transition: grid-template-columns 0.3s ease;
+}
+
+.dashboard-widgets-grid.single-column {
+  grid-template-columns: 1fr;
+}
+
+.dashboard-widgets-grid.single-column .dashboard-widget-column {
+  max-width: 100%;
+}
+
+.dashboard-widget-column {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .dashboard-widgets-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* View All Posts Button - Instagram Brand Style */
+.view-all-posts-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.875rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #FFFFFF;
+  background: linear-gradient(135deg, #E1306C 0%, #FD8D32 100%);
+  border: none;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(225, 48, 108, 0.25);
+  min-height: 48px;
+  min-width: 200px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.view-all-posts-btn:hover {
+  background: linear-gradient(135deg, #C91F5B 0%, #E67A28 100%);
+  box-shadow: 0 6px 16px rgba(225, 48, 108, 0.35);
+  transform: translateY(-2px);
+}
+
+.view-all-posts-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(225, 48, 108, 0.3);
+}
+
+.view-all-posts-btn:focus-visible {
+  outline: 2px solid #E1306C;
+  outline-offset: 2px;
+}
+
+/* Tablet responsive */
+@media (max-width: 1024px) {
+  .view-all-posts-btn {
+    padding: 0.75rem 1.75rem;
+    font-size: 0.9375rem;
+    min-width: 180px;
+  }
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .view-all-posts-btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9375rem;
+    min-width: 160px;
+    min-height: 44px;
+  }
+}
+
+/* Small mobile responsive */
+@media (max-width: 480px) {
+  .view-all-posts-btn {
+    width: 100%;
+    max-width: 280px;
+    padding: 0.875rem 1.25rem;
+    font-size: 0.9375rem;
+    min-height: 48px;
+  }
+}
+
+/* Extra small mobile */
+@media (max-width: 360px) {
+  .view-all-posts-btn {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+    min-height: 44px;
+  }
+}

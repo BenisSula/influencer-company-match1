@@ -1,0 +1,298 @@
+.conversation-list {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background: white;
+  border-right: 1px solid #DBDBDB;
+  transition: all 0.3s ease;
+  position: relative;
+  min-height: 0;
+}
+
+.conversation-list.collapsed .conversation-list-header h2 {
+  display: none;
+}
+
+.conversation-list.collapsed .conversation-item {
+  padding: 12px;
+  justify-content: center;
+}
+
+.conversation-list.collapsed .conversation-content,
+.conversation-list.collapsed .conversation-time {
+  display: none;
+}
+
+.conversation-list.collapsed .conversation-avatar-wrapper {
+  margin-right: 0;
+}
+
+/* Avatar wrapper for badge positioning */
+.conversation-avatar-wrapper {
+  position: relative;
+  flex-shrink: 0;
+  margin-right: 12px;
+}
+
+/* Ensure avatars maintain their size during collapse */
+.conversation-avatar {
+  display: block;
+  flex-shrink: 0;
+  transition: none;
+}
+
+.conversation-list-header {
+  padding: 20px;
+  border-bottom: 1px solid #DBDBDB;
+  transition: padding 0.3s ease;
+}
+
+.refresh-button {
+  padding: 0.5rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.25rem;
+  opacity: 1;
+  transition: transform 0.3s, opacity 0.2s;
+}
+
+.refresh-button.refreshing {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: rotate(360deg);
+}
+
+.conversation-list.collapsed .conversation-list-header {
+  padding: 20px 12px;
+  text-align: center;
+}
+
+.conversation-list-header h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  color: #262626;
+}
+
+.conversation-list-items {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-height: 0;
+  height: 100%;
+}
+
+.conversation-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  border-bottom: 1px solid #EFEFEF;
+  position: relative;
+}
+
+/* Unread conversation styling */
+.conversation-item.has-unread {
+  background-color: #F0F8FF;
+}
+
+.conversation-item.has-unread .conversation-name {
+  font-weight: 700;
+  color: #050505;
+}
+
+.conversation-item.has-unread .conversation-preview span {
+  font-weight: 500;
+  color: #262626;
+}
+
+.conversation-item:hover {
+  background-color: #FAFAFA;
+}
+
+.conversation-item.has-unread:hover {
+  background-color: #E6F3FF;
+}
+
+.conversation-item.selected {
+  background-color: #EFEFEF;
+}
+
+/* Conversation unread badge - positioned on avatar */
+.conversation-unread-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  background: #E1306C; /* Solid Instagram Red */
+  color: white;
+  border-radius: 9px;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  box-shadow: 0 1px 3px rgba(225, 48, 108, 0.3);
+  border: 2px solid white;
+  z-index: 10;
+}
+
+/* Badge appearance animation */
+@keyframes badge-appear {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.conversation-unread-badge {
+  animation: badge-appear 0.2s ease-out;
+}
+
+.conversation-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.conversation-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.conversation-name {
+  font-weight: 600;
+  color: #262626;
+  font-size: 14px;
+}
+
+.conversation-time {
+  font-size: 12px;
+  color: #8E8E8E;
+}
+
+.conversation-preview {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  color: #8E8E8E;
+}
+
+.conversation-preview span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.conversation-preview span.unread {
+  color: #262626;
+  font-weight: 600;
+}
+
+/* Old unread badge removed - now using conversation-unread-badge on avatar */
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  text-align: center;
+  color: #8E8E8E;
+}
+
+.empty-state p {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  color: #262626;
+}
+
+.empty-state span {
+  font-size: 14px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .conversation-list-header {
+    padding: 1rem;
+  }
+
+  .conversation-list-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .conversation-item {
+    padding: 1rem;
+    min-height: 72px;
+  }
+
+  /* Avatar size controlled by Avatar component */
+
+  .conversation-name {
+    font-size: 1rem;
+  }
+
+  .conversation-preview {
+    font-size: 0.875rem;
+  }
+
+  .conversation-time {
+    font-size: 0.75rem;
+  }
+
+  .conversation-unread-badge {
+    min-width: 16px;
+    height: 16px;
+    font-size: 10px;
+    border-width: 1.5px;
+    top: -3px;
+    right: -3px;
+  }
+}
+
+@media (max-width: 480px) {
+  .conversation-list-header {
+    padding: 0.875rem;
+  }
+
+  .conversation-list-header h2 {
+    font-size: 1.25rem;
+  }
+
+  .conversation-item {
+    padding: 0.875rem;
+    min-height: 68px;
+  }
+
+  /* Avatar size controlled by Avatar component */
+
+  .conversation-name {
+    font-size: 0.9375rem;
+  }
+
+  .conversation-preview {
+    font-size: 0.8125rem;
+  }
+
+  .conversation-unread-badge {
+    min-width: 14px;
+    height: 14px;
+    font-size: 9px;
+    border-width: 1.5px;
+    top: -2px;
+    right: -2px;
+  }
+}

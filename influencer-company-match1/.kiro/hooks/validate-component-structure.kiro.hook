@@ -1,0 +1,18 @@
+{
+  "enabled": true,
+  "name": "Validate React Component Structure",
+  "description": "Checks that new React components follow the project's coding standards and architecture patterns",
+  "version": "1",
+  "when": {
+    "type": "fileCreated",
+    "patterns": [
+      "**/components/**/*.tsx",
+      "**/pages/**/*.tsx",
+      "**/features/**/*.tsx"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Review the newly created component file and verify it follows these standards: 1) Proper import order, 2) TypeScript interfaces for props, 3) Functional component with hooks, 4) Proper component structure (hooks, effects, handlers, render). Suggest improvements if needed."
+  }
+}

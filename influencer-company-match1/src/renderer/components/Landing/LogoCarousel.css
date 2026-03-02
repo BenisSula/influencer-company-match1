@@ -1,0 +1,97 @@
+/* LogoCarousel Styles */
+
+.logo-carousel {
+  margin: 2rem 0;
+  overflow: hidden;
+}
+
+.logo-carousel-title {
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 1rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.logo-carousel-track {
+  display: flex;
+  gap: 3rem;
+  animation: scroll 30s linear infinite;
+  width: fit-content;
+}
+
+.logo-item {
+  flex-shrink: 0;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  opacity: 0.6;
+  transition: opacity var(--transition-fast);
+}
+
+.logo-item:hover {
+  opacity: 1;
+}
+
+.logo-item img {
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+  filter: grayscale(100%);
+  transition: filter var(--transition-fast);
+}
+
+.logo-item:hover img {
+  filter: grayscale(0%);
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Pause animation on hover */
+.logo-carousel:hover .logo-carousel-track {
+  animation-play-state: paused;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .logo-carousel-track {
+    gap: 2.5rem;
+    animation-duration: 25s;
+  }
+  
+  .logo-item {
+    height: 36px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .logo-carousel {
+    margin: 0.75rem 0;  /* Reduced from 1.5rem to minimize spacing */
+  }
+  
+  .logo-carousel-track {
+    gap: 2rem;
+    animation-duration: 20s;
+  }
+  
+  .logo-item {
+    height: 32px;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .logo-carousel-track {
+    animation: none;
+  }
+}

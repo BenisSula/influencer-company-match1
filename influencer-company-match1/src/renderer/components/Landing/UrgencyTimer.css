@@ -1,0 +1,167 @@
+/* Urgency Timer Styles */
+/* Phase 3.1.4: Smart CTAs */
+
+.urgency-timer {
+  background: linear-gradient(135deg, #FFF3CD 0%, #FFE69C 100%);
+  border: 2px solid var(--color-warning);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  margin: var(--spacing-xl) 0;
+}
+
+.urgency-timer--expired {
+  background: linear-gradient(135deg, #D4EDDA 0%, #C3E6CB 100%);
+  border-color: var(--color-success);
+}
+
+.urgency-timer__container {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.urgency-timer__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: white;
+  border-radius: var(--radius-full);
+  color: var(--color-warning);
+  flex-shrink: 0;
+  box-shadow: var(--shadow-sm);
+}
+
+.urgency-timer--expired .urgency-timer__icon {
+  color: var(--color-success);
+}
+
+.urgency-timer__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.urgency-timer__message {
+  font-size: var(--font-size-md);
+  font-weight: 600;
+  color: var(--color-neutral-dark);
+  margin: 0;
+}
+
+.urgency-timer__countdown {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.urgency-timer__unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 50px;
+}
+
+.urgency-timer__unit > span:first-child {
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  font-family: var(--font-secondary);
+  color: var(--color-neutral-dark);
+  line-height: 1;
+}
+
+.urgency-timer__label {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.urgency-timer__separator {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--color-neutral-dark);
+  margin: 0 var(--spacing-xs);
+}
+
+.urgency-timer__progress {
+  width: 100%;
+  height: 4px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  margin-top: var(--spacing-sm);
+}
+
+.urgency-timer__progress-bar {
+  height: 100%;
+  background: var(--gradient-primary);
+  border-radius: var(--radius-full);
+  transition: width 1s linear;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .urgency-timer {
+    padding: var(--spacing-md);
+  }
+
+  .urgency-timer__container {
+    gap: var(--spacing-md);
+  }
+
+  .urgency-timer__icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .urgency-timer__icon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .urgency-timer__message {
+    font-size: var(--font-size-sm);
+  }
+
+  .urgency-timer__unit > span:first-child {
+    font-size: var(--font-size-xl);
+  }
+
+  .urgency-timer__unit {
+    min-width: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .urgency-timer__container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .urgency-timer__countdown {
+    justify-content: center;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .urgency-timer__progress-bar {
+    transition: none;
+  }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  .urgency-timer {
+    border-width: 3px;
+  }
+
+  .urgency-timer__icon {
+    border: 2px solid currentColor;
+  }
+}
