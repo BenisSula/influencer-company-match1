@@ -21,6 +21,8 @@ services:
         generateValue: true
       - key: DB_SYNCHRONIZE
         value: "true"
+      - key: FORCE_SYNC
+        value: "true"
       - key: CORS_ORIGIN
         value: https://influencer-match-frontend.onrender.com
       - key: FRONTEND_URL
