@@ -24,7 +24,8 @@ class AdminApiClient {
   private baseURL: string;
 
   constructor() {
-    this.baseURL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
+    const envUrl = import.meta.env.VITE_API_URL;
+    this.baseURL = envUrl ? `${envUrl}/api` : 'http://localhost:3000/api';
   }
 
   getAdminToken(): string | null {

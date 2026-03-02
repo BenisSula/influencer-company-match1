@@ -27,7 +27,10 @@ class ApiClient {
   private token: string | null = null;
 
   constructor() {
-    this.baseURL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
+    // Get base URL from env, default to localhost with /api prefix
+    const envUrl = import.meta.env.VITE_API_URL;
+    // Always append /api for REST API calls
+    this.baseURL = envUrl ? `${envUrl}/api` : 'http://localhost:3000/api';
   }
 
   setToken(token: string) {

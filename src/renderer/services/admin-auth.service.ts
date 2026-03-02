@@ -1,6 +1,12 @@
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
+// Get base URL and ensure /api prefix for REST calls
+const getApiUrl = () => {
+  const envUrl = import.meta.env.VITE_API_URL;
+  return envUrl ? `${envUrl}/api` : 'http://localhost:3000/api';
+};
+
+const API_URL = getApiUrl();
 
 class AdminAuthService {
   async login(email: string, password: string) {
