@@ -1,61 +1,57 @@
 import { NestFactory } from '@nestjs/core';
 import { ExpressAdapter } from '@nestjs/platform-express';
-import { AppModule } from '../src/app.module';
+import { AppServerlessModule } from '../src/app-serverless.module';
 import { ValidationPipe } from '@nestjs/common';
-import express from 'express';
+import * as express from 'express';
 
-// Create Express app
-const expressApp = express();
-
-// Cache the NestJS app instance
-let cachedApp: any = null;
+// Cache the server instance
+let server: any;
 
 async function bootstrap() {
-  if (cachedApp) {
-    return cachedApp;
+  if (!server) {
+    const expressApp = express();
+    const adapter = new ExpressAdapter(expressApp);
+    
+    const app = await NestFactory.create(AppServerlessModule, adapter, {
+      logger: ['error', 'warn'],
+      abortOnError: false,
+    });
+
+    // Enable CORS
+    app.enableCors({
+      origin: true, // Allow all origins for now
+      credentials: true,
+    });
+
+    // Global validation pipe
+    app.useGlobalPipes(
+      new ValidationPipe({
+        whitelist: true,
+        forbidNonWhitelisted: false,
+        transform: true,
+      })
+    );
+
+    // Set global prefix
+    app.setGlobalPrefix('api');
+
+    await app.init();
+    server = expressApp;
   }
-
-  const app = await NestFactory.create(
-    AppModule,
-    new ExpressAdapter(expressApp),
-    {
-      logger: ['error', 'warn', 'log'],
-    }
-  );
-
-  // Enable CORS
-  app.enableCors({
-    origin: [
-      process.env.CORS_ORIGIN,
-      process.env.FRONTEND_URL,
-      /\.vercel\.app$/,
-    ],
-    credentials: true,
-  });
-
-  // Global validation pipe
-  app.useGlobalPipes(
-    new ValidationPipe({
-      whitelist: true,
-      forbidNonWhitelisted: false,
-      transform: true,
-      transformOptions: {
-        enableImplicitConversion: true,
-      },
-    })
-  );
-
-  // Set global prefix
-  app.setGlobalPrefix('api');
-
-  await app.init();
-
-  cachedApp = expressApp;
-  return expressApp;
+  
+  return server;
 }
 
-// Export the serverless function handler
-export default async (req: any, res: any) => {
-  const app = await bootstrap();
-  app(req, res);
+// Vercel serverless function handler
+module.exports = async (req: any, res: any) => {
+  try {
+    const app = await bootstrap();
+    return app(req, res);
+  } catch (error) {
+    console.error('Serverless function error:', error);
+    return res.status(500).json({
+      error: 'Internal Server Error',
+      message: error.message,
+    });
+  }
 };
