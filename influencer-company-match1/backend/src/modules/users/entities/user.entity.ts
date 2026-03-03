@@ -28,6 +28,27 @@ export class User {
   @Column({ default: true })
   isActive: boolean;
 
+  @Column({ default: false })
+  profileCompleted: boolean;
+
+  @Column({ default: 0 })
+  profileCompletionPercentage: number;
+
+  @Column({ nullable: true })
+  avatarUrl: string;
+
+  @Column({ nullable: true, name: 'stripe_account_id' })
+  stripeAccountId: string;
+
+  @Column({ nullable: true, name: 'stripe_customer_id' })
+  stripeCustomerId: string;
+
+  @Column({ default: false, name: 'stripe_onboarding_complete' })
+  stripeOnboardingComplete: boolean;
+
+  @Column({ default: false, name: 'email_verified' })
+  emailVerified: boolean;
+
   @CreateDateColumn()
   createdAt: Date;
 

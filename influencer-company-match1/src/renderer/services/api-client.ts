@@ -27,10 +27,16 @@ class ApiClient {
   private token: string | null = null;
 
   constructor() {
-    // Get base URL from env, default to localhost with /api prefix
+    // Get base URL from env - use VITE_API_URL without /api suffix
+    // The API client will add the /api prefix automatically
     const envUrl = import.meta.env.VITE_API_URL;
-    // Always append /api for REST API calls
-    this.baseURL = envUrl ? `${envUrl}/api` : 'http://localhost:3000/api';
+    // If envUrl already contains /api, don't add it again
+    // Otherwise, add /api for REST API calls
+    if (envUrl) {
+      this.baseURL = envUrl.endsWith('/api') ? envUrl : `${envUrl}/api`;
+    } else {
+      this.baseURL = 'http://localhost:3000/api';
+    }
   }
 
   setToken(token: string) {

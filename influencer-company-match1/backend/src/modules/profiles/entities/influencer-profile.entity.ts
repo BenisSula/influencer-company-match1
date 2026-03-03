@@ -15,19 +15,25 @@ export class InfluencerProfile {
   id: string;
 
   @OneToOne(() => User)
-  @JoinColumn()
+  @JoinColumn({ name: 'userId' })
   user: User;
 
-  @Column()
+  @Column({ name: 'userId', type: 'uuid' })
+  userId: string;
+
+  @Column({ nullable: true })
+  name: string;
+
+  @Column({ nullable: true })
   niche: string;
 
-  @Column({ type: 'int' })
+  @Column({ type: 'int', nullable: true })
   audienceSize: number;
 
-  @Column({ type: 'decimal', precision: 5, scale: 2 })
+  @Column({ type: 'decimal', precision: 5, scale: 2, nullable: true })
   engagementRate: number;
 
-  @Column('simple-array')
+  @Column('simple-array', { nullable: true })
   platforms: string[];
 
   @Column({ nullable: true })

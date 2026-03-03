@@ -45,7 +45,7 @@ async function seed() {
       const userId = userResult.rows[0].id;
 
       await client.query(
-        `INSERT INTO influencer_profiles ("userId", name, niche, bio, "followerCount", "engagementRate", location, platforms) 
+        `INSERT INTO influencer_profiles ("userId", name, niche, bio, "audienceSize", "engagementRate", location, platforms) 
          VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`,
         [userId, name, niche, `${name} - Professional ${niche.toLowerCase()} influencer`, followers, engagement, 'USA', JSON.stringify(['Instagram', 'TikTok', 'YouTube'])]
       );

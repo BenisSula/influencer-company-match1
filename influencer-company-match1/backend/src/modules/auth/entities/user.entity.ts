@@ -62,9 +62,8 @@ export class User {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  // Virtual properties populated from profiles
+  // Virtual properties populated from profiles (not stored in DB)
   name?: string;
-  avatar?: string;
   bio?: string;
   niche?: string;
   audienceSize?: number;

@@ -1,6 +1,11 @@
 import { io, Socket } from 'socket.io-client';
+import { apiClient } from './api-client';
 
-// Use environment variable for production, fallback to localhost for development
+// Use dedicated WebSocket URL for Socket.IO connections
+// Falls back to http://localhost:3000 if VITE_WS_URL is not set
+const WS_URL = import.meta.env.VITE_WS_URL || import.meta.env.VITE_API_URL?.replace(/^http/, 'ws') || 'http://localhost:3000';
+
+// For REST API calls, use the api-client which handles /api prefix correctly
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
 export interface Message {
@@ -65,7 +70,7 @@ class MessagingService {
       this.socket.disconnect();
     }
 
-    this.socket = io(`${API_URL}/messaging`, {
+    this.socket = io(`${WS_URL}/messaging`, {
       auth: { token },
       transports: ['websocket', 'polling'],
       reconnection: true,

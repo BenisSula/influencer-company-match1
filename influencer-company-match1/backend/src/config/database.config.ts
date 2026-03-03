@@ -37,6 +37,8 @@ import { Experiment } from '../modules/experiments/entities/experiment.entity';
 import { Recommendation } from '../modules/ai-matching/entities/recommendation.entity';
 import { MLModel } from '../modules/ai-matching/entities/ml-model.entity';
 import { CollaborationOutcome } from '../modules/ai-matching/entities/collaboration-outcome.entity';
+import { MediaFile } from '../modules/media/entities/media-file.entity';
+import { CampaignMilestone } from '../modules/campaigns/entities/campaign-milestone.entity';
 
 const logger = new Logger('DatabaseConfig');
 
@@ -100,6 +102,7 @@ export const databaseConfig: TypeOrmModuleOptions = {
     Campaign,
     Collaboration,
     CampaignApplication,
+    CampaignMilestone,
     Testimonial,
     LandingStatistic,
     LandingActivity,
@@ -120,6 +123,7 @@ export const databaseConfig: TypeOrmModuleOptions = {
     Recommendation,
     MLModel,
     CollaborationOutcome,
+    MediaFile,
   ],
   // In production, use synchronize if FORCE_SYNC or DB_SYNCHRONIZE is true
   // This allows initial table creation on first deployment

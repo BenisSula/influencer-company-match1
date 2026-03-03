@@ -6,7 +6,7 @@ export class InfluencerProfile {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ name: 'userId' })
+  @Column({ name: 'userId', type: 'uuid' })
   userId: string;
 
   @ManyToOne(() => User)
@@ -22,7 +22,7 @@ export class InfluencerProfile {
   @Column({ nullable: true, type: 'int' })
   audienceSize: number;
 
-  @Column({ nullable: true, type: 'decimal' })
+  @Column({ nullable: true, type: 'decimal', precision: 5, scale: 2 })
   engagementRate: number;
 
   @Column({ nullable: true, type: 'jsonb' })
@@ -49,15 +49,29 @@ export class InfluencerProfile {
   @Column({ nullable: true })
   collaborationPreference: string;
 
-  @Column({ nullable: true, type: 'simple-array', name: 'contenttype' })
-  contentType: string[]; // ✅ Added: Types of content creator produces (video, image, blog, etc.)
+  @Column('simple-array', { nullable: true, name: 'contentType' })
+  contentType: string[]; // ✅ Types of content creator produces (video, image, blog, etc.)
 
-  @Column({ default: false, name: 'verificationstatus' })
-  verificationStatus: boolean; // ✅ Added: Whether influencer is verified
+  @Column({ default: false, name: 'verificationStatus' })
+  verificationStatus: boolean; // ✅ Whether influencer is verified
+
+  @Column({ type: 'json', nullable: true })
+  mediaGallery: MediaItem[];
 
   @CreateDateColumn()
   createdAt: Date;
 
   @UpdateDateColumn()
   updatedAt: Date;
+}
+
+// Media item interface for gallery
+export interface MediaItem {
+  id: string;
+  url: string;
+  type: 'image' | 'video';
+  caption?: string;
+  uploadedAt: Date;
+  fileSize: number;
+  mimeType: string;
 }

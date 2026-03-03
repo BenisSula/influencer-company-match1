@@ -15,19 +15,22 @@ export class CompanyProfile {
   id: string;
 
   @OneToOne(() => User)
-  @JoinColumn()
+  @JoinColumn({ name: 'userId' })
   user: User;
 
-  @Column()
-  companyName: string;
+  @Column({ name: 'userId', type: 'uuid' })
+  userId: string;
 
-  @Column()
+  @Column({ nullable: true })
+  name: string; // ✅ Fixed: matches migration (was companyName)
+
+  @Column({ nullable: true })
   industry: string;
 
-  @Column({ type: 'int' })
+  @Column({ type: 'int', nullable: true })
   budget: number;
 
-  @Column('simple-array')
+  @Column('simple-array', { nullable: true })
   targetPlatforms: string[];
 
   @Column({ nullable: true })

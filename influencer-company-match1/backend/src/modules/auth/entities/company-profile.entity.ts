@@ -6,7 +6,7 @@ export class CompanyProfile {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ name: 'userId' })
+  @Column({ name: 'userId', type: 'uuid' })
   userId: string;
 
   @ManyToOne(() => User)
@@ -14,7 +14,7 @@ export class CompanyProfile {
   user: User;
 
   @Column({ nullable: true })
-  name: string; // ✅ Changed from companyName to name for consistency
+  name: string; // ✅ Fixed: matches migration (was companyName)
 
   @Column({ nullable: true })
   industry: string;
@@ -47,16 +47,16 @@ export class CompanyProfile {
   website: string;
 
   @Column({ nullable: true })
-  companySize: string;
+  companySize: string; // 'startup', 'small', 'medium', 'large', 'enterprise'
 
-  @Column({ nullable: true, type: 'jsonb' })
-  campaignType: string[];
+  @Column('simple-array', { nullable: true })
+  campaignType: string[]; // 'product-launch', 'brand-awareness', 'event', 'sponsored-content'
 
   @Column({ nullable: true, type: 'text' })
   preferredInfluencerNiches: string;
 
   @Column({ nullable: true })
-  collaborationDuration: string;
+  collaborationDuration: string; // 'short-term', 'medium-term', 'long-term'
 
   @Column({ default: false })
   verificationStatus: boolean;
