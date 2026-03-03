@@ -10,6 +10,7 @@
     "start:dev": "ts-node-dev --respawn --transpile-only src/main.ts",
     "start:prod": "node dist/main.js",
     "seed": "ts-node seed-simple.ts",
+    "seed:prod": "ts-node seed-production.ts",
     "migration:generate": "typeorm-ts-node-commonjs migration:generate -d ormconfig.ts",
     "migration:create": "typeorm-ts-node-commonjs migration:create",
     "migration:run": "typeorm-ts-node-commonjs migration:run -d ormconfig.ts",

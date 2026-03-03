@@ -179,12 +179,36 @@ export const LoginForm = ({ onSuccess }: { onSuccess?: () => void }) => {
           <button
             type="button"
             className="demo-account-button"
+            onClick={() => handleDemoLogin('mike.tech@example.com')}
+            disabled={loading}
+          >
+            <div className="demo-account-info">
+              <span className="demo-account-label">Influencer - Tech</span>
+              <span className="demo-account-email">mike.tech@example.com</span>
+            </div>
+            <span className="demo-account-arrow">→</span>
+          </button>
+          <button
+            type="button"
+            className="demo-account-button"
             onClick={() => handleDemoLogin('sarah.fashion@example.com')}
             disabled={loading}
           >
             <div className="demo-account-info">
-              <span className="demo-account-label">Influencer</span>
+              <span className="demo-account-label">Influencer - Fashion</span>
               <span className="demo-account-email">sarah.fashion@example.com</span>
+            </div>
+            <span className="demo-account-arrow">→</span>
+          </button>
+          <button
+            type="button"
+            className="demo-account-button"
+            onClick={() => handleDemoLogin('alex.gaming@example.com')}
+            disabled={loading}
+          >
+            <div className="demo-account-info">
+              <span className="demo-account-label">Influencer - Gaming</span>
+              <span className="demo-account-email">alex.gaming@example.com</span>
             </div>
             <span className="demo-account-arrow">→</span>
           </button>
@@ -195,13 +219,27 @@ export const LoginForm = ({ onSuccess }: { onSuccess?: () => void }) => {
             disabled={loading}
           >
             <div className="demo-account-info">
-              <span className="demo-account-label">Company</span>
+              <span className="demo-account-label">Company - Tech</span>
               <span className="demo-account-email">contact@techstartup.com</span>
             </div>
             <span className="demo-account-arrow">→</span>
           </button>
+          <button
+            type="button"
+            className="demo-account-button"
+            onClick={() => handleDemoLogin('sales@gaminggear.com')}
+            disabled={loading}
+          >
+            <div className="demo-account-info">
+              <span className="demo-account-label">Company - Gaming</span>
+              <span className="demo-account-email">sales@gaminggear.com</span>
+            </div>
+            <span className="demo-account-arrow">→</span>
+          </button>
         </div>
-        <p className="demo-password-hint">Password: password123</p>
+        <p className="demo-password-hint">
+          Password: <strong>password123</strong> • All 10 demo accounts available
+        </p>
       </div>
     </div>
   );

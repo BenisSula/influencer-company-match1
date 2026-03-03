@@ -1,16 +1,34 @@
+/**
+ * Production Seed Script
+ * Run this to seed demo accounts in the production database
+ * 
+ * Usage:
+ *   DATABASE_URL="postgresql://..." npm run seed:prod
+ * 
+ * Or set environment variables and run:
+ *   npm run seed:prod
+ */
+
 import { Client } from 'pg';
 import * as bcrypt from 'bcrypt';
 import * as dotenv from 'dotenv';
 
 dotenv.config();
 
+const DATABASE_URL = process.env.DATABASE_URL;
+
 async function seed() {
+  if (!DATABASE_URL) {
+    console.error('❌ DATABASE_URL environment variable is required');
+    console.log('Usage: DATABASE_URL="postgresql://..." node seed-production.ts');
+    process.exit(1);
+  }
+
   const client = new Client({
-    host: process.env.DB_HOST || 'localhost',
-    port: parseInt(process.env.DB_PORT || '5432'),
-    user: process.env.DB_USERNAME || 'postgres',
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_DATABASE || 'influencer_matching',
+    connectionString: DATABASE_URL,
+    ssl: {
+      rejectUnauthorized: false, // Required for Supabase
+    },
   });
 
   try {
@@ -28,7 +46,7 @@ async function seed() {
     const hashedPassword = await bcrypt.hash('password123', 10);
 
     // Insert influencers
-    const influencers = [
+    const influencers: [string, string, string, number, number][] = [
       ['mike.tech@example.com', 'Mike Chen', 'Technology', 200000, 4.8],
       ['sarah.fashion@example.com', 'Sarah Johnson', 'Fashion & Lifestyle', 150000, 5.2],
       ['emma.fitness@example.com', 'Emma Rodriguez', 'Fitness & Wellness', 180000, 4.5],
@@ -53,7 +71,7 @@ async function seed() {
     }
 
     // Insert companies
-    const companies = [
+    const companies: [string, string, string, number][] = [
       ['contact@techstartup.com', 'TechStartup Inc', 'Technology', 50000],
       ['marketing@fashionbrand.com', 'Fashion Brand Co', 'Fashion', 45000],
       ['partnerships@fitnessapp.com', 'FitnessApp', 'Health & Fitness', 40000],
@@ -85,10 +103,6 @@ async function seed() {
     console.log('📝 Test Credentials:');
     console.log('   Email: mike.tech@example.com (or any other seeded email)');
     console.log('   Password: password123');
-    console.log('\n🔐 Admin Credentials:');
-    console.log('   Run: node create-super-admin.js');
-    console.log('   Email: admin@example.com');
-    console.log('   Password: Admin123!\n');
 
     await client.end();
   } catch (error) {
