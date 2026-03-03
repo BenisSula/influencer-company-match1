@@ -10,16 +10,32 @@ config();
  * This configuration is used by TypeORM CLI for running migrations.
  * It's separate from the NestJS TypeORM configuration to allow
  * migrations to be run independently.
+ * 
+ * Supports both DATABASE_URL (Render) and individual DB variables
  */
-export default new DataSource({
-  type: 'postgres',
-  host: process.env.DB_HOST || 'localhost',
-  port: parseInt(process.env.DB_PORT || '5432', 10),
-  username: process.env.DB_USERNAME || 'postgres',
-  password: process.env.DB_PASSWORD || '',
-  database: process.env.DB_DATABASE || 'influencer_matching',
-  entities: ['src/**/*.entity{.ts,.js}'],
-  migrations: ['src/database/migrations/*{.ts,.js}'],
-  synchronize: false, // Always false for migrations
-  logging: true,
-});
+
+// Check if we have DATABASE_URL (Render/production) or individual variables
+const dataSourceConfig = process.env.DATABASE_URL
+  ? {
+      type: 'postgres' as const,
+      url: process.env.DATABASE_URL,
+      entities: ['src/**/*.entity{.ts,.js}'],
+      migrations: ['src/database/migrations/*{.ts,.js}'],
+      synchronize: false, // Always false for migrations
+      logging: true,
+      ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
+    }
+  : {
+      type: 'postgres' as const,
+      host: process.env.DB_HOST || 'localhost',
+      port: parseInt(process.env.DB_PORT || '5432', 10),
+      username: process.env.DB_USERNAME || 'postgres',
+      password: process.env.DB_PASSWORD || '',
+      database: process.env.DB_DATABASE || 'influencer_matching',
+      entities: ['src/**/*.entity{.ts,.js}'],
+      migrations: ['src/database/migrations/*{.ts,.js}'],
+      synchronize: false, // Always false for migrations
+      logging: true,
+    };
+
+export default new DataSource(dataSourceConfig);

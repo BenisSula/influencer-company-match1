@@ -1,0 +1,5 @@
+# Force Render to deploy latest commit
+# This file triggers a new deployment
+# Last updated: 2026-03-02
+DEPLOY_TIMESTAMP=2026-03-02T12:00:00Z
+FORCE_LATEST_COMMIT=true
