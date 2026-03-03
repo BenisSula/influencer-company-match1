@@ -51,6 +51,7 @@ const getDatabaseUrl = (): string | undefined => {
 // FORCE synchronize for initial deployment
 // Can be disabled later by setting DISABLE_SYNC=true
 const isProduction = process.env.NODE_ENV === 'production';
+// For serverless, we need to enable synchronize initially or tables won't exist
 const forceSyncForInitialDeploy = process.env.FORCE_SYNC === 'true' || process.env.DB_SYNCHRONIZE === 'true';
 const synchronizeEnabled = forceSyncForInitialDeploy || (!isProduction && process.env.NODE_ENV === 'development');
 
@@ -60,6 +61,16 @@ logger.log(`Database URL: ${getDatabaseUrl() ? 'set' : 'not set'}`);
 logger.log(`FORCE_SYNC: ${process.env.FORCE_SYNC}`);
 logger.log(`DB_SYNCHRONIZE: ${process.env.DB_SYNCHRONIZE}`);
 
+// SSL configuration for production cloud databases (Supabase, Render, etc.)
+const getSslConfig = () => {
+  if (isProduction || process.env.DATABASE_URL) {
+    return {
+      rejectUnauthorized: false, // Required for Supabase
+    };
+  }
+  return false;
+};
+
 export const databaseConfig: TypeOrmModuleOptions = {
   type: 'postgres',
   url: getDatabaseUrl(),
@@ -68,6 +79,8 @@ export const databaseConfig: TypeOrmModuleOptions = {
   username: process.env.DB_USERNAME || 'postgres',
   password: process.env.DB_PASSWORD || 'postgres',
   database: process.env.DB_DATABASE || 'influencer_matching',
+  // SSL configuration - CRITICAL for production cloud databases (Supabase, Render, etc.)
+  ssl: getSslConfig(),
   // Explicitly list all entities to ensure they are all registered
   entities: [
     User,

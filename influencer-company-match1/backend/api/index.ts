@@ -1,3 +1,8 @@
+import { config } from 'dotenv';
+
+// Load environment variables FIRST before any other imports
+config();
+
 import { NestFactory } from '@nestjs/core';
 import { ExpressAdapter } from '@nestjs/platform-express';
 import { AppServerlessModule } from '../src/app-serverless.module';
@@ -45,13 +50,32 @@ async function bootstrap() {
 // Vercel serverless function handler
 module.exports = async (req: any, res: any) => {
   try {
+    console.log('[Serverless] Starting bootstrap...');
+    console.log('[Serverless] Environment:', process.env.NODE_ENV);
+    console.log('[Serverless] DATABASE_URL set:', !!process.env.DATABASE_URL);
+    console.log('[Serverless] DB_HOST:', process.env.DB_HOST);
+    
     const app = await bootstrap();
+    console.log('[Serverless] Bootstrap complete, handling request...');
+    
     return app(req, res);
   } catch (error) {
-    console.error('Serverless function error:', error);
-    return res.status(500).json({
-      error: 'Internal Server Error',
-      message: error.message,
-    });
+    console.error('[Serverless] FATAL ERROR:', error);
+    console.error('[Serverless] Error stack:', error.stack);
+    console.error('[Serverless] Error name:', error.name);
+    
+    // Try to send a response with more details
+    try {
+      return res.status(500).json({
+        error: 'Internal Server Error',
+        message: error.message,
+        name: error.name,
+        stack: process.env.NODE_ENV === 'development' ? error.stack : undefined,
+      });
+    } catch (sendError) {
+      // If we can't send JSON, just return basic error
+      console.error('[Serverless] Could not send error response:', sendError);
+      return res.status(500).send('Internal Server Error');
+    }
   }
 };

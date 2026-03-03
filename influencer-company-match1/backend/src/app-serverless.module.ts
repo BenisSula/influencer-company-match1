@@ -1,6 +1,11 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { config } from 'dotenv';
+
+// Load environment variables for serverless
+config();
+
 import { databaseConfig } from './config/database.config';
 import stripeConfig from './config/stripe.config';
 
