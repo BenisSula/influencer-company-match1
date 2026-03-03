@@ -7,17 +7,18 @@ import { NestFactory } from '@nestjs/core';
 import { ExpressAdapter } from '@nestjs/platform-express';
 import { AppServerlessModule } from '../src/app-serverless.module';
 import { ValidationPipe } from '@nestjs/common';
+import { INestApplication } from '@nestjs/common';
 import * as express from 'express';
 
 // Cache the server instance
-let server: any;
+let server: express.Express;
 
-async function bootstrap() {
+async function bootstrap(): Promise<express.Express> {
   if (!server) {
     const expressApp = express();
     const adapter = new ExpressAdapter(expressApp);
     
-    const app = await NestFactory.create(AppServerlessModule, adapter, {
+    const app: INestApplication = await NestFactory.create(AppServerlessModule, adapter, {
       logger: ['error', 'warn'],
       abortOnError: false,
     });
@@ -59,7 +60,7 @@ module.exports = async (req: any, res: any) => {
     console.log('[Serverless] Bootstrap complete, handling request...');
     
     return app(req, res);
-  } catch (error) {
+  } catch (error: any) {
     console.error('[Serverless] FATAL ERROR:', error);
     console.error('[Serverless] Error stack:', error.stack);
     console.error('[Serverless] Error name:', error.name);

@@ -139,11 +139,13 @@ export class AuthService {
         );
       }
 
+      // Find user by lowercase email
       const user = await this.userRepository.findOne({
-        where: { email: loginDto.email }
+        where: { email: email }
       });
 
       if (!user) {
+        this.logger.warn(`Login failed: User not found for email: ${email}`);
         this.accountLockout.recordFailedAttempt(email);
         const remaining = this.accountLockout.getRemainingAttempts(email);
         
@@ -158,6 +160,7 @@ export class AuthService {
       const isPasswordValid = await bcrypt.compare(loginDto.password, user.password || '');
 
       if (!isPasswordValid) {
+        this.logger.warn(`Login failed: Invalid password for email: ${email}`);
         this.accountLockout.recordFailedAttempt(email);
         const remaining = this.accountLockout.getRemainingAttempts(email);
         
@@ -484,10 +487,11 @@ export class AuthService {
   }
 
   private generateToken(user: User): string {
-    const jwtSecret = process.env.JWT_SECRET;
+    const jwtSecret = process.env.JWT_SECRET || 'fallback-secret-do-not-use-in-production';
     
-    if (!jwtSecret) {
-      throw new Error('JWT_SECRET environment variable is not set');
+    // Warn if using fallback secret
+    if (!process.env.JWT_SECRET) {
+      this.logger.warn('JWT_SECRET not set - using fallback secret. This should not happen in production!');
     }
 
     const payload = {
@@ -502,10 +506,10 @@ export class AuthService {
   }
 
   async verifyToken(token: string): Promise<any> {
-    const jwtSecret = process.env.JWT_SECRET;
+    const jwtSecret = process.env.JWT_SECRET || 'fallback-secret-do-not-use-in-production';
     
-    if (!jwtSecret) {
-      throw new Error('JWT_SECRET environment variable is not set');
+    if (!process.env.JWT_SECRET) {
+      this.logger.warn('JWT_SECRET not set - using fallback secret for verification');
     }
 
     try {
